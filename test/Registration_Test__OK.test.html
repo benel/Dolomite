@@ -1,0 +1,19 @@
+#{selenium 'Registration Test OK}
+
+		open("invitation?firstname=Jean+&surname=Greg&email=gregoire.jeanmart@utt.fr&signature=Qoq%2FcbyfCPkcAbuSQ61eSmslgSpnmjcaBfvE1IRU2%2FtEQ9sc2xM%2FBN7EeS%2BrolJCDa%2BE%2BHqe17s5qODRpUHlUQ%3D%3D")
+		type("password", "yourpassword")
+		type("confirm_password", "yourpassword")
+		click("//input[@value='Submit']")
+		waitForPageToLoad("30000")
+				
+		selenium.open("urlDolomite")
+		verifyTrue(selenium.isTextPresent("DOLOMITE - Directories led by members"))
+		selenium.click("link=Log in")
+		verifyTrue(selenium.isTextPresent("User"))
+		verifyTrue(selenium.isTextPresent("Password"))
+		selenium.type("User", "yourUsername")
+		selenium.type("Password", "yourPassword")
+		selenium.click("link=OK")
+		verifyTrue(selenium.isTextPresent("Authentification réussie"))
+
+#{/selenium}
