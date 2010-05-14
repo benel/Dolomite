@@ -1,16 +1,16 @@
 #{extends 'main.html' /}
 #{set title:'Welcome to Dolomite' /}
 
-#{if art-content}
+#{if artcontent}
 	<div class="art-content">
         <div class="art-Post">
             <div class="art-Post-body">
 				<div class="art-Post-inner">
                                 <h2 class="art-PostHeader">
-                                    ${art-content.content.Header()}
+                                    ${artcontent.content.Header()}
                                 </h2>
                             <div class="art-PostContent">
-                                ${art-content.content.Content()}
+                                ${artcontent.content.Content()}
 								<div class="cleared"></div>
 							</div>
                         
@@ -19,3 +19,4 @@
 			</div>
 		</div>
 	</div>
+#{/if}
