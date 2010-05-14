@@ -5,4 +5,12 @@
     open('/')
     waitForPageToLoad(1000)
     assertNotTitle('Application error')
+
 #{/selenium}
+
+#{selenium 'Test sign'}
+    open('invitation?firstname=Jean+&surname=Greg&email=gregoire.jeanmart@utt.fr&signature=Qoq%2FcbyfCPkcAbuSQ61eSmslgSpnmjcaBfvE1IRU2%2FtEQ9sc2xM%2FBN7EeS%2BrolJCDa%2BE%2BHqe17s5qODRpUHlUQ%3D%3D')
+    type('password', '0000')
+    clickAndWait('//input[@value='Sign in']')
+    assertTextPresent('Signature doesn't match!')
+ #{/selenium}
