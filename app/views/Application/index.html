@@ -1,6 +1,21 @@
-<h1>Welcome in Dolomite</h1>
-
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set title:'Welcome to Dolomite' /}
 
-#{welcome /}
+#{if art-content}
+	<div class="art-content">
+        <div class="art-Post">
+            <div class="art-Post-body">
+				<div class="art-Post-inner">
+                                <h2 class="art-PostHeader">
+                                    ${art-content.content.Header()}
+                                </h2>
+                            <div class="art-PostContent">
+                                ${art-content.content.Content()}
+								<div class="cleared"></div>
+							</div>
+                        
+					<div class="cleared"></div>
+				</div>
+			</div>
+		</div>
+	</div>
