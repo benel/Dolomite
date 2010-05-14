@@ -1,0 +1,9 @@
+#{selenium 'Registration Test KO : wrong signature'}
+
+    open('invitation?firstname=Jean+&surname=Greg&email=gregoire.jeanmart@utt.fr&signature=Qoq%2FcbyfCPkcAbuSQ61eSmslgSpnmjcaBfvE1IRU2%2FtEQ9sc2xM%2FBN7EeS%2BrolJCDa%2BE%2BHqe17s5qODRpUHlUQ%3D%3D')
+    type('password', 'password')
+	type('confirm_password', 'password')
+    clickAndWait('//input[@value='Submit']')
+    assertTextPresent('La signature a été falsifiée!')
+
+	#{/selenium}
