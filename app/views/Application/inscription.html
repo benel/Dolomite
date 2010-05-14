@@ -34,10 +34,12 @@
               </tr>
               <tr>
                   <td><label>Password confirmation:</label></td>
+				  
                   <td><input type="password" name="password2" value="" /></td>
               </tr>
           </tbody>
       </table>
+	  <input type="hidden" name="signature" value="${params.signature}"/>
           <input type="submit" value="OK" name="validate" /><input type="reset" value="Reset" name="reset" />
           <br/>
           <br/>
