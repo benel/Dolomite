@@ -1,0 +1,43 @@
+
+site_title=Bienvenue sur Dolomite
+
+#user_fields
+
+lastname=Nom de famille
+firstname=Prénom
+login=Identifiant
+email=Email
+password=Mot de passe
+password_confirmation=Confirmation de mot de passe
+language=Langue
+
+#inputs
+
+input_send_claim=Envoyer une réclamation
+input_reset=Annuler
+input_invite=Inviter
+
+
+#inscription
+
+title_inscription=Inscription
+
+msg_problem_with_identification=Les champs n'ont pas été saisis correctement
+
+
+
+#invitation
+
+title_invit_member_group=Inviter un membre
+error_all_field_required=Tous les champs sont nécessaires
+
+#main.html
+
+#_footer
+
+copyright=Copyright - Tous les droits réservés
+
+#_menu
+
+menu_invitation=Invitation
+menu_inscription=Inscription
