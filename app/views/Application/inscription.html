@@ -1,5 +1,6 @@
 #{extends 'main.html' /}
 
+<<<<<<< HEAD
 <h1>Registration</h1>
 		
 	#{form @Inscription.adduser()}
@@ -67,4 +68,44 @@
         If you have any problem with your first name, your name or your email, please send a message to your sponsor. You can find your sponsor's email in your invitation's mail.
 		</p>
         
+=======
+      <h1>&{"title_inscription"}</h1>
+		
+	#{form @Inscription.adduser()}
+      <table border="0">	
+          <tbody>
+              <tr>
+                  <td><label>&{"lastname"} :</label></td>
+                  <td><input type="text" name="lastname" value="${params.lastname}" disabled="disabled" /></td>
+              </tr>
+              <tr>
+                  <td><label>&{"firstname"} :</label></td>
+                  <td><input type="text" name="firstname" value="${params.firstname}" disabled="disabled" /></td>
+              </tr>
+			  <tr>
+                  <td><label>&{"login"} :</label></td>
+                  <td><input type="text" name="email" value="${params.firstname}.${params.lastname}" disabled="disabled" /></td>
+              </tr>
+              <tr>
+                  <td><label>&{"email"} :</label></td>
+                  <td><input type="text" name="email" value="${params.email}" disabled="disabled" /></td>
+              </tr>
+              <tr>
+                  <td><label>&{"password"} :</label></td>
+                  <td><input type="password" name="password1" value="" /></td>
+              </tr>
+              <tr>
+                  <td><label>&{"password_confirmation"} :</label></td>
+				  
+                  <td><input type="password" name="password2" value="" /></td>
+              </tr>
+          </tbody>
+      </table>
+	  <input type="hidden" name="signature" value="${params.signature}"/>
+          <input type="submit" value="OK" name="validate" /><input type="reset" value="&{"input_reset"}" name="reset" />
+          <br/>
+          <br/>
+          <label>&{"msg_problem_with_identification"}</label><br/>
+          <input type="submit" value="&{"input_send_claim"}" name="reclamation" />
+>>>>>>> 6bde8ba54283f065a36a47d29381ba519242ea38
 	#{/form}

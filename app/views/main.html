@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>
-    <title>#{get 'title' /}</title>
+    <title>&{"site_title"}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
     <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}">
@@ -48,6 +48,7 @@
                 		</li>
 						<li>
                 			<a href="@{Application.invitation()}" class=" active"><span class="l"></span><span class="r"></span><span class="t">Invitation</span></a>
+                			<a href="#" class=" active"><span class="l"></span><span class="r"></span><span class="t">&{"menu_invitation"}</span></a>
                 		</li>
                 	</ul>
                 </div>
@@ -55,11 +56,27 @@
 				#{doLayout /}
 				</div>
                 <div class="art-contentLayout">
-                    <div class="cleared"></div>
+
+                    <div class="art-content">
+						<div class="art-Post">
+							<div class="art-Post-body">
+								<div class="art-Post-inner">
+									<div class="art-PostContent">
+										#{doLayout /}
+										<div class="cleared"></div>
+									</div>
+                        
+									<div class="cleared"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="cleared"></div>
 					<div class="art-Footer">
 						<div class="art-Footer-inner">
 							<div class="art-Footer-text">
-								<p>Copyright &copy; 2010 Dolomite. All rights reserved.</p>
+								<p>Copyright &copy; 2010 Dolomite. &{"all_right_reserved"}.</p>
+
 							</div>
 						</div>
 						<div class="art-Footer-background"></div>
@@ -72,7 +89,4 @@
 		</div>
     </div>
 </body>
-</html>
-
-    </body>
 </html>
