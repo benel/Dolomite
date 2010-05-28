@@ -137,3 +137,26 @@ public class LdapUser {
 	public String getLastname(){return lastname;}
 
 }	
+public void listgroup (String member) {
+	try {
+		Hashtable<String,String> env = new Hashtable<String,String>();
+		 
+		// recherche en profondeur
+		SearchControls controle = new SearchControls();
+		controle.setSearchScope(SearchControls.SUBTREE_SCOPE);
+
+		String critere = "(|(member="+member+")(objectclass=groupOfNames*))";
+		DirContext ictx = new InitialDirContext(env);
+		NamingEnumeration<SearchResult> e = ictx.search("", critere, controle);
+		while (e.hasMore()) {
+		SearchResult r = e.next();
+		System.out.println("name: " + r.getName());
+	   // System.out.println("object: " + r.getClassName());
+		listerAttributs(r.getAttributes());
+
+			}
+			}
+			catch (javax.naming.NamingException e) {
+			System.err.println("Exception " + e);
+			}
+			}
