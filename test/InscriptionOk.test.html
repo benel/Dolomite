@@ -1,7 +1,17 @@
 #{selenium}
-		open("url")
-		type("password", "yourpassword")
-		type("confirm_password", "yourpassword")
+		open("urlMailRegister")
+		type("password", "yourPassword")
+		type("confirm_password", "yourPassword")
 		click("//input[@value='Submit']")
 		waitForPageToLoad("30000")
+		
+		selenium.open("urlDolomite");
+		verifyTrue(selenium.isTextPresent("DOLOMITE - Directories led by members"));
+		selenium.click("link=Log in");
+		verifyTrue(selenium.isTextPresent("User"));
+		verifyTrue(selenium.isTextPresent("Password"));
+		selenium.type("User", "yourUsername");
+		selenium.type("Password", "yourPassword");
+		selenium.click("link=OK");
+		verifyTrue(selenium.isTextPresent("Authentification réussie"));
 #{/selenium}
