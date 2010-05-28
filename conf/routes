@@ -5,6 +5,11 @@
 # Home page
 GET     /                                       Application.index
 
+GET     /inscription                                       Application.inscription
+GET     /invitation                                       Application.invitation
+GET     /invitation/invitenewmember                                       Application.invitation
+
+
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 

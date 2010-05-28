@@ -1,23 +1,41 @@
 #{extends 'main.html' /}
 
-
-
-	<h1>Inviter un Membre du groupe</h1>
-	#{form @Application.invitation_action()}
-	 #{ifErrors}
-        <p class="error">
-		<FONT color="red">
-		<em>
-            All fields are required!</em></FONT>
-        </p>
-    #{/ifErrors}
-	<table>
-	<tr><td>Nom</td><td><input type='text' name='nom' value='${params.nom}' /></td></tr>
-	<tr><td>Prenom</td><td><input type='text' name='prenom' value='${params.prenom}' /></td></tr>
-	<tr><td>Mail</td><td><input type='text' name='mail' value='${params.mail}' /></td></tr>
-	<tr><td>Langue</td><td><input type='radio' name='langue' value='FR'>FR<input type='radio' name='langue' value='EN'>EN</td></tr>
-	<tr><td><center><input type='submit' value='Inviter' /></td><td><input type='reset' value='Annuler' /></center></td></tr>
+<h1>Invite someone</h1>
+#{form @Invitation.inviteNewMember()}
+	<!--
+	#{ifErrors}
+        <table class="error" width="70%">
+			<td bgcolor="red" width="70%">
+			<FONT color="white" size="4">
+			<em>All fields are required!</em></FONT></td>
 	</table>
+	<p/>
+    #{/ifErrors}
+	-->
+	#{ifErrors}
+    <p class="error">
+        All fields are required!
+    </p>
+	#{/ifErrors}
+	
+	#{if flash.success}
+    <p class="success">
+		${flash.success}
+    </p>
+	#{/if}
+
+	<table>
+	<tr><td>Last name: </td><td><input type='text' name='nom' value='${params.nom}' /></td></tr>
+	<tr><td>First name: </td><td><input type='text' name='prenom' value='${params.prenom}' /></td></tr>
+	<tr><td>Email: </td><td><input type='text' name='mail' value='${params.mail}' /></td></tr>
+	<tr><td>Language: </td><td><input type='radio' name='langue' value='fr'>FR&nbsp;&nbsp;<input type='radio' name='langue' value='en'>EN</td></tr>
+	<!--<tr><td><center><input type='submit' value='Invite' /></td><td><input type='reset' value='Reset' /></center></td></tr>-->
+	</table>
+	<br />
+	<div style="margin-left:100px">
+		<input type='submit' value='Invite' />
+		<input type='reset' value='Reset' />
+	</div>
 	#{/form}
 	
 	<script type="text/javascript" charset="utf-8">
