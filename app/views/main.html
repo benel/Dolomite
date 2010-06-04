@@ -40,18 +40,26 @@
                 	<div class="l"></div>
                 	<div class="r"></div>
                 	<ul class="art-menu">
+						<li>
+                			<a href="@{Application.index()}" class=" active"><span class="l"></span><span class="r"></span><span class="t">Home</span></a>
+                		</li>
                 		<li>
-                			<a href="#" class=" active"><span class="l"></span><span class="r"></span><span class="t">Invitation</span></a>
+                			<a href="@{Application.inscription()}" class=" active"><span class="l"></span><span class="r"></span><span class="t">Registration</span></a>
+                		</li>
+						<li>
+                			<a href="@{Application.invitation()}" class=" active"><span class="l"></span><span class="r"></span><span class="t">Invitation</span></a>
                 		</li>
                 	</ul>
                 </div>
+				<div id="">
+				#{doLayout /}
+				</div>
                 <div class="art-contentLayout">
-                    
-					<div class="cleared"></div>
+                    <div class="cleared"></div>
 					<div class="art-Footer">
 						<div class="art-Footer-inner">
 							<div class="art-Footer-text">
-								<p>Copyright &copy; 2010 Dolomite. Tous droits réservés.</p>
+								<p>Copyright &copy; 2010 Dolomite. All rights reserved.</p>
 							</div>
 						</div>
 						<div class="art-Footer-background"></div>
