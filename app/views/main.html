@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>
-    <title>#{get 'title' /}</title>
+    <title>&{"site_title"}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
     <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}">
@@ -41,13 +41,13 @@
                 	<div class="r"></div>
                 	<ul class="art-menu">
 						<li>
-                			<a href="@{Application.index()}" class=" active"><span class="l"></span><span class="r"></span><span class="t">Home</span></a>
+                			<a href="@{Application.index()}" class=" active"><span class="l"></span><span class="r"></span><span class="t">&{"title_home"}</span></a>
                 		</li>
                 		<li>
-                			<a href="@{Application.inscription()}" class=" active"><span class="l"></span><span class="r"></span><span class="t">Registration</span></a>
+                			<a href="@{Application.inscription()}" class=" active"><span class="l"></span><span class="r"></span><span class="t">&{"menu_inscription"}</span></a>
                 		</li>
 						<li>
-                			<a href="@{Application.invitation()}" class=" active"><span class="l"></span><span class="r"></span><span class="t">Invitation</span></a>
+                			<a href="@{Application.invitation()}" class=" active"><span class="l"></span><span class="r"></span><span class="t">&{"menu_invitation"}</span></a>
                 		</li>
                 	</ul>
                 </div>
@@ -59,7 +59,7 @@
 					<div class="art-Footer">
 						<div class="art-Footer-inner">
 							<div class="art-Footer-text">
-								<p>Copyright &copy; 2010 Dolomite. All rights reserved.</p>
+								<p>&{"copyright"} &copy; 2010 Dolomite</p>
 							</div>
 						</div>
 						<div class="art-Footer-background"></div>
