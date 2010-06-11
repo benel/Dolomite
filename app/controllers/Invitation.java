@@ -24,7 +24,7 @@ public class Invitation extends Controller {
 		}
 		else{
 			if(langue.equals("fr")){
-				message = " Vous avez été invité(e) par votre parrain à rejoindre la communauté hypertopic. Pour ce faire, veuillez vous inscrire en cliquant ici:";//Lien.signature;
+				message = " Vous avez ï¿½tï¿½ invitï¿½(e) par votre parrain ï¿½ rejoindre la communautï¿½ hypertopic. Pour ce faire, veuillez vous inscrire en cliquant ici:";//Lien.signature;
 			}else if(langue.equals("en")){
 				message = "You have been invited by your godfather to register as a member to the Hypertopic community.";//Lien.signature;
 			}
@@ -52,7 +52,7 @@ public class Invitation extends Controller {
 				render("Application/invitation.html");
 		}else{
 			if(msgLang.equals("fr")){
-				message = " Vous avez été invité(e) par "+firstNameSender+" "+lastNameSender+"à rejoindre la communauté hypertopic. Pour ce faire, veuillez vous inscrire en cliquant ici:";//Lien.signature;
+				message = " Vous avez ï¿½tï¿½ invitï¿½(e) par "+firstNameSender+" "+lastNameSender+"ï¿½ rejoindre la communautï¿½ hypertopic. Pour ce faire, veuillez vous inscrire en cliquant ici:";//Lien.signature;
 			}else if(msgLang.equals("en")){
 				message = "You have been invited by "+firstNameSender+" "+lastNameSender+" to register as a member to the Hypertopic community.";//Lien.signature;
 			}
