@@ -1,0 +1,41 @@
+site_title=Welcome to dolomite
+
+#user_fields
+
+lastname=Last name
+firstname=First name
+login=Login
+email=Email
+password=Password
+password_confirmation=Confirm your password
+language=Language
+
+#inputs
+
+input_send_claim=Send a claim
+input_reset=Cancel
+input_invite=Invite
+input_submit=Accept
+
+#inscription
+
+title_inscription=Registration
+title_home=Home
+msg_problem_with_identification=ALL fields have not been carry out correctly
+claim=If you have any problem with your first name, your name or your email, please send a message to your sponsor. You can find your sponsor's email in your invitation's mail.
+
+#invitation
+
+title_invit_member_group=Invit a member
+error_all_field_required=All fields are required
+
+#main.html
+
+#_footer
+
+copyright=Copyright - All rights reserved
+
+#_menu
+
+menu_invitation=Invitation
+menu_inscription=Registration
