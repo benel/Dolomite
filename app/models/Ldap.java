@@ -27,6 +27,8 @@ import javax.naming.directory.InitialDirContext;
 import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
 
+import play.*;
+
 public class Ldap {
 
 	/**
@@ -64,7 +66,7 @@ public class Ldap {
         try {
           ldapContext = new InitialDirContext(ldapEnv);
          // MonObjet objet = new MonObjet("valeur1","valeur2");
-         ldapContext.bind("cn="+cn+",dc=hypertopic,dc=org",null, attributes);
+         ldapContext.bind("cn="+cn+","+Play.configuration.getProperty("ldap.dn"), null, attributes);
           ldapContext.close();
 
         } catch (Exception e) {
@@ -116,7 +118,7 @@ public class Ldap {
             String critere = "(cn="+login+")"; // ok					ldapsearch -x -h localhost -b 'dc=placeoweb' '(cn=*)'
             //			 DirContext ictx = new InitialDirContext(ldapEnv);
             //			 NamingEnumeration<SearchResult> e = ldapContext.search("ou=monorganisationunit,dc=placeoweb", critere, controle);
-            NamingEnumeration<SearchResult> e = ldapContext.search("dc=hypertopic,dc=org", critere, controle);
+            NamingEnumeration<SearchResult> e = ldapContext.search(Play.configuration.getProperty("ldap.dn"), critere, controle);
             while (e.hasMore()) {
                 SearchResult r = e.next();
                 System.out.println("name: " + r.getName());
@@ -169,7 +171,7 @@ public class Ldap {
               attribut.add(value);
               attributes.put(attribut);
 
-              ldapContext.modifyAttributes("cn="+login+",dc=hypertopic,dc=org",
+              ldapContext.modifyAttributes("cn="+login+","+Play.configuration.getProperty("ldap.dn"),
                     DirContext.REPLACE_ATTRIBUTE,attributes); 
               ldapContext.close();
 

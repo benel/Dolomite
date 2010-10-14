@@ -30,6 +30,9 @@ title_invit_member_group=Inviter un membre
 error_all_field_required=Tous les champs sont necessaires
 
 #main.html
+home_title=Bienvenue sur Dolomite
+home_content=Cette application permet de administrer un annuaire LDAP dans un mode collaboratif. Quiconque avec un compte peut inviter une autre personne.
+
 
 #_footer
 

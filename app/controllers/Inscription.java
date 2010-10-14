@@ -10,11 +10,10 @@ import java.security.Signature;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Sign;
-
+import models.LdapUser;
 import play.mvc.*;
-
+import play.libs.Crypto;
 import play.data.validation.*;
-
 
 public class Inscription extends Controller {
 
@@ -27,9 +26,7 @@ public class Inscription extends Controller {
 		@Required(message="The email is required") String email,
 		String signature) {
 
-             Sign sign = new Sign();
-        try {
-            if (sign.verifySig((firstname + lastname + email).getBytes(), signature, Sign.getPublicKey())) {
+            if (signature.equals(Crypto.sign(firstname + lastname + email))) {
                 if (validation.hasErrors()) {
                     render("Application/inscription.html");
                 } else {
@@ -39,7 +36,7 @@ public class Inscription extends Controller {
                                 //New entry in the active directory
                                 if ((!password1.equals(firstname)) && (!password1.equals(lastname)) && (!password1.equals(login))) {
                                     if (password1.length() >= 6) {
-                                        //new LdapUser(email, password1, firstname, lastname, login).addUser();
+                                        new LdapUser(email, password1, firstname, lastname, login).addUser();
                                         flash.success("You have been successfully registered " + firstname + " " + lastname + ". You can now get logged with your login and password.");
                                         render("Application/inscription.html");
                                     } else {
@@ -66,12 +63,9 @@ public class Inscription extends Controller {
                     }
                 }
             } else {
-                flash.error("signature erronÃ©");
+                flash.error("signature erronée");
                 render("Application/inscription.html");
             }
-        } catch (Exception ex) {
-            Logger.getLogger(Inscription.class.getName()).log(Level.SEVERE, null, ex);
-        }
         }
 
 
@@ -90,7 +84,7 @@ public class Inscription extends Controller {
           try {
             String data = firstname + lastname + email;
             byte[] dataByte = data.getBytes();
-            result = Inscription.verifySig(dataByte, signature.getBytes(), Inscription.deserializePublic("D:\\Documents\\Developpement\\play-1.0.1\\dolomite\\public\\public.Obj"));
+            result = Inscription.verifySig(dataByte, signature.getBytes(), Inscription.deserializePublic(System.getProperty("user.dir") + "/conf/key.pub"));
                System.out.println("check sign : " + result);
 
             /*

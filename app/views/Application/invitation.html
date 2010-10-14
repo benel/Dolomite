@@ -28,7 +28,7 @@
 	<tr><td>&{"lastname"} : </td><td><input type='text' name='nom' value='${params.nom}' /></td></tr>
 	<tr><td>&{"firstname"} :</td><td><input type='text' name='prenom' value='${params.prenom}' /></td></tr>
 	<tr><td>&{"email"} : </td><td><input type='text' name='mail' value='${params.mail}' /></td></tr>
-	<tr><td>&{"language"} : </td><td><input type='radio' name='langue' value='fr'>FR&nbsp;&nbsp;<input type='radio' name='langue' value='en'>EN</td></tr>
+	<tr><td>&{"language"} : </td><td><input type='radio' name='langue' value='fr' ${params.checked_fr}>FR&nbsp;&nbsp;<input type='radio' name='langue' value='en' ${params.checked_en}>EN</td></tr>
 	<!--<tr><td><center><input type='submit' value='Invite' /></td><td><input type='reset' value='Reset' /></center></td></tr>-->
 	</table>
 	<br />
@@ -48,4 +48,3 @@
         }
     });
 </script>
-	

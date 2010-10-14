@@ -3,6 +3,7 @@ package models;
 import java.util.*;
 import javax.persistence.*;
  
+import play.*;
 import play.db.jpa.*;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
@@ -13,24 +14,23 @@ import controllers.*;
  
 public class LdapUser {
  
-    public String email;
-    public String password;
+	public String email;
+	public String password;
 	public String login;
 	public String firstname;
 	public String lastname;
-    //public boolean isAdmin;
 	
 	Ldap userConnection;
     
     public LdapUser(String email, String password, String firstname, String lastname, String login) {
         this.email = email;
         this.password = password;
-		this.firstname=firstname;
-		this.lastname=lastname;
-		this.login = login;
+	this.firstname=firstname;
+	this.lastname=lastname;
+	this.login = login;
 		
-		userConnection = new Ldap();
-		userConnection.SetEnv("test.hypertopic.org:389","cn="+login+",dc=hypertopic,dc=org", password);
+	userConnection = new Ldap();
+	userConnection.SetEnv(Play.configuration.getProperty("ldap.host"), "cn=" + login + "," + Play.configuration.getProperty("ldap.dn"), password);
     }
 	
 	public static LdapUser connect(String login, String password) {
@@ -38,14 +38,13 @@ public class LdapUser {
 		
 		
 		Ldap staticConnection = new Ldap();
-		staticConnection.SetEnv("test.hypertopic.org:389","cn="+login+",dc=hypertopic,dc=org", password);
-		
+		staticConnection.SetEnv(Play.configuration.getProperty("ldap.host"),"cn="+login+","+Play.configuration.getProperty("ldap.dn"), password);
+		//staticConnection.SetEnv("test.hypertopic.org:389", "cn=" + login + ",dc=hypertopic,dc=org", password);
 		LdapUser newUser;
 		
 		String email="";
 		String firstname="";
 		String lastname="";
-			
 
 		Attributes atts=staticConnection.getUserInfo(staticConnection.getLdapEnv(), login);
 		
@@ -60,10 +59,8 @@ public class LdapUser {
 				Attribute a = (Attribute) e.next();
 				//System.out.println(a.getID() + ":");
 				
-				
-				
 				String attributeName = a.getID();
-				String attributeValue="";
+				String attributeValue = "";
 				
 				Enumeration values = a.getAll();
 				while (values.hasMoreElements()) {
@@ -104,7 +101,7 @@ public class LdapUser {
 	public void addUser() {
 	//	this.save();
 		Ldap adminConnection = new Ldap();
-		adminConnection.SetEnv("test.hypertopic.org:389","cn=admin,dc=hypertopic,dc=org" ,"if052010");
+		adminConnection.SetEnv(Play.configuration.getProperty("ldap.host"),Play.configuration.getProperty("ldap.admin.dn"), Play.configuration.getProperty("ldap.admin.password"));
 		
 		adminConnection.addUser(adminConnection.getLdapEnv(), email, firstname, lastname, login, password);
 	}
@@ -115,7 +112,7 @@ public class LdapUser {
 		//this.refresh();
 		
 		Ldap adminConnection = new Ldap();
-		adminConnection.SetEnv("test.hypertopic.org:389","cn=admin,dc=hypertopic,dc=org" ,"if052010");
+		adminConnection.SetEnv(Play.configuration.getProperty("ldap.host"),Play.configuration.getProperty("ldap.admin.dn"), Play.configuration.getProperty("ldap.admin.password"));
 		
 		
 		adminConnection.modifyAttribute(adminConnection.getLdapEnv(), this.getLogin(), "givenName", firstname);
@@ -127,8 +124,8 @@ public class LdapUser {
 	public void deleteUser (){
 	//	this.delete();
 		Ldap adminConnection = new Ldap();
-		adminConnection.SetEnv("test.hypertopic.org:389","cn=admin,dc=hypertopic,dc=org" ,"if052010");
-		adminConnection.deleteUser(adminConnection.getLdapEnv(), "cn="+login+",dc=hypertopic,dc=org");
+		adminConnection.SetEnv(Play.configuration.getProperty("ldap.host"),Play.configuration.getProperty("ldap.admin.dn"), Play.configuration.getProperty("ldap.admin.password"));
+		adminConnection.deleteUser(adminConnection.getLdapEnv(), "cn="+login+","+Play.configuration.getProperty("ldap.dn"));
 	}
 	
 	public String getEmail(){return email;}

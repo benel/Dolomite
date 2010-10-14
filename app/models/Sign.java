@@ -43,7 +43,7 @@ public class Sign {
 		 ObjectInputStream ois;
 		try {
 
-			ois = new ObjectInputStream(new FileInputStream("D:\\Documents\\Developpement\\play-1.0.1\\dolomite\\app\\models\\private.Obj"));
+			ois = new ObjectInputStream(new FileInputStream(System.getProperty("user.dir") + "/conf/key"));
 
 				key  =(PrivateKey)ois.readObject();
 				ois.close();
@@ -62,7 +62,7 @@ public class Sign {
 		return key;
 	 }
 	 public static PublicKey getPublicKey(){
-            String path = "D:\\Documents\\Developpement\\play-1.0.1\\dolomite\\public\\public.Obj";
+            String path = System.getProperty("user.dir") + "/conf/key.pub";
                 PublicKey key =null;
                 ObjectInputStream ois;
 

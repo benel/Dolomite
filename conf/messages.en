@@ -31,6 +31,9 @@ error_all_field_required=All fields are required
 
 #main.html
 
+home_title=This software allows to manage an LDAP directory in a collaborative way.
+home_content=Anybody with an account can invite somebody else.
+
 #_footer
 
 copyright=Copyright - All rights reserved
