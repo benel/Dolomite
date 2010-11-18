@@ -8,6 +8,7 @@
     <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
     <script src="@{'/public/javascripts/jquery-1.4.min.js'}" type="text/javascript" charset="utf-8"></script>
     <script src="@{'/public/javascripts/script.js'}" type="text/javascript" charset="utf-8"></script>
+    
         
 </head>
     <body>
@@ -32,7 +33,8 @@
                     <div class="art-Header-png"></div>
                     <div class="art-Header-jpeg"></div>
                     <div class="art-Logo">
-                        <h1 id="name-text" class="art-Logo-name"><a href="#">DOLOMITE</a></h1>
+                        <h1 id="name-text" class="art-Logo-name"><a href="#">#{if domainName} ${domainName} @ #{/if} DOLOMITE 
+                        </a></h1>
                         <div id="slogan-text" class="art-Logo-text">ECom</div>
                     </div>
                 </div>

@@ -12,6 +12,7 @@ import java.io.UnsupportedEncodingException;
 
 import notifiers.*;
 import models.*;
+import play.*;
 
 
 /**
@@ -22,7 +23,7 @@ import models.*;
  */
 
 @With(Secure.class)
-public class Invitation extends Controller {
+public class Invitation extends BaseController {
 
 	@Before
 	static void saveValuesIntoSession()
@@ -41,7 +42,7 @@ public class Invitation extends Controller {
 		String url = "";
 		String signature = "";
 		try {
-			url = Play.configuration.getProperty("site.domain") + ":" + Play.configuration.getProperty("site.port") + "/inscription?firstname=" + URLEncoder.encode(prenom, "UTF-8") + "&lastname=" + URLEncoder.encode(nom, "UTF-8") + "&email=" + URLEncoder.encode(mail, "UTF-8");
+			url = "http://" + request.domain + ":" + Play.configuration.getProperty("site.port") + "/inscription?firstname=" + URLEncoder.encode(prenom, "UTF-8") + "&lastname=" + URLEncoder.encode(nom, "UTF-8") + "&email=" + URLEncoder.encode(mail, "UTF-8");
 			signature = Crypto.sign(prenom + nom + mail);
 			url += "&signature=" + signature;
 			System.out.println(url);
@@ -51,10 +52,11 @@ public class Invitation extends Controller {
 		if (validation.hasErrors()){
 			render("Application/invitation.html");
 		} else {
+            String community = renderArgs.get("domainName").toString();
 			if (langue.equals("fr")) {
-				Mails.inviteFr("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url);
+				Mails.inviteFr("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community);
 			} else {
-				Mails.inviteEn("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url);
+				Mails.inviteEn("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community);
 			}
 			flash.success("Your invitation has been sent successfully!");
 			Application.invitation();

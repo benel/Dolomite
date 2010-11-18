@@ -21,17 +21,17 @@ public class LdapUser {
 	public String lastname;
 	
 	Ldap userConnection;
-    
-    public LdapUser(String email, String password, String firstname, String lastname, String login) {
-        this.email = email;
-        this.password = password;
+	
+	public LdapUser(String email, String password, String firstname, String lastname, String login) {
+		this.email = email;
+		this.password = password;
 	this.firstname=firstname;
 	this.lastname=lastname;
 	this.login = login;
 		
 	userConnection = new Ldap();
 	userConnection.SetEnv(Play.configuration.getProperty("ldap.host"), "cn=" + login + "," + Play.configuration.getProperty("ldap.dn"), password);
-    }
+	}
 	
 	public static LdapUser connect(String login, String password) {
 		//return find("byLoginAndPassword", login, password).first();
@@ -98,12 +98,12 @@ public class LdapUser {
 
 	}
 
-	public void addUser() {
+	public int addUser() {
 	//	this.save();
 		Ldap adminConnection = new Ldap();
 		adminConnection.SetEnv(Play.configuration.getProperty("ldap.host"),Play.configuration.getProperty("ldap.admin.dn"), Play.configuration.getProperty("ldap.admin.password"));
-		
-		adminConnection.addUser(adminConnection.getLdapEnv(), email, firstname, lastname, login, password);
+		if(adminConnection.getUserInfo(adminConnection.getLdapEnv(),login)!=null){return 1 ;}
+		else{adminConnection.addUser(adminConnection.getLdapEnv(), email, firstname, lastname, login, password);return 0;}
 	}
 
 	public void updateUser(String email, String password, String firstname, String lastname){

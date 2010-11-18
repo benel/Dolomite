@@ -23,6 +23,7 @@ title_inscription=Inscrire un membre
 title_home=Accueil
 msg_problem_with_identification=Les champs n'ont pas ete saisis correctement
 claim=Si vous rencontrez le moindre probleme avec votre prenom, votre nom ou votre email, envoyez un message a votre sponsor. Vous pourrez trouver l'email de votre sponsor dans votre courier d'invitation 
+start_now_msg=Welcome %1s! You can now either start using <a href='%2s'>%3s</a> as a member or <a href="%4s">invite</a> other people to join the community.
 
 #invitation
 
@@ -42,3 +43,8 @@ copyright=Copyright - Tous les droits reserves
 
 menu_invitation=Invitation
 menu_inscription=Inscription
+
+#error.html
+
+title_error=Erreur
+msg_signature_no_match=Signature erronée

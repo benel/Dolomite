@@ -14,18 +14,20 @@ import models.LdapUser;
 import play.mvc.*;
 import play.libs.Crypto;
 import play.data.validation.*;
+import play.*;
 
-public class Inscription extends Controller {
+public class Inscription extends BaseController {
 
 	public static void adduser(
 		@Required(message="The first password is required") String password1,
-                @Required(message="The second password is required") String password2,
+        @Required(message="The second password is required") String password2,
 		@Required(message="The firstname is required") String firstname,
 		@Required(message="The lastname is required") String lastname,
 		@Required(message="The login is required") String login,
 		@Required(message="The email is required") String email,
 		String signature) {
 
+        int result = -1;
             if (signature.equals(Crypto.sign(firstname + lastname + email))) {
                 if (validation.hasErrors()) {
                     render("Application/inscription.html");
@@ -36,9 +38,18 @@ public class Inscription extends Controller {
                                 //New entry in the active directory
                                 if ((!password1.equals(firstname)) && (!password1.equals(lastname)) && (!password1.equals(login))) {
                                     if (password1.length() >= 6) {
-                                        new LdapUser(email, password1, firstname, lastname, login).addUser();
-                                        flash.success("You have been successfully registered " + firstname + " " + lastname + ". You can now get logged with your login and password.");
+                                        flash.clear();
+                                        result = new LdapUser(email, password1, firstname, lastname, login).addUser();
+                                        System.out.println(result);
+                                        if (result==0) {
+                                            //user doesn't exist yet
+                                            flash.success("You have been successfully registered " + firstname + " " + lastname + "." );                                            
+                                        } else if(result==1) { 
+                                            //user already exists
+                                            flash.success("You are already registered. You can't change your password.");                                            
+                                        }
                                         render("Application/inscription.html");
+                                        //we should redirect to the calling site                           
                                     } else {
                                         flash.error("Your password should contain at least 6 characters");
                                         render("Application/inscription.html", firstname, lastname, email, signature);

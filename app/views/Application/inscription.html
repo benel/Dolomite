@@ -5,24 +5,25 @@
 	#{form @Inscription.adduser()}
 	
 	#{ifErrors}
-    <p class="error">
-        ${errors}
-    </p>
+	<p class="error">
+		${errors}
+	</p>
 	#{/ifErrors}
 	
-	#{if flash.success}
-    <p class="success">
-		${flash.success}
-    </p>
-	#{/if}
 	
 	#{if flash.error}
-    <p class="error">
+	<p class="error">
 		${flash.error}
-    </p>
+	</p>
 	#{/if}
-
 	
+	#{if flash.success}
+	<p class="success">
+		${flash.success}
+	</p>
+    #{/if}
+	#{else}
+
 		<table border="0">	
 			<tbody>
 				<tr>
@@ -58,14 +59,21 @@
 				</tr>
 			</tbody>
 		</table>
+       
 		<br />
 		<div style="margin-left:100px">
+        
 			<input type="hidden" name="signature" value='${params.signature}'/>
 			<input type="submit" value=&{"input_submit"} name="validate" /><input type="reset" value=&{"input_reset"} name="reset" />
-        </div>
-		  
+        
+		</div> 
+        #{/else}
+        #{if flash.success}
+        ${flash.discard("success")}
+        <p> &{"start_now_msg", params.firstname +"."+ params.lastname, domainHref,domainName,actionBridge.Application.invitation() }</p>
+        #{/if}
 		<p class="info">
 			&{"claim"}
 		</p>
-        
+		
 	#{/form}

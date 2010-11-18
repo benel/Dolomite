@@ -21,12 +21,14 @@ input_submit=Accept
 
 title_inscription=Registration
 title_home=Home
-msg_problem_with_identification=ALL fields have not been carry out correctly
+msg_problem_with_identification=All fields have not been carry out correctly
 claim=If you have any problem with your first name, your name or your email, please send a message to your sponsor. You can find your sponsor's email in your invitation's mail.
+start_now_msg=Welcome %1s! You can now either start using <a href='%2s'>%3s</a> as a member or <a href="%4s">invite</a> other people to join the community.
+
 
 #invitation
 
-title_invit_member_group=Invit a member
+title_invit_member_group=Invite a member
 error_all_field_required=All fields are required
 
 #main.html
@@ -42,3 +44,8 @@ copyright=Copyright - All rights reserved
 
 menu_invitation=Invitation
 menu_inscription=Registration
+
+#error.html
+
+title_error=Error
+msg_signature_no_match=Signature doesn't match

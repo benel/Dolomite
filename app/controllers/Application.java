@@ -2,7 +2,7 @@ package controllers;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.lang.*;
 import models.Sign;
 import play.mvc.*;
 import play.data.validation.Required;
@@ -10,11 +10,13 @@ import play.libs.Crypto;
 import models.*;
 import java.net.URLDecoder;
 import java.io.UnsupportedEncodingException;
+import play.*;
 
-public class Application extends Controller {
+public class Application extends BaseController {
 
 	public static void index() {
-		render();
+        render();
+       
 	}
 
 	public static void inscription(
@@ -49,7 +51,6 @@ public class Application extends Controller {
 		//params.put("langue", session.get("langue") );
 
 		String lang = session.get("langue");
-
 		if(lang != null) {
 			params.put("checked_fr", "");
 			params.put("checked_en", "");
