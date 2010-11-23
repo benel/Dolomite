@@ -21,15 +21,20 @@ input_submit=Accept
 
 title_inscription=Registration
 title_home=Home
-msg_problem_with_identification=All fields have not been carry out correctly
+msg_problem_with_identification=All fields have not been carried out correctly
 claim=If you have any problem with your first name, your name or your email, please send a message to your sponsor. You can find your sponsor's email in your invitation's mail.
 start_now_msg=Welcome %1s! You can now either start using <a href='%2s'>%3s</a> as a member or <a href="%4s">invite</a> other people to join the community.
-
+error_short_pass_msg=Your password should contain at least 6 characters
+error_easy_pass_msg=Your password shouldn't be equal to your firstname, lastname or login
+error_pass_no_match_msg=The passwords typed do not match
+error_short_pass_msg=Your password should contain at least five characters and a number
+error_empty_pass_msg=Your password shouldn't be empty
 
 #invitation
 
 title_invit_member_group=Invite a member
 error_all_field_required=All fields are required
+invitation_success=Your invitation has been sent successfully!
 
 #main.html
 
@@ -49,3 +54,6 @@ menu_inscription=Registration
 
 title_error=Error
 msg_signature_no_match=Signature doesn't match
+
+#500.html
+application_error_title=Application error

@@ -4,7 +4,9 @@
     // Open the home page, and check that no error occured
     open('/')
     waitForPageToLoad(1000)
-    assertNotTitle('Application error')
+    assertNotTitle(&{application_error_title})
+    
+    
 
 #{/selenium}
 
@@ -12,6 +14,6 @@
     *{open('invitation?firstname=Jean+&surname=Greg&email=gregoire.jeanmart@utt.fr&signature=Qoq%2FcbyfCPkcAbuSQ61eSmslgSpnmjcaBfvE1IRU2%2FtEQ9sc2xM%2FBN7EeS%2BrolJCDa%2BE%2BHqe17s5qODRpUHlUQ%3D%3D')}*
     open('http://localhost:9000/inscription?firstname=dfg&lastname=dfg&email=diana.zambon%40gmail.com&signature=d4cce7a1955e6b8bc54c740b1e3a7e01c8912c03wrong')
     *{type('password', '0000')
-    clickAndWait('//input[@value='Sign in']')}*
-    assertTextPresent('Signature doesn't match')
+    clickAndWait('//input[@value='Sign in']')}*    
+    assertTextPresent(&{"msg_signature_no_match"})
  #{/selenium}

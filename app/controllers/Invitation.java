@@ -13,6 +13,7 @@ import java.io.UnsupportedEncodingException;
 import notifiers.*;
 import models.*;
 import play.*;
+import play.i18n.Messages;
 
 
 /**
@@ -41,6 +42,8 @@ public class Invitation extends BaseController {
 	public static void inviteNewMember(@Required String nom,@Required String prenom, @Required String mail, @Required String langue) {
 		String url = "";
 		String signature = "";
+		String community = "Hypertopic";
+        
 		try {
 			url = "http://" + request.domain + ":" + Play.configuration.getProperty("site.port") + "/inscription?firstname=" + URLEncoder.encode(prenom, "UTF-8") + "&lastname=" + URLEncoder.encode(nom, "UTF-8") + "&email=" + URLEncoder.encode(mail, "UTF-8");
 			signature = Crypto.sign(prenom + nom + mail);
@@ -52,13 +55,16 @@ public class Invitation extends BaseController {
 		if (validation.hasErrors()){
 			render("Application/invitation.html");
 		} else {
-            String community = renderArgs.get("domainName").toString();
+            if(renderArgs.get("domainName")!=null){
+                community=renderArgs.get("domainName").toString();
+            }
 			if (langue.equals("fr")) {
 				Mails.inviteFr("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community);
 			} else {
 				Mails.inviteEn("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community);
 			}
-			flash.success("Your invitation has been sent successfully!");
+			flash.success(Messages.get("invitation_success"));
+            System.out.println(community);
 			Application.invitation();
 		}
 	}

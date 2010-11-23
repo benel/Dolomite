@@ -15,6 +15,8 @@ import play.mvc.*;
 import play.libs.Crypto;
 import play.data.validation.*;
 import play.*;
+import play.i18n.Messages;
+
 
 public class Inscription extends BaseController {
 
@@ -51,30 +53,30 @@ public class Inscription extends BaseController {
                                         render("Application/inscription.html");
                                         //we should redirect to the calling site                           
                                     } else {
-                                        flash.error("Your password should contain at least 6 characters");
+                                        flash.error(Messages.get("error_short_pass_msg"));
                                         render("Application/inscription.html", firstname, lastname, email, signature);
                                     }
                                 } else {
-                                    flash.error("Your password shouldn't be equal to your firstname, lastname or login");
+                                    flash.error(Messages.get("error_easy_pass_msg"));
                                     render("Application/inscription.html", firstname, lastname, email, signature);
                                 }
                             } else {
                                 //Error message : passwords 1 and 2 dont match
-                                flash.error("The passwords typed do not match");
+                                flash.error(Messages.get("error_pass_no_match_msg"));
                                 render("Application/inscription.html", firstname, lastname, email, signature);
                             }
                         } else {
-                            flash.error("Your password should contain at least five characters and a number");
+                            flash.error(Messages.get("error_short_pass_msg"));
                             render("Application/inscription.html", firstname, lastname, email, signature);
                         }
                     } else {
                         //Error message : passwords fields empty
-                        flash.error("Your password shouldn't be empty");
+                        flash.error(Messages.get("error_empty_pass_msg"));
                         render("Application/inscription.html", firstname, lastname, email, signature);
                     }
                 }
             } else {
-                flash.error("signature erronée");
+                flash.error(Messages.get("msg_signature_no_match"));
                 render("Application/inscription.html");
             }
         }
