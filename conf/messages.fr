@@ -23,12 +23,13 @@ title_inscription=Inscrire un membre
 title_home=Accueil
 msg_problem_with_identification=Les champs n'ont pas ete saisis correctement
 claim=Si vous rencontrez le moindre probleme avec votre prenom, votre nom ou votre email, envoyez un message a votre sponsor. Vous pourrez trouver l'email de votre sponsor dans votre courier d'invitation 
-start_now_msg=Welcome %1s! You can now either start using <a href='%2s'>%3s</a> as a member or <a href="%4s">invite</a> other people to join the community.
-error_short_pass_msg=Your password should contain at least 6 characters
-error_easy_pass_msg=Your password shouldn't be equal to your firstname, lastname or login
-error_pass_no_match_msg=The passwords typed do not match
-error_short_pass_msg=Your password should contain at least five characters and a number
-error_empty_pass_msg=Your password shouldn't be empty
+start_now_msg=Bienvenue %1s! Vous pouvez maintenant utiliser <a id='application_link' href='%2s'>%3s</a> en tant que membre ou <a href="%4s">inviter</a> d'autres gens à joindre la communauté
+start_now_msg_without_domain=Bienvenue %1s! Vous pouvez maintenant <a href="%4s">inviter</a> d'autres gens à joindre la communauté
+error_short_pass_msg=Votre mot de passe doit contenir au moins 6 caractères
+error_easy_pass_msg=Votre mot de passe ne doit pas correspondre à votre prénom, nom ou login
+error_pass_no_match_msg=Les mots de passe insérés ne sont pas pareil
+error_alfanum_pass_msg=Votre mot de passe doit contenir des caractères et des chiffres
+error_empty_pass_msg=Votre mot de passe ne peut pas être vide
 
 #invitation
 

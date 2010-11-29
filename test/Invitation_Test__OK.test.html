@@ -29,7 +29,7 @@
 	type('prenom', 'Jean')
 	type('mail', 'jean.dupont@utt.fr')
 	click(//input[@name='langue' and @value='fr'])
- 	clickAndWait(//input[@value='Inviter'])
+ 	clickAndWait(//input[@name='validate'])
 	selenium.waitForPageToLoad(3000)
  
 	//Invitation réussie

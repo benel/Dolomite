@@ -90,7 +90,7 @@ public class Invitation extends BaseController {
 				message = "You have been invited by "+firstNameSender+" "+lastNameSender+" to register as a member to the Hypertopic community.";//Lien.signature;
 			}
 			//Mail.send(sender, "essoufy_@hotmail.com","sujet", message);
-			flash.success("Your invitation has been sent successfully!");
+			flash.success(Messages.get("invitation_success"));
 		}
 		//show(); la vue pour afficher les erreur ou le succes de l'envoi d'invitation
 	}

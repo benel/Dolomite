@@ -28,7 +28,7 @@ public class Inscription extends BaseController {
 		@Required(message="The login is required") String login,
 		@Required(message="The email is required") String email,
 		String signature) {
-
+        System.out.println('1');
         int result = -1;
             if (signature.equals(Crypto.sign(firstname + lastname + email))) {
                 if (validation.hasErrors()) {
@@ -40,43 +40,45 @@ public class Inscription extends BaseController {
                                 //New entry in the active directory
                                 if ((!password1.equals(firstname)) && (!password1.equals(lastname)) && (!password1.equals(login))) {
                                     if (password1.length() >= 6) {
-                                        flash.clear();
                                         result = new LdapUser(email, password1, firstname, lastname, login).addUser();
                                         System.out.println(result);
                                         if (result==0) {
                                             //user doesn't exist yet
-                                            flash.success("You have been successfully registered " + firstname + " " + lastname + "." );                                            
+                                            flash.now("success","You have been successfully registered " + firstname + " " + lastname + "." );      
                                         } else if(result==1) { 
                                             //user already exists
-                                            flash.success("You are already registered. You can't change your password.");                                            
+                                            flash.now("success","You have already been successfully registered " + firstname + " " + lastname + "." );                                           
                                         }
+                                        //String applicationName = (renderArgs.get("domainName")!=null)?renderArgs.get("domainName").toString():"Hypertopic";
+                                        //String applicationHref = (renderArgs.get("domainHref")!=null)?renderArgs.get("domainHref").toString():"http://www.hypertopic.org/";
                                         render("Application/inscription.html");
                                         //we should redirect to the calling site                           
                                     } else {
-                                        flash.error(Messages.get("error_short_pass_msg"));
-                                        render("Application/inscription.html", firstname, lastname, email, signature);
+                                        flash.now("error",Messages.get("error_short_pass_msg"));
+                                        
                                     }
                                 } else {
-                                    flash.error(Messages.get("error_easy_pass_msg"));
-                                    render("Application/inscription.html", firstname, lastname, email, signature);
+                                    flash.now("error",Messages.get("error_easy_pass_msg"));
+                        
                                 }
                             } else {
                                 //Error message : passwords 1 and 2 dont match
-                                flash.error(Messages.get("error_pass_no_match_msg"));
-                                render("Application/inscription.html", firstname, lastname, email, signature);
+                                flash.now("error",Messages.get("error_pass_no_match_msg"));
+                        
                             }
                         } else {
-                            flash.error(Messages.get("error_short_pass_msg"));
-                            render("Application/inscription.html", firstname, lastname, email, signature);
+                            flash.now("error",Messages.get("error_alfanum_pass_msg"));
+                        
                         }
                     } else {
                         //Error message : passwords fields empty
-                        flash.error(Messages.get("error_empty_pass_msg"));
-                        render("Application/inscription.html", firstname, lastname, email, signature);
+                        flash.now("error",Messages.get("error_empty_pass_msg"));
+                        
                     }
+                    render("Application/inscription.html", firstname, lastname, email, signature);
                 }
             } else {
-                flash.error(Messages.get("msg_signature_no_match"));
+                flash.now("error",Messages.get("msg_signature_no_match"));
                 render("Application/inscription.html");
             }
         }

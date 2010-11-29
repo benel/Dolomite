@@ -34,13 +34,19 @@ public class Application extends BaseController {
 			email = URLDecoder.decode(email, "UTF-8");
 		} catch (UnsupportedEncodingException uee) {
                         System.err.println(uee);
-                }
-
-                if (signature.equals(Crypto.sign(firstname + lastname + email))) {
-                    render();
-                } else {
-                    render("errors/error.html");
-                }
+        }
+        
+        if (signature.equals(Crypto.sign(firstname + lastname + email))) {
+			login = firstname+'.'+lastname;
+            if (userExists(login)){
+				flash.now("success","You have already been successfully registered " + firstname + " " + lastname + "." );
+				render();}
+            else{
+				render();
+			}
+        } else {
+            render("errors/error.html");
+        }
 	}
 	
         public static void invitation(){
@@ -71,4 +77,6 @@ public class Application extends BaseController {
 		}
 		render();
 	}
+    
+    
 }

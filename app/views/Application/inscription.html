@@ -69,11 +69,15 @@
 		</div> 
         #{/else}
         #{if flash.success}
-        ${flash.discard("success")}
-        <p> &{"start_now_msg", params.firstname +"."+ params.lastname, domainHref,domainName,actionBridge.Application.invitation() }</p>
+            #{if domainHref==null}
+                <p id="start_now"> &{"start_now_msg_without_domain", params.firstname +"."+ params.lastname, actionBridge.Application.invitation() }</p>
+            #{/if}#{else}
+                <p id="start_now"> &{"start_now_msg", params.firstname +"."+ params.lastname, domainHref,domainName,actionBridge.Application.invitation() }</p>
+            #{/else}
         #{/if}
 		<p class="info">
 			&{"claim"}
 		</p>
 		
 	#{/form}
+    
