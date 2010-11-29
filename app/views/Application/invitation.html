@@ -23,6 +23,14 @@
 		${flash.success}
     </p>
 	#{/if}
+    
+	#{if flash.error}
+    <p class="error">
+		${flash.error}
+    </p>
+	#{/if}
+    
+    
 
 	<table>
 	<tr><td>&{"lastname"} : </td><td><input type='text' name='nom' value='${params.nom}' /></td></tr>
@@ -48,3 +56,6 @@
         }
     });
 </script>
+
+
+%{System.out.println("flash in html: "+flash)}%

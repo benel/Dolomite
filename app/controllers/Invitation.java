@@ -35,6 +35,7 @@ public class Invitation extends BaseController {
 		session.put("langue", params.get("langue"));
 	}
 
+
 	/*
 	 * inviteNewMember
 	 *
@@ -55,17 +56,23 @@ public class Invitation extends BaseController {
 		if (validation.hasErrors()){
 			render("Application/invitation.html");
 		} else {
-            if(renderArgs.get("domainName")!=null){
-                community=renderArgs.get("domainName").toString();
+            if(!userExists(prenom+'.'+nom)){
+                if(renderArgs.get("domainName")!=null){
+                    community=renderArgs.get("domainName").toString();
+                }
+                if (langue.equals("fr")) {
+                    Mails.inviteFr("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community);
+                } else {
+                    Mails.inviteEn("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community);
+                }
+                flash.success(Messages.get("invitation_success"));
+                System.out.println(community);
+            } else {
+                flash.error(Messages.get("invitation_fail_user_already_exist",prenom +'.'+ nom, mail));
+                session.remove("nom");
+                session.remove("prenom");
             }
-			if (langue.equals("fr")) {
-				Mails.inviteFr("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community);
-			} else {
-				Mails.inviteEn("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community);
-			}
-			flash.success(Messages.get("invitation_success"));
-            System.out.println(community);
-			Application.invitation();
+            Application.invitation();
 		}
 	}
 	

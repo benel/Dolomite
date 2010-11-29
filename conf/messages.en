@@ -36,6 +36,7 @@ error_empty_pass_msg=Your password shouldn't be empty
 title_invit_member_group=Invite a member
 error_all_field_required=All fields are required
 invitation_success=Your invitation has been sent successfully!
+invitation_fail_user_already_exist=The user %1s already exists. Your invitation to %2s hasn't been sent
 
 #main.html
 

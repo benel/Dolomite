@@ -20,14 +20,12 @@ public class BaseController extends Controller {
         String domain = request.domain;
         String domainName = Play.configuration.getProperty(domain + ".name");
         String domainHref = Play.configuration.getProperty(domain + ".href");
-        System.out.println(domainName);
-        System.out.println(domainHref);
+        System.out.println("domain name: " + domainName);
+        System.out.println("domain Href: " + domainHref);
 
         renderArgs.put("domainName", domainName);
         renderArgs.put("domainHref", domainHref);
-        System.out.println("check request: "+request);
-        
-            flash.put("url", request.method == "GET" ? request.url : "/"); // seems a good default
+       
     }
     
     

@@ -36,6 +36,7 @@ error_empty_pass_msg=Votre mot de passe ne peut pas être vide
 title_invit_member_group=Inviter un membre
 error_all_field_required=Tous les champs sont necessaires
 invitation_success=Votre invitation a été envoyé!
+invitation_fail_user_already_exist=L'utilisateur %1s existe déjà. Votre invitation à %2s n'a pas été envoyée
 
 #main.html
 home_title=Bienvenue sur Dolomite
