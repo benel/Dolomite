@@ -33,6 +33,10 @@ public class Invitation extends BaseController {
 		session.put("prenom", params.get("prenom"));
 		session.put("mail", params.get("mail"));
 		session.put("langue", params.get("langue"));
+        System.out.println("request.url: "+request.url);
+        System.out.println("request.method: "+request.method);
+        session.put("url",request.url);
+        session.put("method",request.method);
 	}
 
 
@@ -41,15 +45,18 @@ public class Invitation extends BaseController {
 	 *
 	 */
 	public static void inviteNewMember(@Required String nom,@Required String prenom, @Required String mail, @Required String langue) {
-		String url = "";
+		
+        String url = "";
 		String signature = "";
 		String community = "Hypertopic";
-        
+        System.out.println("invitenewmember");
 		try {
-			url = "http://" + request.domain + ":" + Play.configuration.getProperty("site.port") + "/inscription?firstname=" + URLEncoder.encode(prenom, "UTF-8") + "&lastname=" + URLEncoder.encode(nom, "UTF-8") + "&email=" + URLEncoder.encode(mail, "UTF-8");
+			url = "http://" + request.domain;
+            if (request.port!=80) url += ":" + request.port;
+            url += "/inscription?firstname=" + URLEncoder.encode(prenom, "UTF-8") + "&lastname=" + URLEncoder.encode(nom, "UTF-8") + "&email=" + URLEncoder.encode(mail, "UTF-8");
 			signature = Crypto.sign(prenom + nom + mail);
 			url += "&signature=" + signature;
-			System.out.println(url);
+			System.out.println("url in inviteNewMember: "+url);
 		} catch (UnsupportedEncodingException uee) {
 			System.err.println(uee);
 		}
@@ -66,16 +73,17 @@ public class Invitation extends BaseController {
                     Mails.inviteEn("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community);
                 }
                 flash.success(Messages.get("invitation_success"));
-                System.out.println(community);
+                System.out.println("community: "+community);
             } else {
                 flash.error(Messages.get("invitation_fail_user_already_exist",prenom +'.'+ nom, mail));
                 session.remove("nom");
                 session.remove("prenom");
             }
             Application.invitation();
-		}
+		}       
+        
 	}
-	
+    
 	public static void sendInvitation(
 		String firstNameSender,
 		String lastNameSender,
