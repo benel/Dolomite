@@ -1,7 +1,6 @@
 package controllers;
 
 import models.LdapUser;
-import models.Temp;
 
 public class Security extends Secure.Security{
 	static boolean authenticate(String username, String password){
