@@ -12,7 +12,7 @@ language=Langue
 
 #inputs
 
-input_send_claim=Envoyer une reclamation
+input_send_claim=Envoyer une réclamation
 input_reset=Annuler
 input_invite=Inviter
 input_submit=Valider
@@ -21,31 +21,31 @@ input_submit=Valider
 
 title_inscription=Inscrire un membre	
 title_home=Accueil
-msg_problem_with_identification=Les champs n'ont pas ete saisis correctement
-claim=Si vous rencontrez le moindre probleme avec votre prenom, votre nom ou votre email, envoyez un message a votre sponsor. Vous pourrez trouver l'email de votre sponsor dans votre courier d'invitation 
-start_now_msg=Bienvenue %1s! Vous pouvez maintenant utiliser <a id='application_link' href='%2s'>%3s</a> en tant que membre ou <a href="%4s">inviter</a> d'autres gens à joindre la communauté
-start_now_msg_without_domain=Bienvenue %1s! Vous pouvez maintenant <a href="%4s">inviter</a> d'autres gens à joindre la communauté
+msg_problem_with_identification=Les champs n'ont pas été saisis correctement
+claim=Si vous rencontrez le moindre probleme avec votre prénom, votre nom ou votre email, envoyez un message a votre sponsor. Vous pourrez trouver l'email de votre sponsor dans votre courier d'invitation 
+start_now_msg=Bienvenue %1s! Vous pouvez maintenant utiliser <a id='application_link' href='%2s'>%3s</a> en tant que membre et <a href="%4s">inviter</a> d'autres personnes à rejoindre la communauté
+start_now_msg_without_domain=Bienvenue %1s! Vous pouvez maintenant <a href="%4s">inviter</a> d'autres personnes à joindre la communauté
 error_short_pass_msg=Votre mot de passe doit contenir au moins 6 caractères
 error_easy_pass_msg=Votre mot de passe ne doit pas correspondre à votre prénom, nom ou login
-error_pass_no_match_msg=Les mots de passe insérés ne sont pas pareil
-error_alfanum_pass_msg=Votre mot de passe doit contenir des caractères et des chiffres
+error_pass_no_match_msg=Les mots de passe insérés ne sont pas les mêmes
+error_alfanum_pass_msg=Votre mot de passe doit contenir seulement des caractères et des chiffres
 error_empty_pass_msg=Votre mot de passe ne peut pas être vide
 
 #invitation
 
 title_invit_member_group=Inviter un membre
-error_all_field_required=Tous les champs sont necessaires
-invitation_success=Votre invitation a été envoyé!
+error_all_field_required=Tous les champs sont nécessaires
+invitation_success=Votre invitation a été envoyée !
 invitation_fail_user_already_exist=L'utilisateur %1s existe déjà. Votre invitation à %2s n'a pas été envoyée
 
 #main.html
 home_title=Bienvenue sur Dolomite
-home_content=Cette application permet de administrer un annuaire LDAP dans un mode collaboratif. Quiconque avec un compte peut inviter une autre personne.
+home_content=Cette application permet d'administrer un annuaire LDAP de façon collaborative. Tout membre disposant d'un compte utilisateur peut inviter d'autres personnes à rejoindre la communauté.
 
 
 #_footer
 
-copyright=Copyright - Tous les droits reserves
+copyright=Copyright - Tous droits reservés
 
 #_menu
 
