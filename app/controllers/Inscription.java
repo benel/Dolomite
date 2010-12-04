@@ -34,8 +34,8 @@ public class Inscription extends BaseController {
                 if (validation.hasErrors()) {
                     render("Application/inscription.html");
                 } else {
-                    if ((password2.matches("[a-zA-Z0-9]+")) && (password1.matches("[a-zA-Z0-9]+"))) {
-                        if ((password2.matches("[a-zA-Z]+[0-9]+")) && (password1.matches("[a-zA-Z]+[0-9]+"))) {
+                    if ((password2.matches(".+")) && (password1.matches(".+"))) {
+                        if ((password2.matches("[a-zA-Z0-9]+")) && (password1.matches("[a-zA-Z0-9]+"))) {
                             if (password2.equals(password1)) {
                                 //New entry in the active directory
                                 if ((!password1.equals(firstname)) && (!password1.equals(lastname)) && (!password1.equals(login))) {
