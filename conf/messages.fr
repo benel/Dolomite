@@ -24,7 +24,7 @@ title_home=Accueil
 msg_problem_with_identification=Les champs n'ont pas été saisis correctement
 claim=Si vous rencontrez le moindre probleme avec votre prénom, votre nom ou votre email, envoyez un message a votre sponsor. Vous pourrez trouver l'email de votre sponsor dans votre courier d'invitation 
 start_now_msg=Bienvenue %1s! Vous pouvez maintenant utiliser <a id='application_link' href='%2s'>%3s</a> en tant que membre et <a href="%4s">inviter</a> d'autres personnes à rejoindre la communauté
-start_now_msg_without_domain=Bienvenue %1s! Vous pouvez maintenant <a href="%4s">inviter</a> d'autres personnes à joindre la communauté
+start_now_msg_without_domain=Bienvenue %1s! Vous pouvez maintenant <a href="%4s">inviter</a> d'autres personnes à rejoindre la communauté
 error_short_pass_msg=Votre mot de passe doit contenir au moins 6 caractères
 error_easy_pass_msg=Votre mot de passe ne doit pas correspondre à votre prénom, nom ou login
 error_pass_no_match_msg=Les mots de passe insérés ne sont pas les mêmes
@@ -39,9 +39,9 @@ invitation_success=Votre invitation a été envoyée !
 invitation_fail_user_already_exist=L'utilisateur %1s existe déjà. Votre invitation à %2s n'a pas été envoyée
 
 #main.html
+
 home_title=Bienvenue sur Dolomite
 home_content=Cette application permet d'administrer un annuaire LDAP de façon collaborative. Tout membre disposant d'un compte utilisateur peut inviter d'autres personnes à rejoindre la communauté.
-
 
 #_footer
 
@@ -56,3 +56,10 @@ menu_inscription=Inscription
 
 title_error=Erreur
 msg_signature_no_match=Signature erronée
+
+#500.html
+application_error_title=Erreur de l'application
+
+#password reset
+title_reset=Changer le mot de passe
+pwd_reset_msg=Bienvenue! Vous êtes déjà enregistré et votre login est %1s.%2s.<br>Si vous avez oublié votre mot de passe, choisissez-en un nouveau et insérez-le de suite.

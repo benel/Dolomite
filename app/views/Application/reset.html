@@ -1,0 +1,82 @@
+#{extends 'main.html' /}
+
+<h1>&{"title_reset"}</h1>
+	
+			
+	#{form @Inscription.resetPass()}
+	
+	#{if !flash.success}
+		<p> &{"pwd_reset_msg",params.firstname,params.lastname} </p>
+	#{/if}		
+	
+	#{ifErrors}
+	<p class="error">
+		${errors}
+	</p>
+	#{/ifErrors}
+	
+	#{if flash.error}
+	<p class="error">
+		${flash.error}
+	</p>
+	#{/if}
+	
+	#{if flash.success}
+	<p class="success">
+		${flash.success}
+	</p>
+    #{/if}
+	#{else}
+	
+		<table border="0">	
+			<tbody>
+				<tr>
+					<input type="hidden" name="lastname" value='${params.lastname}' />
+				</tr>
+				<tr>
+					<input type="hidden" name="firstname" value='${params.firstname}' />
+				</tr>
+				<tr>
+					<td><label>&{"login"} :</label></td>
+					<td><input type="text" name='login' value='${params.firstname}.${params.lastname}' disabled="disabled" /></td>
+					<input type="hidden" name="login" value='${params.firstname}.${params.lastname}' />
+				</tr>
+				<tr>
+					<td><label>&{"email"} :</label></td>
+					<td><input type="text" name='email' value='${params.email}' disabled="disabled" /></td>
+					<input type="hidden" name="email" value='${params.email}' />
+				</tr>
+				<tr>
+					<td><label>&{"password"} :</label></td>
+					<td><input type="password" name='password1' value="" /></td>
+				</tr>
+				<tr>
+					<td><label>&{"password_confirmation"} :</label></td>
+				  
+					<td><input type="password" name='password2' value="" /></td>
+				</tr>
+			</tbody>
+		</table>
+       
+		<br />
+		<div style="margin-left:100px">
+        
+			<input type="hidden" name="signature" value='${params.signature}'/>
+			<input type="submit" value=&{"input_submit"} name="validate" /><input type="reset" value=&{"input_reset"} name="reset" />
+        
+		</div> 
+	    #{/else}
+        #{if flash.success}
+            #{if domainHref==null}
+                <p id="start_now"> &{"start_now_msg_without_domain", params.firstname +"."+ params.lastname, actionBridge.Application.invitation() }</p>
+            #{/if}#{else}
+                <p id="start_now"> &{"start_now_msg", params.firstname +"."+ params.lastname, domainHref,domainName,actionBridge.Application.invitation() }</p>
+            #{/else}      
+            
+        #{/if}
+		<p class="info">
+			&{"claim"}
+		</p>
+		
+	#{/form}
+    

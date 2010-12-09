@@ -44,6 +44,7 @@ public class Invitation extends BaseController {
 	 */
 	public static void inviteNewMember(@Required String nom,@Required String prenom, @Required String mail, @Required String langue) {
 		 
+		try {
 		nom = normalize(params.get("nom"));
 		prenom = normalize(params.get("prenom"));  
 		
@@ -82,6 +83,10 @@ public class Invitation extends BaseController {
 			}
 			Application.invitation();
 		}	   
+	} catch (Exception e) {
+		System.out.println("An exception occurred in Invitation.inviteNewMember");
+		e.printStackTrace();
+		render("Application/invitation.html"); }
 		
 	}
 	

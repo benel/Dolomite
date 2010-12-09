@@ -59,3 +59,7 @@ msg_signature_no_match=Signature doesn't match
 
 #500.html
 application_error_title=Application error
+
+#password reset
+title_reset=Reset your password
+pwd_reset_msg=Welcome back! You are already registered and your login is %1s.%2s.<br>To reset your password, please type your new password in the form.

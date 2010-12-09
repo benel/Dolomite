@@ -11,6 +11,7 @@ import models.*;
 import java.net.URLDecoder;
 import java.io.UnsupportedEncodingException;
 import play.*;
+import play.i18n.Messages;
 
 public class Application extends BaseController {
 
@@ -20,42 +21,48 @@ public class Application extends BaseController {
 	}
 
 	public static void inscription(
-                String password1,
-                String password2,
+        String password1,
+        String password2,
 		String firstname,
 		String lastname,
 		String login,
 		String email,
 		String signature) {
-
-		try {
-			firstname = URLDecoder.decode(firstname, "UTF-8");
-			lastname = URLDecoder.decode(lastname, "UTF-8");
-			email = URLDecoder.decode(email, "UTF-8");
-		} catch (UnsupportedEncodingException uee) {
-                        System.err.println(uee);
-        }
         
-        if (signature.equals(Crypto.sign(firstname + lastname + email))) {
-			login = firstname+'.'+lastname;
-            if (userExists(login)){
-				flash.now("success","You have already been successfully registered " + firstname + " " + lastname + "." );
-				render();}
-            else{
-				render();
-			}
-        } else {
-            render("errors/error.html");
+        try{
+            try {
+                firstname = URLDecoder.decode(firstname, "UTF-8");
+                lastname = URLDecoder.decode(lastname, "UTF-8");
+                email = URLDecoder.decode(email, "UTF-8");
+            } catch (UnsupportedEncodingException uee) {
+                System.err.println(uee);
+                render("Application/index.html");
+            }
+            
+            if (signature.equals(Crypto.sign(firstname + lastname + email))) {
+                login = firstname+'.'+lastname;
+                if (userExists(login)){
+                    render("Application/reset.html",login);
+                }
+                else{
+                    render();
+                }
+            } else {
+                render("errors/error.html");
+            }
+        }catch(Exception e) {
+            System.err.println(e);
+            render("Application/index.html"); 
         }
 	}
-	
+
         public static void invitation(){
 
 		params.put("nom", session.get("nom") );
 		params.put("prenom", session.get("prenom") );
 		params.put("mail", session.get("mail") );
 		//params.put("langue", session.get("langue") );
-
+        
 		String lang = session.get("langue");
 		if(lang != null) {
 			params.put("checked_fr", "");
@@ -74,9 +81,8 @@ public class Application extends BaseController {
 			{
 				System.out.println("Language error! Please check controller Invitation");
 			}
-		}
+		}                    
 		render();
 	}
-    
     
 }
