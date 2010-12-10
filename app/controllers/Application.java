@@ -40,7 +40,8 @@ public class Application extends BaseController {
             }
             
             if (signature.equals(Crypto.sign(firstname + lastname + email))) {
-                login = firstname+'.'+lastname;
+                login = normalize(firstname)+'.'+normalize(lastname);
+                params.put("login",login);
                 if (userExists(login)){
                     render("Application/reset.html",login);
                 }
@@ -61,7 +62,7 @@ public class Application extends BaseController {
 		params.put("nom", session.get("nom") );
 		params.put("prenom", session.get("prenom") );
 		params.put("mail", session.get("mail") );
-		//params.put("langue", session.get("langue") );
+		params.put("login", session.get("login") );
         
 		String lang = session.get("langue");
 		if(lang != null) {

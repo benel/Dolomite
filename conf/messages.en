@@ -23,7 +23,7 @@ title_inscription=Registration
 title_home=Home
 msg_problem_with_identification=All fields have not been carried out correctly
 claim=If you have any problem with your first name, your name or your email, please send a message to your sponsor. You can find your sponsor's email in your invitation's mail.
-start_now_msg=Welcome %1s! You can now either start using <a id='application_link' href='%2s'>%3s</a> as a member or <a href="%4s">invite</a> other people to join the community.
+start_now_msg=Welcome %1s! You can now either start using <a id="application_link" href="%2s" target="_blank">%3s</a> as a member or <a href="%4s">invite</a> other people to join the community.
 start_now_msg_without_domain=Welcome %1s! You can now <a href="%4s">invite</a> other people to join the community.
 error_short_pass_msg=Your password should contain at least 6 characters
 error_easy_pass_msg=Your password shouldn't be equal to your firstname, lastname or login
@@ -62,4 +62,4 @@ application_error_title=Application error
 
 #password reset
 title_reset=Reset your password
-pwd_reset_msg=Welcome back! You are already registered and your login is %1s.%2s.<br>To reset your password, please type your new password in the form.
+pwd_reset_msg=Welcome back! You are already registered and your login is %1s.<br>To reset your password, please type your new password in the form.

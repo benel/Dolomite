@@ -23,38 +23,37 @@
 	</p>
     #{/if}
 	#{else}
-
 		<table border="0">	
 			<tbody>
 				<tr>
 					<td><label>&{"lastname"} :</label></td>
-					<td><input type="text" name='lastname' value='${params.lastname}' disabled="disabled" /></td>
-					<input type="hidden" name="lastname" value='${params.lastname}' />
+					<td><input type="text" name="lastname" value="${params.lastname.escape()}" disabled="disabled" /></td>
+					<input type="hidden" name="lastname" value="${params.lastname.escape()}" />
 				</tr>
 				<tr>
 					<td><label>&{"firstname"} :</label></td>
-					<td><input type="text" name='firstname' value='${params.firstname}' disabled="disabled" /></td>
-					<input type="hidden" name="firstname" value='${params.firstname}' />
+					<td><input type="text" name="firstname" value="${params.firstname.escape()}" disabled="disabled" /></td>
+					<input type="hidden" name="firstname" value="${params.firstname.escape()}" />
 				</tr>
 				<tr>
 					<td><label>&{"login"} :</label></td>
-					<td><input type="text" name='login' value='${params.firstname}.${params.lastname}' disabled="disabled" /></td>
-					<input type="hidden" name="login" value='${params.firstname}.${params.lastname}' />
+					<td><input type="text" name='login' value="${params.login.escape()}" disabled="disabled" /></td>
+					<input type="hidden" name="login" value="${params.login.escape()}" />
 				</tr>
 				<tr>
 					<td><label>&{"email"} :</label></td>
-					<td><input type="text" name='email' value='${params.email}' disabled="disabled" /></td>
-					<input type="hidden" name="email" value='${params.email}' />
+					<td><input type="text" name='email' value="${params.email.escape()}" disabled="disabled" /></td>
+					<input type="hidden" name="email" value="${params.email.escape()}" />
 				</tr>
 				<tr>
 					<td><label>&{"password"} :</label></td>
-					<td><input type="password" name='password1' value="" /></td>
+					<td><input type="password" name="password1" value="" /></td>
 					<!--<input type="hidden" name="password1" value='' />-->
 				</tr>
 				<tr>
 					<td><label>&{"password_confirmation"} :</label></td>
 				  
-					<td><input type="password" name='password2' value="" /></td>
+					<td><input type="password" name="password2" value="" /></td>
 					<!--<input type="hidden" name="password2" value='' />-->
 				</tr>
 			</tbody>
@@ -63,17 +62,18 @@
 		<br />
 		<div style="margin-left:100px">
         
-			<input type="hidden" name="signature" value='${params.signature}'/>
+			<input type="hidden" name="signature" value='${params.signature.escape()}'/>
 			<input type="submit" value=&{"input_submit"} name="validate" /><input type="reset" value=&{"input_reset"} name="reset" />
         
-		</div> 
+		</div>
         #{/else}
         #{if flash.success}
             #{if domainHref==null}
-                <p id="start_now"> &{"start_now_msg_without_domain", params.firstname +"."+ params.lastname, actionBridge.Application.invitation() }</p>
+                <p id="start_now"> &{"start_now_msg_without_domain", params.login, actionBridge.Application.invitation() }</p>
             #{/if}#{else}
-                <p id="start_now"> &{"start_now_msg", params.firstname +"."+ params.lastname, domainHref,domainName,actionBridge.Application.invitation() }</p>
-            #{/else}
+                <p id="start_now"> &{"start_now_msg", params.login, domainHref,domainName,actionBridge.Application.invitation() }</p>
+            #{/else}      
+            
         #{/if}
 		<p class="info">
 			&{"claim"}
