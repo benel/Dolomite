@@ -29,16 +29,7 @@ public class Application extends BaseController {
 		String email,
 		String signature) {
         
-        try{
-            try {
-                firstname = URLDecoder.decode(firstname, "UTF-8");
-                lastname = URLDecoder.decode(lastname, "UTF-8");
-                email = URLDecoder.decode(email, "UTF-8");
-            } catch (UnsupportedEncodingException uee) {
-                System.err.println(uee);
-                render("Application/index.html");
-            }
-            
+        try{            
             if (signature.equals(Crypto.sign(firstname + lastname + email))) {
                 login = normalize(firstname)+'.'+normalize(lastname);
                 params.put("login",login);
