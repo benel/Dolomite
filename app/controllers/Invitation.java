@@ -45,6 +45,9 @@ public class Invitation extends BaseController {
 	public static void inviteNewMember(@Required String nom,@Required String prenom, @Required String mail, @Required String langue) {
 		 
 		try {
+            //remove any '%' character form the name or surname, problematic for the encoding/decoding process
+            nom = nom.replaceAll("%+","");
+            prenom = prenom.replaceAll("%+","");
             String login = normalize(prenom)+'.'+normalize(nom);
             String url = "";
             String signature = "";

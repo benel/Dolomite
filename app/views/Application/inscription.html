@@ -24,16 +24,16 @@
     #{/if}
 	#{else}
 		<table border="0">	
-			<tbody>
-				<tr>
-					<td><label>&{"lastname"} :</label></td>
-					<td><input type="text" name="lastname" value="${params.lastname.escape()}" disabled="disabled" /></td>
-					<input type="hidden" name="lastname" value="${params.lastname.escape()}" />
-				</tr>
+			<tbody>				
 				<tr>
 					<td><label>&{"firstname"} :</label></td>
 					<td><input type="text" name="firstname" value="${params.firstname.escape()}" disabled="disabled" /></td>
 					<input type="hidden" name="firstname" value="${params.firstname.escape()}" />
+				</tr>
+                <tr>
+					<td><label>&{"lastname"} :</label></td>
+					<td><input type="text" name="lastname" value="${params.lastname.escape()}" disabled="disabled" /></td>
+					<input type="hidden" name="lastname" value="${params.lastname.escape()}" />
 				</tr>
 				<tr>
 					<td><label>&{"login"} :</label></td>
