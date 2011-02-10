@@ -63,20 +63,17 @@ public class Invitation extends BaseController {
             if (validation.hasErrors()){
                 render("Application/invitation.html");
             } else {
-                if(!userExists(login)){
-                    if(renderArgs.get("domainName")!=null){
-                        community=renderArgs.get("domainName").toString();
-                    }
-                    if (langue.equals("fr")) {
-                        Mails.inviteFr("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community);
-                    } else {
-                        Mails.inviteEn("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community);
-                    }
-                    flash.success(Messages.get("invitation_success"));
-                    System.out.println("community: "+community);
-                } else {
-                    flash.error(Messages.get("invitation_fail_user_already_exist",prenom +'.'+ nom, mail));
+                if(renderArgs.get("domainName")!=null){
+                    community=renderArgs.get("domainName").toString();
                 }
+                if (langue.equals("fr")) {
+                    Mails.inviteFr("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community);
+                } else {
+                    Mails.inviteEn("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community);
+                }
+                flash.success(Messages.get("invitation_success"));
+                System.out.println("community: "+community);
+                
                 session.remove("nom");
                 session.remove("prenom");
                 session.remove("mail");
