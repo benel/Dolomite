@@ -44,7 +44,11 @@ Register the hostname ("ourcommunity.acme.com") as an alias for localhost in you
 Run Dolomite:
     ./play run Dolomite
 
-Open Dolomite in a browser: http://ourcommunity.acme.com/
+Open Dolomite at <http://ourcommunity.acme.com:9000/>
+and invite someone by logging in with an existing LDAP account.
+
+Run functional tests in <http://ourcommunity.acme.com:9000/@tests>
+
 
 Production
 ----------
