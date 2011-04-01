@@ -28,7 +28,7 @@ start_now_msg_without_domain=Bienvenue %1s! Vous pouvez maintenant <a href="%4s"
 error_short_pass_msg=Votre mot de passe doit contenir au moins 6 caractères
 error_easy_pass_msg=Votre mot de passe ne doit pas correspondre à votre prénom, nom ou login
 error_pass_no_match_msg=Les mots de passe insérés ne sont pas les mêmes
-error_alfanum_pass_msg=Votre mot de passe doit contenir seulement des caractères et des chiffres
+error_alfanum_pass_msg=Votre mot de passe doit être d'au moins 6 caractères et doit mélanger des lettres et des chiffres
 error_empty_pass_msg=Votre mot de passe ne peut pas être vide
 
 #invitation

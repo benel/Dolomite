@@ -1,39 +1,12 @@
-#{selenium 'authentification Test OK'}
-*{	clearSession()
-	
-	// Ouverture de la page
-	open('http://www.icom.fr')
-  
-	click('link=Se connecter')
-	waitForPageToLoad(3000)
-	click("//div[@id='master-header']/div/div/table/tbody/tr/td/a/img")
-	waitForPageToLoad(3000)
-	type("Identifiant", "User")											
-	type("Mot de passe", "Password")									
-	click("//input[@value='Connexion']")
-	waitForPageToLoad(3000)
-	// Vérifie que la page d'invitation se charge
-	assertTextPresent('Inviter un membre au groupe')
-	assertTextPresent('Nom')
-	assertTextPresent('Prénom')
- }*
-#{/selenium}
-
 #{selenium 'Invitation Test OK'}
-    
-    open('invitation')
-	//click("link=Inviter")
+	open('invitation')
 	// select("Choix du groupe", "label=Groupe A") // Fonctionnalité non encore développée 
-	waitForPageToLoad(3000)
-	type('nom', 'unregistered')
-	type('prenom', 'user')
-	type('mail', 'jean.dupont@utt.fr')
+	waitForPageToLoad(2000)
+	type('nom', 'Tournesol')
+	type('prenom', 'Tryphon')
+	type('mail', 'nobody@hypertopic.org')
 	click(//input[@name='langue' and @value='fr'])
  	clickAndWait(//input[@name='validate'])
-	selenium.waitForPageToLoad(3000)
- 
-	//Invitation réussie
-
+	selenium.waitForPageToLoad(2000)
 	assertTextPresent(&{'invitation_success'})
-
 #{/selenium}

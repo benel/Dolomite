@@ -1,17 +1,4 @@
 #{selenium 'Registration Test KO : wrong signature'}
-
-    //uncomment to use it on the hypertopic server
-    //open('inscription?firstname=Jean+&lastname=Greg&email=gregoire.jeanmart@utt.fr&signature=Qoq%2FcbyfCPkcAbuSQ61eSmslgSpnmjcaBfvE1IRU2%2FtEQ9sc2xM%2FBN7EeS%2BrolJCDa%2BE%2BHqe17s5qODRpUHlUQ%3D%3D')
-    
-
-    //uncomment this to test on localhost
-    open('inscription?firstname=tizia&lastname=dfg&email=diana.zambon%40gmail.com&signature=a0714ac9e1ccfec4070be0cbaac9db42130a88bdWRONG')
-    
-    // I commented the three following lines, because if the signature is incorrect, the password field is not present in the page!
-    //type('password', 'password')
-	//type('confirm_password', 'password')
-    //clickAndWait('//input[@name='validate']')
-    
-    assertTextPresent(&{'msg_signature_no_match'})
-
-	#{/selenium}
+	open('inscription?firstname=Tryphon&lastname=Tournesol&email=nobody%40hypertopic.org&signature=a0714ac9e1ccfec4070be0cbaac9db42130a88bd')
+	assertTextPresent(&{'msg_signature_no_match'})
+#{/selenium}
