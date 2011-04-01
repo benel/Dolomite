@@ -7,9 +7,6 @@ Contact: <aurelien.benel@utt.fr>
 
 Home page: <http://dolomite.sf.net>
 
-Dolomite is a server software. There is no need to install it on your own computer to use it. However, in the case you would need your own server, your system administrator the will follow the instructions below.
-
-
 Installation and tests
 ----------------------
 
@@ -28,9 +25,11 @@ In the new file, edit (at least) the parameters about your LDAP directory:
     ldap.admin.dn = cn=admin,dc=acme,dc=com
     ldap.admin.password = sesame
 
-Launch the tests:
+Launch Dolomite in test mode:
 
     ./play test Dolomite
+
+Open <http://localhost:9000/@tests> in a browser. If your LDAP settings are OK, you should be able to run "LdapTest".
     
 If everything goes fine, define a community in your settings:
 

@@ -5,7 +5,7 @@ import models.*;
 
 
 
-public class BasicTestLdap extends UnitTest {
+public class LdapTest extends UnitTest {
 
 	@Test
     public void createAndRetrieveUser() 
