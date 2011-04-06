@@ -6,20 +6,29 @@ import models.*;
 
 
 public class LdapTest extends UnitTest {
+	private LdapUser flo;
+	
+	@Before
+	public void setUp()
+	{
+		// Create a new user and save it
+		new LdapUser("flora.dupont@utt.fr", "test", "Flora", "Dupont", "flora.dupont").addUser();
+		flo = LdapUser.connect("flora.dupont", "test");
+	
+	}
+	
+	@After
+	public void delete()
+	{
+		
+		flo.deleteUser();
+	}
+
 
 	@Test
     public void createAndRetrieveUser() 
 	{
-	
-	    // Create a new user and save it
-		new LdapUser("flora.dupont@utt.fr", "test", "Flora", "Dupont", "flora.dupont").addUser();
-		
-	    // Retrieve the user with login+passwd
-		LdapUser flo = LdapUser.connect("flora.dupont", "test");
-	    
-	    // Test
-		flo.deleteUser();
-		
+				
 		assertNotNull(flo); 
 		assertEquals("Flora", flo.getFirstname());
 		assertEquals("Dupont", flo.getLastname());
@@ -29,14 +38,8 @@ public class LdapTest extends UnitTest {
 	
 	@Test
 	public void tryConnectAsUser() {
-		// Create a new user and save it
-		new LdapUser("flora.dupont@utt.fr", "test", "Flora", "Dupont", "flora.dupont").addUser();
-		LdapUser flo = LdapUser.connect("flora.dupont", "test");
 		LdapUser stef = LdapUser.connect("stephane.batteux", "pas_le_bon");
 		LdapUser flo2 = LdapUser.connect("flora.dupont", "mauvais_mot_de_passe");
-
-		// Test 
-		flo.deleteUser();
 		
 		assertNotNull(flo);
 		assertNull(stef);
@@ -45,8 +48,6 @@ public class LdapTest extends UnitTest {
 	
 	@Test 
 	public void tryUpdateUser(){
-		new LdapUser("flora.dupont@utt.fr", "test", "Flora", "Dupont", "flora.dupont").addUser();
-		LdapUser flo = LdapUser.connect("flora.dupont", "test");
 		LdapUser admin = LdapUser.connect("admin", "if052010");
 		
 		//assertEquals("Flora", flo.getFirstname());
@@ -72,14 +73,10 @@ public class LdapTest extends UnitTest {
 	@Test
 	public void tryDeleteUser(){
 	
-		// Create a new user and save it
-		new LdapUser("flora.dupont@utt.fr", "test", "Flora", "Dupont", "flora.dupont").addUser();
 		LdapUser flo = LdapUser.connect("flora.dupont", "test");
-		
-		flo.deleteUser();
 		assertNotNull(flo);
-		
-		
+				flo.deleteUser();
+
 		
 		LdapUser flo2 = LdapUser.connect("flora.dupont", "test");
 		
