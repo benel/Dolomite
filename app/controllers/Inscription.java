@@ -42,11 +42,11 @@ public class Inscription extends BaseController {
                         System.out.println(result);
                         if (result==0) {
                             //user doesn't exist yet
-                            flash.now("success","You have been successfully registered " + firstname + " " + lastname + "." );	  
-                        } else if(result==1) { 
+                            flash.now("success","You have been successfully registered " + firstname + " " + lastname + "." );
+                        } else if(result==1) {
                             //user already exists
-                            flash.now("success","You have already been successfully registered " + firstname + " " + lastname + "." );										   
-                        } 
+                            flash.now("success","You have already been successfully registered " + firstname + " " + lastname + "." );
+                        }
                         render("Application/inscription.html");
 					}
 					else{
@@ -185,7 +185,7 @@ public class Inscription extends BaseController {
 		return key;
 	 }
 
-	
+
 	public static void resetPass (
 		@Required(message="The first password is required") String password1,
 		@Required(message="The second password is required") String password2,
@@ -194,7 +194,7 @@ public class Inscription extends BaseController {
 		@Required(message="The login is required") String login,
 		@Required(message="The email is required") String email,
 		@Required(message="Invalid signature") String signature) {
-			
+
 		String checkResult;
 		try {
 			if (signature.equals(Crypto.sign(firstname + lastname + email))) {
@@ -204,7 +204,7 @@ public class Inscription extends BaseController {
 					checkResult = checkPass(password1,password2,firstname,lastname,login);
 					System.out.println("v: "+validation);
 					if ( checkResult == null){ //valid passwords
-						// retrieve the user and change the password						
+						// retrieve the user and change the password
 						new LdapUser(email, password1, firstname, lastname, login).updateUser(email,password1,firstname,lastname);
 						flash.now("success","Your password has been successfully changed");
 						System.out.println("params: "+params.toString());
@@ -220,12 +220,11 @@ public class Inscription extends BaseController {
 		{
 			render("Application/index.html");
 		}
-			
+
 	}
 
 	public static String checkPass(String password1, String password2, String firstname, String lastname, String login) {
-		if ((password2.matches(".+")) && (password1.matches(".+"))) {
-			if ((password2.matches("[a-zA-Z0-9]+")) && (password1.matches("[a-zA-Z0-9]+"))) {
+		if ((password1.matches("[a-zA-Z]")) && (password1.matches("[0-9]"))) {
 				if (password2.equals(password1)) {
 					if ((!password1.equals(firstname)) && (!password1.equals(lastname)) && (!password1.equals(login))) {
 						if (password1.length() >= 6) {
@@ -234,8 +233,7 @@ public class Inscription extends BaseController {
 					} else { return(Messages.get("error_easy_pass_msg")); }
 				} else { return(Messages.get("error_pass_no_match_msg")); }
 			} else { return(Messages.get("error_alfanum_pass_msg")); }
-		} else { return(Messages.get("error_empty_pass_msg")); }
-	}
+    }
 
 }
 
