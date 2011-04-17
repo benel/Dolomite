@@ -69,15 +69,13 @@
         #{/else}
         #{if flash.success}
             #{if domainHref==null}
-                <p id="start_now"> &{"start_now_msg_without_domain", params.login, actionBridge.Application.invitation() }</p>
+
+	<p id="start_now"> &{"start_now_msg_without_domain", params.login, actionBridge.Application.invitation() }</p>
             #{/if}#{else}
                 <p id="start_now"> &{"start_now_msg", params.login, domainHref,domainName,actionBridge.Application.invitation() }</p>
             #{/else}      
             
         #{/if}
-		<p class="info">
-			&{"claim"}
-		</p>
 		
 	#{/form}
     
