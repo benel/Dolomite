@@ -9,8 +9,11 @@ package models;
  *
  * @author Administrateur
  */
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -51,7 +54,7 @@ public class Ldap {
 			System.out.println(e.getMessage());
 		}
 	}
-    public  void addUser(Hashtable ldapEnv, String mail, String givenName, String sn, String cn, String userPassword){
+    public void addUser(Hashtable ldapEnv, String mail, String givenName, String sn, String cn, String userPassword){
     	
         Attributes attributes = new BasicAttributes(true); 
         attributes.put(new BasicAttribute("mail", mail));
@@ -179,5 +182,67 @@ public class Ldap {
             Logger.getLogger(Ldap.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public Attributes getGroupInfo(Hashtable<String, String> ldapEnv, String groupName) {
+        try {
+            DirContext ldapContext = null;
+            ldapContext = new InitialDirContext(ldapEnv);
+            System.out.println("LDAP : Bind Ok = ");
+            SearchControls controle = new SearchControls();
+            controle.setSearchScope(SearchControls.SUBTREE_SCOPE);
+            String critere = "(cn="+groupName+")";
+            NamingEnumeration<SearchResult> e = ldapContext.search(Play.configuration.getProperty("ldap.dn"), critere, controle);
+            while (e.hasMore()) {
+                SearchResult r = e.next();
+                System.out.println("name: " + r.getName());
+                System.out.println("object: " + r.getClassName());
+                System.out.println("getAttributes: " + r.getAttributes());
+				return r.getAttributes();
+            }
+
+        }catch(AuthenticationException error){
+        	return null;
+
+        }catch (NamingException ex) {
+            Logger.getLogger(Ldap.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
+    void addGroup(Hashtable<String, String> ldapEnv, String cn, ArrayList members, String owner) {
+        Attributes attributes = new BasicAttributes(true);
+        attributes.put(new BasicAttribute("objectClass", "groupOfNames"));
+        attributes.put(new BasicAttribute("cn", cn));
+        attributes.put(new BasicAttribute("owner", "cn="+owner+","+Play.configuration.getProperty("ldap.dn")));
+        Iterator memberIterator = members.iterator();
+        while(memberIterator.hasNext()){
+            attributes.put(new BasicAttribute("member", "cn="+memberIterator.next()+","+Play.configuration.getProperty("ldap.dn")));
+        }
+        DirContext ldapContext = null;
+        try {
+          ldapContext = new InitialDirContext(ldapEnv);
+         ldapContext.bind("cn="+cn+","+Play.configuration.getProperty("ldap.dn"), null, attributes);
+          ldapContext.close();
+
+        } catch (Exception e) {
+          System.err.println("Erreur lors de l'acces au serveur LDAP " + e);
+          e.printStackTrace();
+        }
+        System.out.println("fin des traitements");
+    }
+
+    public void deleteGroup(Hashtable ldapEnv,String cn){
+        DirContext ldapContext = null;
+        try {
+            ldapContext = new InitialDirContext(ldapEnv);
+            ldapContext.unbind(cn);
+            ldapContext.close();
+        } catch (NamingException e) {
+            System.err.println("Erreur lors de l'acces au serveur LDAP" + e);
+            e.printStackTrace();
+        }
+        System.out.println("fin des traitements");
     }
   }

@@ -11,6 +11,11 @@ public class LdapTest extends UnitTest {
 	//to do before EACH test
 	public void setUp(){
 		new LdapUser("flora.dupont@utt.fr", "test", "Flora", "Dupont", "flora.dupont").addUser();
+                
+                LdapUser flo = LdapUser.connect("flora.dupont", "test");
+                ArrayList<String> myMembers = new ArrayList();
+                myMembers.add(flo.getLogin());
+                LdapGroup.createGroup("myFirstGroup", myMembers, flo);
 	}
 	
 	@Test
@@ -78,11 +83,29 @@ public class LdapTest extends UnitTest {
 		assertNull(userDeleted); 
     }
 	
+	@Test
+    public void createGroup(){
+        LdapUser flo = LdapUser.connect("flora.dupont", "test");
+        ArrayList<String> myMembers = new ArrayList();
+        myMembers.add(flo.getLogin());
+
+        int aGroup = LdapGroup.createGroup("MySecondGroup", myMembers, flo);
+        assertEquals(0, aGroup);
+    }
+	
+	@Test
+    public void deleteGroup(){
+        LdapGroup myGroup = LdapGroup.retrieve("myFirstGroup");
+        myGroup.deleteGroup();
+        LdapGroup myGroup2 = LdapGroup.retrieve("myFirstGroup");
+        assertNull(myGroup2);
+    }
+	
 	@After
 	//to do after EACH test
 	public void setDown(){
 		//delete Flora from Ldap
-		LdapUser flo= LdapUser.connect("flora.dupont", "test");
+		LdapUser flo = LdapUser.connect("flora.dupont", "test");
 		if(flo==null)
 			flo = LdapUser.connect("flora.dupont", "new_password");	
 		flo.deleteUser();
@@ -92,7 +115,13 @@ public class LdapTest extends UnitTest {
 		if(user!=null)
 			user.deleteUser();
 		
+                LdapGroup myGroup = LdapGroup.retrieve("myFirstGroup");
+                if(myGroup!=null)
+                    myGroup.deleteGroup();
 
+                LdapGroup myGroup2 = LdapGroup.retrieve("mySecondGroup");
+                if(myGroup2!=null)
+                    myGroup2.deleteGroup();
 	}
 
 }
