@@ -1504,7 +1504,7 @@ form .info {
 #application_link{
 	position: absolute;
 	top: 300px;
-	right: 357px;
+	right: 327px;
 	font-size: 337%;
 	border-radius: 4px 4px 4px 4px;
 	-moz-border-radius: 4px 4px 4px 4px;
@@ -1513,11 +1513,11 @@ form .info {
 	background-color:  #78A419;
 	border: 1px solid #78A419;
     	display: inline-block;
-    	font-size: 19px;
+    	font-size: 28px;
     	padding: 15px 30px;
 
 	
 }
 #start_now{
-	margin-bottom: 8em;
+	margin-bottom: 9em;
 }
