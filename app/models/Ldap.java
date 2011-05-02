@@ -217,9 +217,13 @@ public class Ldap {
         attributes.put(new BasicAttribute("cn", cn));
         attributes.put(new BasicAttribute("owner", "cn="+owner+","+Play.configuration.getProperty("ldap.dn")));
         Iterator memberIterator = members.iterator();
+        BasicAttribute membersAttribute = new BasicAttribute("member", "cn="+owner+","+Play.configuration.getProperty("ldap.dn"));
         while(memberIterator.hasNext()){
-            attributes.put(new BasicAttribute("member", "cn="+memberIterator.next()+","+Play.configuration.getProperty("ldap.dn")));
+            String specificMember = "cn="+memberIterator.next()+","+Play.configuration.getProperty("ldap.dn");
+            if(!membersAttribute.contains(specificMember))
+                membersAttribute.add(specificMember);
         }
+        attributes.put(membersAttribute);
         DirContext ldapContext = null;
         try {
           ldapContext = new InitialDirContext(ldapEnv);
