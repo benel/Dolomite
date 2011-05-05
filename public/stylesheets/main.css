@@ -237,7 +237,7 @@ div.art-Header-jpeg
 	left: 0;
 	width: 784px;
 	height: 125px;
-	background-image: url('../images/Header.jpg');
+	/*background-image: url('../images/Header.jpg');*/
 	background-repeat: no-repeat;
 	background-position: center center;
 }
@@ -248,15 +248,15 @@ div.art-Header-jpeg
 {
 	display : block;
 	position: absolute;
-	left: 0px;
-	top: 28px;
+	left: 30px;
+	top: 50px;
 	width: 349px;
 }
 
 h1.art-Logo-name
 {
 	display: block;
-	text-align: right;
+	text-align: left;
 }
 
 h1.art-Logo-name, h1.art-Logo-name a, h1.art-Logo-name a:link, h1.art-Logo-name a:visited, h1.art-Logo-name a:hover
@@ -268,7 +268,7 @@ font-weight: bold;
 text-decoration: none;
 	padding:0;
 	margin:0;
-	color: #0D1A73 !important;
+	color: white !important;
 }
 
 .art-Logo-text
@@ -1432,6 +1432,12 @@ text-decoration: underline;
 font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
 text-decoration: none;
 }
+
+.powered{
+	position:relative;
+	top:5px;
+}
+
 /* end Footer */
 
 /* begin PageFooter */
