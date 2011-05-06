@@ -94,6 +94,36 @@ public class LdapTest extends UnitTest {
     }
 	
 	@Test
+    public void addSpecificMemberInGroup(){
+        
+		System.out.println("------------ Unit Test < Add a New Member in a Group > ------------");
+		
+		LdapUser flo = LdapUser.connect("flora.dupont", "test");
+        ArrayList<String> myMembers = new ArrayList();
+		
+        new LdapUser("steve.bobbs@utt.fr", "password", "Steve", "Bobbs", "steve.bobbs").addUser();
+		LdapUser steve = LdapUser.connect("steve.bobbs", "password");
+		
+		new LdapUser("michel.vaillant@utt.fr", "password", "Michel", "Vaillant", "michel.vaillant").addUser();
+		LdapUser michel = LdapUser.connect("michel.vaillant", "password");
+		
+		myMembers.add(flo.getLogin());
+		
+		LdapGroup.createGroup("MySecondGroup", myMembers, flo);
+
+		LdapGroup myGroup = LdapGroup.retrieve("mySecondGroup");
+		myGroup.displayGroupMembers();
+
+		myGroup.addSpecificMember(steve.getLogin());
+		myGroup.displayGroupMembers();
+		
+		myGroup.addSpecificMember(michel.getLogin());
+		myGroup.displayGroupMembers();
+
+		
+    }
+	
+	@Test
     public void deleteGroup(){
         LdapGroup myGroup = LdapGroup.retrieve("myFirstGroup");
         myGroup.deleteGroup();

@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package models;
 
 /**
@@ -34,32 +33,33 @@ import play.*;
 
 public class Ldap {
 
-	/**
-	 * @param args
-	 */
-    Hashtable<String, String> ldapEnv =  new  Hashtable<String, String>();
+    /**
+     * @param args
+     */
+    Hashtable<String, String> ldapEnv = new Hashtable<String, String>();
     String ldap_account;
 
     public static void listerAttributs(Attributes atts) {
-		try {
-			for (NamingEnumeration e = atts.getAll(); e.hasMore();) {
-				Attribute a = (Attribute) e.next();
-				System.out.println(a.getID() + ":");
-				Enumeration values = a.getAll();
-				while (values.hasMoreElements()) {
-					System.out.println("valeur : " + values.nextElement().toString());
-				}
-			}
-		} catch (javax.naming.NamingException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-    public void addUser(Hashtable ldapEnv, String mail, String givenName, String sn, String cn, String userPassword){
-    	
-        Attributes attributes = new BasicAttributes(true); 
+        try {
+            for (NamingEnumeration e = atts.getAll(); e.hasMore();) {
+                Attribute a = (Attribute) e.next();
+                System.out.println(a.getID() + ":");
+                Enumeration values = a.getAll();
+                while (values.hasMoreElements()) {
+                    System.out.println("valeur : " + values.nextElement().toString());
+                }
+            }
+        } catch (javax.naming.NamingException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void addUser(Hashtable ldapEnv, String mail, String givenName, String sn, String cn, String userPassword) {
+
+        Attributes attributes = new BasicAttributes(true);
         attributes.put(new BasicAttribute("mail", mail));
         attributes.put(new BasicAttribute("objectClass", "inetOrgPerson"));
-       // attributes.put(new BasicAttribute("objectClass","simpleSecurityObject"));
+        // attributes.put(new BasicAttribute("objectClass","simpleSecurityObject"));
         attributes.put(new BasicAttribute("givenName", givenName));
         attributes.put(new BasicAttribute("sn", sn));
         attributes.put(new BasicAttribute("cn", cn));
@@ -67,46 +67,47 @@ public class Ldap {
 
         DirContext ldapContext = null;
         try {
-          ldapContext = new InitialDirContext(ldapEnv);
-         // MonObjet objet = new MonObjet("valeur1","valeur2");
-         ldapContext.bind("cn="+cn+","+Play.configuration.getProperty("ldap.dn"), null, attributes);
-          ldapContext.close();
+            ldapContext = new InitialDirContext(ldapEnv);
+            // MonObjet objet = new MonObjet("valeur1","valeur2");
+            ldapContext.bind("cn=" + cn + "," + Play.configuration.getProperty("ldap.dn"), null, attributes);
+            ldapContext.close();
 
         } catch (Exception e) {
-          System.err.println("Erreur lors de l'acces au serveur LDAP " + e);
-          e.printStackTrace();
+            System.err.println("Erreur lors de l'acces au serveur LDAP " + e);
+            e.printStackTrace();
         }
         System.out.println("fin des traitements");
     }
-    public void deleteUser(Hashtable ldapEnv,String account){
-      DirContext ldapContext = null;
-      try {
-          ldapContext = new InitialDirContext(ldapEnv);
-          ldapContext.unbind(account);
-          ldapContext.close();
+
+    public void deleteUser(Hashtable ldapEnv, String account) {
+        DirContext ldapContext = null;
+        try {
+            ldapContext = new InitialDirContext(ldapEnv);
+            ldapContext.unbind(account);
+            ldapContext.close();
         } catch (NamingException e) {
-          System.err.println("Erreur lors de l'acces au serveur LDAP" + e);
-          e.printStackTrace();
+            System.err.println("Erreur lors de l'acces au serveur LDAP" + e);
+            e.printStackTrace();
         }
         System.out.println("fin des traitements");
-      }
+    }
 
-    public void SetEnv(String ldap_server, String ldap_account, String ldap_password){
+    public void SetEnv(String ldap_server, String ldap_account, String ldap_password) {
 
-        
+
         ldapEnv.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
         ldapEnv.put(Context.PROVIDER_URL, "ldap://" + ldap_server);	// localhost:389
         ldapEnv.put(Context.SECURITY_AUTHENTICATION, "simple");		// simple, none, list of SASL mechanisms
         ldapEnv.put(Context.SECURITY_PRINCIPAL, ldap_account);			// cn=admin,dc=placeoweb
         ldapEnv.put(Context.SECURITY_CREDENTIALS, ldap_password);		// motdepasse
-        this.ldap_account=ldap_account;
-     }
+        this.ldap_account = ldap_account;
+    }
 
     public Hashtable<String, String> getLdapEnv() {
         return ldapEnv;
     }
 
-    public Attributes getUserInfo(Hashtable ldapEnv, String login){
+    public Attributes getUserInfo(Hashtable ldapEnv, String login) {
 
         try {
             DirContext ldapContext = null;
@@ -118,7 +119,7 @@ public class Ldap {
             controle.setSearchScope(SearchControls.SUBTREE_SCOPE);
             //			 String critere = "(|(sn=premier)(sn=deux*))";
             //			 String critere = "(cn = *)";	// ne trouve rien
-            String critere = "(cn="+login+")"; // ok					ldapsearch -x -h localhost -b 'dc=placeoweb' '(cn=*)'
+            String critere = "(cn=" + login + ")"; // ok					ldapsearch -x -h localhost -b 'dc=placeoweb' '(cn=*)'
             //			 DirContext ictx = new InitialDirContext(ldapEnv);
             //			 NamingEnumeration<SearchResult> e = ldapContext.search("ou=monorganisationunit,dc=placeoweb", critere, controle);
             NamingEnumeration<SearchResult> e = ldapContext.search(Play.configuration.getProperty("ldap.dn"), critere, controle);
@@ -129,54 +130,53 @@ public class Ldap {
                 System.out.println("getAttributes: " + r.getAttributes());
                 //System.out.println("bigsiri: " + r.getAttributes().get("userPassword").getID());
                 //listerAttributs(r.getAttributes());
-				
-				return r.getAttributes();
+
+                return r.getAttributes();
             }
-			
-        }catch(AuthenticationException error){
-        	return null;
-        	
-        }catch (NamingException ex) {
+
+        } catch (AuthenticationException error) {
+            return null;
+
+        } catch (NamingException ex) {
             Logger.getLogger(Ldap.class.getName()).log(Level.SEVERE, null, ex);
         }
-		
-		return null;
+
+        return null;
     }
-	
-	
-    public void modifyPassword(Hashtable ldapEnv, String password){
+
+    public void modifyPassword(Hashtable ldapEnv, String password) {
         try {
             DirContext ldapContext = null;
             ldapContext = new InitialDirContext(ldapEnv);
 
-              Attributes attributes = new BasicAttributes(true);
-              Attribute attribut = new BasicAttribute("userPassword");
-              attribut.add(password);
-              attributes.put(attribut);
+            Attributes attributes = new BasicAttributes(true);
+            Attribute attribut = new BasicAttribute("userPassword");
+            attribut.add(password);
+            attributes.put(attribut);
 
-              ldapContext.modifyAttributes(this.ldap_account,
-                    DirContext.REPLACE_ATTRIBUTE,attributes); 
-              ldapContext.close();
+            ldapContext.modifyAttributes(this.ldap_account,
+                    DirContext.REPLACE_ATTRIBUTE, attributes);
+            ldapContext.close();
 
         } catch (NamingException ex) {
             Logger.getLogger(Ldap.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-	
-	public void modifyAttribute(Hashtable ldapEnv, String login, String attributeName, String value){
+
+    public void modifyAttribute(Hashtable ldapEnv, String login, String attributeName, String value) {
         try {
             DirContext ldapContext = null;
             ldapContext = new InitialDirContext(ldapEnv);
-			
-              Attributes attributes = new BasicAttributes(true);
-              Attribute attribut = new BasicAttribute(attributeName);
-              attribut.add(value);
-              attributes.put(attribut);
 
-              ldapContext.modifyAttributes("cn="+login+","+Play.configuration.getProperty("ldap.dn"),
-                    DirContext.REPLACE_ATTRIBUTE,attributes); 
-              ldapContext.close();
+            Attributes attributes = new BasicAttributes(true);
+            Attribute attribut = new BasicAttribute(attributeName);
+            attribut.add(value);
+            attributes.put(attribut);
+
+            ldapContext.modifyAttributes("cn=" + login + "," + Play.configuration.getProperty("ldap.dn"),
+                    DirContext.REPLACE_ATTRIBUTE, attributes);
+            ldapContext.close();
 
         } catch (NamingException ex) {
             Logger.getLogger(Ldap.class.getName()).log(Level.SEVERE, null, ex);
@@ -191,20 +191,20 @@ public class Ldap {
             System.out.println("LDAP : Bind Ok = ");
             SearchControls controle = new SearchControls();
             controle.setSearchScope(SearchControls.SUBTREE_SCOPE);
-            String critere = "(cn="+groupName+")";
+            String critere = "(cn=" + groupName + ")";
             NamingEnumeration<SearchResult> e = ldapContext.search(Play.configuration.getProperty("ldap.dn"), critere, controle);
             while (e.hasMore()) {
                 SearchResult r = e.next();
                 System.out.println("name: " + r.getName());
                 System.out.println("object: " + r.getClassName());
                 System.out.println("getAttributes: " + r.getAttributes());
-				return r.getAttributes();
+                return r.getAttributes();
             }
 
-        }catch(AuthenticationException error){
-        	return null;
+        } catch (AuthenticationException error) {
+            return null;
 
-        }catch (NamingException ex) {
+        } catch (NamingException ex) {
             Logger.getLogger(Ldap.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -215,29 +215,63 @@ public class Ldap {
         Attributes attributes = new BasicAttributes(true);
         attributes.put(new BasicAttribute("objectClass", "groupOfNames"));
         attributes.put(new BasicAttribute("cn", cn));
-        attributes.put(new BasicAttribute("owner", "cn="+owner+","+Play.configuration.getProperty("ldap.dn")));
+        attributes.put(new BasicAttribute("owner", "cn=" + owner + "," + Play.configuration.getProperty("ldap.dn")));
         Iterator memberIterator = members.iterator();
-        BasicAttribute membersAttribute = new BasicAttribute("member", "cn="+owner+","+Play.configuration.getProperty("ldap.dn"));
+		
+		BasicAttribute membersAttribute = new BasicAttribute("member", "cn="+owner+","+Play.configuration.getProperty("ldap.dn"));
+
         while(memberIterator.hasNext()){
             String specificMember = "cn="+memberIterator.next()+","+Play.configuration.getProperty("ldap.dn");
             if(!membersAttribute.contains(specificMember))
                 membersAttribute.add(specificMember);
         }
+		
         attributes.put(membersAttribute);
         DirContext ldapContext = null;
         try {
-          ldapContext = new InitialDirContext(ldapEnv);
-         ldapContext.bind("cn="+cn+","+Play.configuration.getProperty("ldap.dn"), null, attributes);
-          ldapContext.close();
+            ldapContext = new InitialDirContext(ldapEnv);
+            ldapContext.bind("cn=" + cn + "," + Play.configuration.getProperty("ldap.dn"), null, attributes);
+            ldapContext.close();
 
         } catch (Exception e) {
-          System.err.println("Erreur lors de l'acces au serveur LDAP " + e);
-          e.printStackTrace();
+            System.err.println("Erreur lors de l'acces au serveur LDAP " + e);
+            e.printStackTrace();
         }
         System.out.println("fin des traitements");
     }
+	
+	void addSpecificMember(Hashtable ldapEnv, String cn, ArrayList members, String specificMemberLogin) {
+	
+		try {
+            DirContext ldapContext = null;
+            ldapContext = new InitialDirContext(ldapEnv);
 
-    public void deleteGroup(Hashtable ldapEnv,String cn){
+            Attributes attributes = new BasicAttributes(true);
+			
+			String specificMember = "cn="+specificMemberLogin+","+Play.configuration.getProperty("ldap.dn");
+            members.add(specificMember);
+			
+			BasicAttribute membersAttribute = new BasicAttribute("member");
+			
+			for(int i = 0; i < members.size(); i++)
+			{
+				membersAttribute.add(members.get(i));
+			} 
+			
+			attributes.put(membersAttribute);
+
+            ldapContext.modifyAttributes("cn=" + cn + "," + Play.configuration.getProperty("ldap.dn"),
+                    DirContext.REPLACE_ATTRIBUTE, attributes);
+            ldapContext.close();
+
+        } catch (NamingException ex) {
+            Logger.getLogger(Ldap.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		
+		System.out.println("fin des traitements");	
+	}
+
+    public void deleteGroup(Hashtable ldapEnv, String cn) {
         DirContext ldapContext = null;
         try {
             ldapContext = new InitialDirContext(ldapEnv);
@@ -249,4 +283,4 @@ public class Ldap {
         }
         System.out.println("fin des traitements");
     }
-  }
+}
