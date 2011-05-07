@@ -249,10 +249,52 @@ public class Ldap {
             Attributes attributes = new BasicAttributes(true);
 			
 			String specificMember = "cn="+specificMemberLogin+","+Play.configuration.getProperty("ldap.dn");
-            members.add(specificMember);
+            
+			//We check that the member hasn't already been added in the group
+			if(!members.contains(specificMember))
+				members.add(specificMember);
+			else System.out.println("Error: "+ specificMemberLogin + " already exists in this group.");
+
+			BasicAttribute membersAttribute = new BasicAttribute("member");
+			
+			for(int i = 0; i < members.size(); i++)
+			{
+				membersAttribute.add(members.get(i));
+			} 
+			
+			attributes.put(membersAttribute);
+
+            ldapContext.modifyAttributes("cn=" + cn + "," + Play.configuration.getProperty("ldap.dn"),
+                    DirContext.REPLACE_ATTRIBUTE, attributes);
+            ldapContext.close();
+
+        } catch (NamingException ex) {
+            Logger.getLogger(Ldap.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		
+		System.out.println("fin des traitements");	
+	}
+	
+	void removeSpecificMember(Hashtable ldapEnv, String cn, ArrayList members, String specificMemberLogin) {
+	
+		try {
+            DirContext ldapContext = null;
+            ldapContext = new InitialDirContext(ldapEnv);
+
+            Attributes attributes = new BasicAttributes(true);
 			
 			BasicAttribute membersAttribute = new BasicAttribute("member");
 			
+			String memberLoginToRemove = "cn="+specificMemberLogin+","+Play.configuration.getProperty("ldap.dn");
+			
+			//Looking for the member's name in the list
+			for(int i = 0; i < members.size(); i++)
+			{
+				if(memberLoginToRemove.equals(members.get(i)))
+				members.remove(i);
+			}
+			
+			//We rebuild a member attribute with the remaining members after the delete
 			for(int i = 0; i < members.size(); i++)
 			{
 				membersAttribute.add(members.get(i));

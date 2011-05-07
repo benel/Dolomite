@@ -81,6 +81,15 @@ public class LdapGroup {
 		
 	}
 	
+	public void removeSpecificMember(String memberLogin) {
+	
+		Ldap adminConnection = new Ldap();
+		
+		adminConnection.SetEnv(Play.configuration.getProperty("ldap.host"),Play.configuration.getProperty("ldap.admin.dn"), Play.configuration.getProperty("ldap.admin.password"));
+		adminConnection.removeSpecificMember(adminConnection.getLdapEnv(), this.groupName, this.members, memberLogin);		
+		
+	}
+	
 	public void displayGroupMembers() {
 	
 		System.out.println();
