@@ -38,10 +38,37 @@ public class Invitation extends BaseController {
 		session.put("method",request.method);
 	}
 
-	/*
-	 * inviteNewMember
-	 *
-	 */
+	public static void index() {
+	render();
+	}
+	  public static void invitation(){
+
+		params.put("nom", session.get("nom") );
+		params.put("prenom", session.get("prenom") );
+		params.put("mail", session.get("mail") );
+		params.put("login", session.get("login") );
+        
+		String lang = session.get("langue");
+		if(lang != null) {
+			params.put("checked_fr", "");
+			params.put("checked_en", "");
+
+			if(lang.equals("fr"))
+			{
+				params.put("checked_fr", "checked");
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			}
+			else if(lang.equals("en"))
+			{
+				params.put("checked_en", "checked");
+			}
+			else
+			{
+				System.out.println("Language error! Please check controller Invitation");
+			}
+		}                    
+		render("Invitation/index.html");
+	}
 	public static void inviteNewMember(@Required String nom,@Required String prenom, @Required String mail, @Required String langue) {
 		 
 		try {
@@ -61,7 +88,7 @@ public class Invitation extends BaseController {
                 System.err.println(uee);
             }
             if (validation.hasErrors()){
-                render("Application/invitation.html");
+                render("Invitation/index.html");
             } else {
                 if(renderArgs.get("domainName")!=null){
                     community=renderArgs.get("domainName").toString();
@@ -77,12 +104,12 @@ public class Invitation extends BaseController {
                 session.remove("nom");
                 session.remove("prenom");
                 session.remove("mail");
-                Application.invitation();                
+                Invitation.invitation();              
             }	   
         } catch (Exception e) {
 		System.out.println("An exception occurred in Invitation.inviteNewMember");
 		e.printStackTrace();
-		render("Application/invitation.html"); }
+		render("Invitation/index.html"); }
 		
 	}
 	
