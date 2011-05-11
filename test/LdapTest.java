@@ -6,83 +6,122 @@ import models.*;
 
 
 public class LdapTest extends UnitTest {
-	private LdapUser flo;
-	
+
 	@Before
-	public void setUp()
-	{
-		// Create a new user and save it
+	//to do before EACH test
+	public void setUp(){
 		new LdapUser("flora.dupont@utt.fr", "test", "Flora", "Dupont", "flora.dupont").addUser();
-		flo = LdapUser.connect("flora.dupont", "test");
-	
+                
+                LdapUser flo = LdapUser.connect("flora.dupont", "test");
+                ArrayList<String> myMembers = new ArrayList();
+                myMembers.add(flo.getLogin());
+                LdapGroup.createGroup("myFirstGroup", myMembers, flo);
 	}
 	
-	@After
-	public void delete()
-	{
-		
-		flo.deleteUser();
-	}
-
-
 	@Test
-    public void createAndRetrieveUser() 
+    public void createUser() 
 	{
-				
-		assertNotNull(flo); 
-		assertEquals("Flora", flo.getFirstname());
-		assertEquals("Dupont", flo.getLastname());
-		assertEquals("flora.dupont@utt.fr", flo.getEmail());
-	    
+		int result = new LdapUser("firstname.lastname@utt.fr", "password", "Firstname", "Lastname", "firstname.lastname").addUser();
+		assertEquals(0, result);	    
     }
 	
 	@Test
-	public void tryConnectAsUser() {
-		LdapUser stef = LdapUser.connect("stephane.batteux", "pas_le_bon");
-		LdapUser flo2 = LdapUser.connect("flora.dupont", "mauvais_mot_de_passe");
-		
+	public void connect_OK() {
+		LdapUser flo = LdapUser.connect("flora.dupont", "test");
 		assertNotNull(flo);
-		assertNull(stef);
-		assertNull(flo2);	
-	}
-	
-	@Test 
-	public void tryUpdateUser(){
-		LdapUser admin = LdapUser.connect("admin", "if052010");
-		
-		//assertEquals("Flora", flo.getFirstname());
-		
-		flo.updateUser("flora.dupont@utt.fr", "hehehe", "arolf", "tnopud");
-
-
-		
-		LdapUser floModified = LdapUser.connect("flora.dupont", "hehehe");
-		LdapUser floWithOldPwd = LdapUser.connect("flora.dupont", "test");
-		
-		floModified.deleteUser();
-		
-		assertNull(floWithOldPwd);
-		
-		assertNotNull(floModified);
-		assertEquals("flora.dupont@utt.fr", floModified.getEmail());
-		assertEquals("arolf", floModified.getFirstname());
-		assertEquals("tnopud", floModified.getLastname());
-		
 	}
 	
 	@Test
-	public void tryDeleteUser(){
-	
-		LdapUser flo = LdapUser.connect("flora.dupont", "test");
-		assertNotNull(flo);
-				flo.deleteUser();
-
-		
-		LdapUser flo2 = LdapUser.connect("flora.dupont", "test");
-		
-		assertNull(flo2);
-	
+	public void connect_KO_no_user() {
+		LdapUser wrong_user = LdapUser.connect("wrong.user", "wrong_password");
+		assertNull(wrong_user);	
 	}
 	
+	@Test
+	public void connect_KO_wrong_password() {
+		LdapUser flo = LdapUser.connect("flora.dupont", "wrong_password");
+		assertNull(flo);	
+	}
+	
+	@Test
+    public void retrieveUserInfo() 
+	{
+		LdapUser flo = LdapUser.connect("flora.dupont", "test");	
+		assertEquals("Flora", flo.getFirstname());
+		assertEquals("Dupont", flo.getLastname());
+		assertEquals("flora.dupont@utt.fr", flo.getEmail()); 
+    }
+	
+	@Test 
+	public void updateUserInfo(){
+		LdapUser flo = LdapUser.connect("flora.dupont", "test");
+		
+		//update information
+		flo.updateUser("flora.dupont@utt.fr", "new_password", "Arolf", "Tnopud");
+
+		//try to connect using old and new password
+		LdapUser floModified = LdapUser.connect("flora.dupont", "new_password");
+		LdapUser floWithOldPwd = LdapUser.connect("flora.dupont", "test");
+		
+		assertNull(floWithOldPwd);
+		assertNotNull(floModified);
+		assertEquals("flora.dupont@utt.fr", floModified.getEmail());
+		assertEquals("Arolf", floModified.getFirstname());
+		assertEquals("Tnopud", floModified.getLastname());
+	}
+	
+	@Test
+    public void deleteUser() 
+	{
+		new LdapUser("firstname.lastname@utt.fr", "password", "Firstname", "Lastname", "firstname.lastname").addUser();
+		
+		LdapUser user = LdapUser.connect("firstname.lastname", "password");
+		user.deleteUser();
+		LdapUser userDeleted = LdapUser.connect("firstname.lastname", "password");
+		
+		assertNotNull(user); 
+		assertNull(userDeleted); 
+    }
+	
+	@Test
+    public void createGroup(){
+        LdapUser flo = LdapUser.connect("flora.dupont", "test");
+        ArrayList<String> myMembers = new ArrayList();
+        myMembers.add(flo.getLogin());
+
+        int aGroup = LdapGroup.createGroup("MySecondGroup", myMembers, flo);
+        assertEquals(0, aGroup);
+    }
+	
+	@Test
+    public void deleteGroup(){
+        LdapGroup myGroup = LdapGroup.retrieve("myFirstGroup");
+        myGroup.deleteGroup();
+        LdapGroup myGroup2 = LdapGroup.retrieve("myFirstGroup");
+        assertNull(myGroup2);
+    }
+	
+	@After
+	//to do after EACH test
+	public void setDown(){
+		//delete Flora from Ldap
+		LdapUser flo = LdapUser.connect("flora.dupont", "test");
+		if(flo==null)
+			flo = LdapUser.connect("flora.dupont", "new_password");	
+		flo.deleteUser();
+		
+		//delete the user created during the test if any
+		LdapUser user = LdapUser.connect("firstname.lastname", "password");
+		if(user!=null)
+			user.deleteUser();
+		
+                LdapGroup myGroup = LdapGroup.retrieve("myFirstGroup");
+                if(myGroup!=null)
+                    myGroup.deleteGroup();
+
+                LdapGroup myGroup2 = LdapGroup.retrieve("mySecondGroup");
+                if(myGroup2!=null)
+                    myGroup2.deleteGroup();
+	}
 
 }
