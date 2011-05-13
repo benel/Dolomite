@@ -1,6 +1,8 @@
 package controllers;
 
 import java.net.URLEncoder;
+import java.text.AttributedCharacterIterator;
+import java.text.AttributedCharacterIterator.Attribute;
 import java.util.*;
  
 import play.*;
@@ -14,6 +16,9 @@ import notifiers.*;
 import models.*;
 import play.*;
 import play.i18n.Messages;
+
+import javax.naming.NamingEnumeration;
+import javax.naming.directory.*;
 
 /**
  * Invitation Controller
@@ -49,6 +54,49 @@ public class Invitation extends BaseController {
             String url = "";
             String signature = "";
             String community = "Hypertopic";
+            //
+            String mailGodfather="";
+            String firstNameGodfather="";
+            String lastNameGodfather="";
+            if(session.get("username").equals("admin")){
+            	firstNameGodfather="l'administrateur";
+            	mailGodfather="Hypertopic Team <noreply@hypertopic.org>";
+            }
+            HashMap<String, String> infos=Ldap.getConnectedUserInfos(session.get("username"));
+            mailGodfather=infos.get("mail");
+            firstNameGodfather=infos.get("firstName");
+            lastNameGodfather=infos.get("lastName");
+    		/*Ldap adminConnection = new Ldap();
+    		adminConnection.SetEnv(Play.configuration.getProperty("ldap.host"),Play.configuration.getProperty("ldap.admin.dn"), Play.configuration.getProperty("ldap.admin.password"));
+    		Attributes r=adminConnection.getUserInfo(adminConnection.getLdapEnv(),session.get("username"));
+	    	try{
+	    		NamingEnumeration  e=r.getAll();
+	    		while(e.hasMore()){
+	    			javax.naming.directory.Attribute a=(javax.naming.directory.Attribute)e.next();
+	    			String attributeName=a.getID();
+	    			String attributeValue="";
+	    			Enumeration values = a.getAll();
+	    			while(values.hasMoreElements()){
+	    				attributeValue = values.nextElement().toString();
+	    			}
+					if(attributeName.equals("mail"))
+					{
+						mailGodfather = attributeValue;
+					}
+					else if(attributeName.equals("givenName"))
+					{
+						firstNameGodfather=attributeValue;
+					}
+					else if(attributeName.equals("sn"))
+					{
+						lastNameGodfather = attributeValue;
+					}
+	    		}
+	    	}catch(javax.naming.NamingException e) {
+	    		System.out.println(e.getMessage());
+	    	}*/
+            //
+            //
             System.out.println("invitenewmember");
             try {
                 url = "http://" + request.domain;
@@ -67,9 +115,9 @@ public class Invitation extends BaseController {
                     community=renderArgs.get("domainName").toString();
                 }
                 if (langue.equals("fr")) {
-                    Mails.inviteFr("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community);
+                	Mails.inviteFr("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community, firstNameGodfather, lastNameGodfather, mailGodfather);
                 } else {
-                    Mails.inviteEn("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community);
+                	Mails.inviteEn("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community, firstNameGodfather, lastNameGodfather, mailGodfather);
                 }
                 flash.success(Messages.get("invitation_success"));
                 System.out.println("community: "+community);
