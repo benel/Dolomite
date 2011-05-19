@@ -33,9 +33,9 @@
                     <div class="art-Header-png"></div>
                     <div class="art-Header-jpeg"></div>
                     <div class="art-Logo">
-                        <h1 id="name-text" class="art-Logo-name">#{if domainName} <a href="${domainHref?domainHref:'#'}" target="_blank">${domainName}</a> @ #{/if} <a href="#">DOLOMITE </a>
+                        <h1 id="name-text" class="art-Logo-name">#{if domainName} <a href="${domainHref?domainHref:'#'}" target="_blank">${domainName}</a> @ #{/if} <a href="#">DOLOMITE IF05</a>
                         </a></h1>
-                        <div id="slogan-text" class="art-Logo-text">ECom</div>
+                        <div id="slogan-text" class="art-Logo-text"></div>
                     </div>
                 </div>
                 <div class="art-nav">
@@ -58,7 +58,7 @@
 					<div class="art-Footer">
 						<div class="art-Footer-inner">
 							<div class="art-Footer-text">
-								<p>&{"copyright"} &copy; <a href="http://dolomite.sourceforge.net/" target="_blank">2010 Dolomite</a></p>
+								<p>#{if domainName} <a href="${domainHref?domainHref:'#'}" target="_blank">${domainName}</a> @ #{/if} <a href="#">Référence à la communauté</a> &{"copyright"} &copy; <a href="http://dolomite.sourceforge.net/" target="_blank"><img class="powered" src="@{'/public/images/dolomite.png'}" /></a></p>
 							</div>
 						</div>
 						<div class="art-Footer-background"></div>
