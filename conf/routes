@@ -3,11 +3,11 @@
 # ~~~~
 
 # Home page
-GET     /                                       Application.index
+GET     /                                                  Application.index
 
 GET     /inscription                                       Application.inscription
-GET     /invitation                                       Application.invitation
-GET     /invitation/invitenewmember                                       Application.invitation
+GET     /invitation                                        Invitation.index
+GET     /invitation/invitenewmember                        Invitation.inviteNewMember
 
 
 # Map static resources from the /app/public folder to the /public path

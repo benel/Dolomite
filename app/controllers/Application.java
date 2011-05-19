@@ -48,33 +48,6 @@ public class Application extends BaseController {
         }
 	}
 
-        public static void invitation(){
-
-		params.put("nom", session.get("nom") );
-		params.put("prenom", session.get("prenom") );
-		params.put("mail", session.get("mail") );
-		params.put("login", session.get("login") );
-        
-		String lang = session.get("langue");
-		if(lang != null) {
-			params.put("checked_fr", "");
-			params.put("checked_en", "");
-
-			if(lang.equals("fr"))
-			{
-				params.put("checked_fr", "checked");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			}
-			else if(lang.equals("en"))
-			{
-				params.put("checked_en", "checked");
-			}
-			else
-			{
-				System.out.println("Language error! Please check controller Invitation");
-			}
-		}                    
-		render();
-	}
+     
     
 }
