@@ -23,7 +23,7 @@ title_inscription=Inscrire un membre
 title_home=Accueil
 msg_problem_with_identification=Les champs n'ont pas été saisis correctement
 claim=Si vous rencontrez le moindre probleme avec votre prénom, votre nom ou votre email, envoyez un message a votre sponsor. Vous pourrez trouver l'email de votre sponsor dans votre courier d'invitation 
-start_now_msg=Bienvenue %1s! Vous pouvez maintenant utiliser <a id="application_link" href="%2s" target="_blank">%3s</a> en tant que membre et <a href="%4s">inviter</a> d'autres personnes à rejoindre la communauté
+start_now_msg=Bienvenue %1s! Pour vous connecter veuillez cliquer sur le bouton ci dessous  <a id="application_link" href="%2s" target="_blank">%3s</a>
 start_now_msg_without_domain=Bienvenue %1s! Vous pouvez maintenant <a href="%4s">inviter</a> d'autres personnes à rejoindre la communauté
 error_short_pass_msg=Votre mot de passe doit contenir au moins 6 caractères
 error_easy_pass_msg=Votre mot de passe ne doit pas correspondre à votre prénom, nom ou login
