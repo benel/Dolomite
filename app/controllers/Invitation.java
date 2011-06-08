@@ -85,16 +85,21 @@ public class Invitation extends BaseController {
             String mailGodfather="";
             String firstNameGodfather="";
             String lastNameGodfather="";
+
+
             if(session.get("username").equals("admin")){
             	firstNameGodfather="l'administrateur";
             	mailGodfather="Hypertopic Team <noreply@hypertopic.org>";
             }
-            else{
-            	HashMap<String, String> infos=Ldap.getConnectedUserInfos(session.get("username"));
-	            mailGodfather=infos.get("mail");
-	            firstNameGodfather=infos.get("firstName");
-	            lastNameGodfather=infos.get("lastName");
-            }
+                    else{
+            HashMap<String, String> infos = Ldap.getConnectedUserInfos(session.get("username"));
+            mailGodfather=infos.get("mail");
+            firstNameGodfather=infos.get("firstName");
+            lastNameGodfather=infos.get("lastName");
+                    }
+            int flag = Ldap.verifyMaliciousPassword(login, mail);
+            if(flag == Ldap.ADDRESSES_MATCHE || flag ==Ldap.USER_NOTEXIST){
+
             System.out.println("invitenewmember");
             try {
                 url = "http://" + request.domain;
@@ -124,12 +129,19 @@ public class Invitation extends BaseController {
                 session.remove("prenom");
                 session.remove("mail");
                 Invitation.invitation();              
-            }	   
-        } catch (Exception e) {
+            }	
+            
+                }
+            else{
+                flash.error(Messages.get("invitation_wrong_mail"));
+                Invitation.invitation();
+            }
+                }catch (Exception e) {
 		System.out.println("An exception occurred in Invitation.inviteNewMember");
 		e.printStackTrace();
 		render("Invitation/index.html"); }
-		
+
+
 	}
 	
 	public static void sendInvitation(

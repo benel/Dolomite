@@ -56,7 +56,7 @@ menu_inscription=Registration
 
 title_error=Error
 msg_signature_no_match=Signature doesn't match
-
+invitation_wrong_mail＝The invitation lettre is banned!    Please check mail adresse!
 #500.html
 application_error_title=Application error
 
