@@ -10,7 +10,7 @@ import java.security.Signature;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Sign;
-import models.LdapUser;
+import models.*;
 import play.mvc.*;
 import play.libs.Crypto;
 import play.data.validation.*;
@@ -20,7 +20,7 @@ import play.i18n.Messages;
 
 public class Inscription extends BaseController {
 
-	public static void adduser(
+		public static void adduser(
 		@Required(message="The first password is required") String password1,
 		@Required(message="The second password is required") String password2,
 		@Required(message="The firstname is required") String firstname,
@@ -38,12 +38,15 @@ public class Inscription extends BaseController {
 				} else {
                     checkResult = checkPass(password1,password2,firstname,lastname,login);
                     if ( checkResult == null){ //valid passwords
-                        result = new LdapUser(email, password1, firstname, lastname, login).addUser();
-                        System.out.println(result);
-                        if (result==0) {
+                        LDAPDirectory adminConnection = new LDAPDirectory(Play.configuration.getProperty("ldap.host"),Play.configuration.getProperty("ldap.admin.dn"), Play.configuration.getProperty("ldap.admin.password"));
+						Entry entry=adminConnection.retrieve(login);
+                                                
+                        if(entry==null) {
                             //user doesn't exist yet
+							User user = new User(email, password1, firstname, lastname, login);
+							adminConnection.create(user);
                             flash.now("success","You have been successfully registered " + firstname + " " + lastname + "." );	  
-                        } else if(result==1) { 
+                        } else if(entry!=null) { 
                             //user already exists
                             flash.now("success","You have already been successfully registered " + firstname + " " + lastname + "." );										   
                         } 
@@ -64,7 +67,6 @@ public class Inscription extends BaseController {
 			render("Application/index.html");
 		}
 	}
-
 
 		/**
 		 * Checksign
@@ -204,8 +206,10 @@ public class Inscription extends BaseController {
 					checkResult = checkPass(password1,password2,firstname,lastname,login);
 					System.out.println("v: "+validation);
 					if ( checkResult == null){ //valid passwords
-						// retrieve the user and change the password						
-						new LdapUser(email, password1, firstname, lastname, login).updateUser(email,password1,firstname,lastname);
+						// retrieve the user and change the password	
+						LDAPDirectory adminConnection = new LDAPDirectory(Play.configuration.getProperty("ldap.host"),Play.configuration.getProperty("ldap.admin.dn"), Play.configuration.getProperty("ldap.admin.password"));					
+						User user = new User(email, password1, firstname, lastname, login);
+						adminConnection.update(user);
 						flash.now("success","Your password has been successfully changed");
 						System.out.println("params: "+params.toString());
 						params.remove(signature);

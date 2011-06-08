@@ -1,198 +1,205 @@
 
+import javax.naming.NamingException;
 import org.junit.*;
 import java.util.*;
+import javax.naming.AuthenticationException;
 import play.test.*;
+import play.*;
 import models.*;
+
+
 
 public class LdapTest extends UnitTest {
 
+private LDAPDirectory adminConnection;
+
     @Before
     //to do before EACH test
-    public void setUp() {
-        new LdapUser("flora.dupont@utt.fr", "test", "Flora", "Dupont", "flora.dupont").addUser();
+    public void setUp() throws NamingException{
+      adminConnection=new LDAPDirectory(Play.configuration.getProperty("ldap.host"),Play.configuration.getProperty("ldap.admin.dn"), Play.configuration.getProperty("ldap.admin.password"));
+		 
+		 User flora = new User("flore.dupont@utt.fr", "test", "Flora", "Dupont", "flore.tr");
+		 Entry entryUser= (Entry)flora;
+		 adminConnection.create(entryUser);
 
-        LdapUser flo = LdapUser.connect("flora.dupont", "test");
+         ArrayList<String> myMembers = new ArrayList();
+         myMembers.add(flora.getLogin());
+         myMembers.add("steph");
+         myMembers.add("toto");
+		 Group floGroup=new Group("myFirstGroup", myMembers, flora.getLogin());
+		 Entry entry=(Entry)floGroup;
+         adminConnection.create(entry);
+    }
+
+     @Test
+    public void createUser() throws NamingException {
+        User usr = new User("firstname.userLastname@utt.fr", "password", "Firstname", "userLastname", "firstname.userLast");
+        Entry entry=(Entry)usr;
+        adminConnection.create(entry);
+                
+         LDAPDirectory userConnection =  new LDAPDirectory(Play.configuration.getProperty("ldap.host"),"cn="+"firstname.userLast"+","+Play.configuration.getProperty("ldap.dn"), "password");
+        User flo2 = (User) userConnection.retrieve("firstname.userLast");
+        
+         assertNotNull(flo2);  
+    }  
+
+     
+           @Test
+    public void createGroup() throws NamingException {
+        
         ArrayList<String> myMembers = new ArrayList();
-        myMembers.add(flo.getLogin());
-        LdapGroup.createGroup("myFirstGroup", myMembers, flo);
-    }
+         myMembers.add("flora.dupont");
+        Group floGroup2=new Group("mySecondGroup", myMembers, "flora.tr");
+         Entry entry=(Entry)floGroup2;
+         adminConnection.create(entry);
+        Group myGroup = (Group) adminConnection.retrieve("mySecondGroup");
+        assertNotNull(myGroup); 
+        
+      }
+     
+      @Test
+    public void connect_OK() throws NamingException  {
 
-    @Test
-    public void createUser() {
-        int result = new LdapUser("firstname.lastname@utt.fr", "password", "Firstname", "Lastname", "firstname.lastname").addUser();
-        assertEquals(0, result);
-    }
-
-    @Test
-    public void connect_OK() {
-        LdapUser flo = LdapUser.connect("flora.dupont", "test");
+        LDAPDirectory userConnection =  new LDAPDirectory(Play.configuration.getProperty("ldap.host"),"cn="+"flore.tr"+","+Play.configuration.getProperty("ldap.dn"), "test");
+		User flo = (User)userConnection.retrieve("flore.tr");
         assertNotNull(flo);
     }
-
+      
     @Test
-    public void connect_KO_no_user() {
-        LdapUser wrong_user = LdapUser.connect("wrong.user", "wrong_password");
-        assertNull(wrong_user);
-    }
-
-    @Test
-    public void connect_KO_wrong_password() {
-        LdapUser flo = LdapUser.connect("flora.dupont", "wrong_password");
+    public void connect_KO_no_user() throws NamingException {
+        try{
+        LDAPDirectory userConnection =  new LDAPDirectory(Play.configuration.getProperty("ldap.host"),"cn="+"wron_user"+","+Play.configuration.getProperty("ldap.dn"), "wrong_password");
+		User flo = (User)userConnection.retrieve("wron_user");
         assertNull(flo);
+        } catch (AuthenticationException e) {} 
     }
 
     @Test
-    public void retrieveUserInfo() {
-        LdapUser flo = LdapUser.connect("flora.dupont", "test");
-        assertEquals("Flora", flo.getFirstname());
-        assertEquals("Dupont", flo.getLastname());
-        assertEquals("flora.dupont@utt.fr", flo.getEmail());
+    public void connect_KO_wrong_password() throws NamingException{
+       try {
+        LDAPDirectory userConnection =  new LDAPDirectory(Play.configuration.getProperty("ldap.host"),"cn="+"flore.tr"+","+Play.configuration.getProperty("ldap.dn"), "wrong_password");
+       User flo = (User)userConnection.retrieve("flore.tr");
+        assertNull(flo);
+       } catch (AuthenticationException e) {}  
+        
     }
 
-    @Test
-    public void updateUserInfo() {
-        LdapUser flo = LdapUser.connect("flora.dupont", "test");
-
-        //update information
-        flo.updateUser("flora.dupont@utt.fr", "new_password", "Arolf", "Tnopud");
-
-        //try to connect using old and new password
-        LdapUser floModified = LdapUser.connect("flora.dupont", "new_password");
-        LdapUser floWithOldPwd = LdapUser.connect("flora.dupont", "test");
-
-        assertNull(floWithOldPwd);
-        assertNotNull(floModified);
-        assertEquals("flora.dupont@utt.fr", floModified.getEmail());
-        assertEquals("Arolf", floModified.getFirstname());
-        assertEquals("Tnopud", floModified.getLastname());
+ @Test
+    public void retrieveUser() throws NamingException {
+	       LDAPDirectory userConnection =  new LDAPDirectory(Play.configuration.getProperty("ldap.host"),"cn="+"flore.tr"+","+Play.configuration.getProperty("ldap.dn"), "test");
+        User user= (User) userConnection.retrieve("flore.tr");
+        assertEquals("Flora", user.getFirstname());
+        assertEquals("Dupont", user.getLastname());
+        assertEquals("flore.dupont@utt.fr", user.getEmail());
+    } 
+    
+  @Test
+ public void retrieveGroup() throws NamingException {
+ 	   Group group = (Group)adminConnection.retrieve("myFirstGroup");
+		assertEquals("myFirstGroup", group.getGroupName());
+		assertEquals("flore.tr", group.getOwner());
+		assertEquals("flore.tr", group.getMembers().get(0));
+                assertEquals("steph", group.getMembers().get(1));
+                assertEquals("toto", group.getMembers().get(2));
+;
+ 	  } 
+ 
+ @Test
+    public void updateUser() throws NamingException {
+       LDAPDirectory userConnection =  new LDAPDirectory(Play.configuration.getProperty("ldap.host"),"cn="+"flore.tr"+","+Play.configuration.getProperty("ldap.dn"), "test");
+       
+		User user = (User) userConnection.retrieve("flore.tr");
+        user.setEmail("kpstephie@yahoo.fr");
+        user.setFirstname("stephanie");
+        user.setLastname("kamwa");
+        
+        adminConnection.update((Entry)user);
+        
+        User newUser = (User) userConnection.retrieve("flore.tr");
+        
+        assertEquals("kpstephie@yahoo.fr", newUser.getEmail());
+        assertEquals("stephanie", newUser.getFirstname());
+        assertEquals("kamwa", newUser.getLastname());
+        assertEquals("flore.tr", newUser.getLogin());
     }
-
+    
     @Test
-    public void deleteUser() {
-        new LdapUser("firstname.lastname@utt.fr", "password", "Firstname", "Lastname", "firstname.lastname").addUser();
-
-        LdapUser user = LdapUser.connect("firstname.lastname", "password");
-        user.deleteUser();
-        LdapUser userDeleted = LdapUser.connect("firstname.lastname", "password");
-
-        assertNotNull(user);
+    public void updateGroup() throws NamingException {
+       
+		Group group = (Group) adminConnection.retrieve("myFirstGroup");
+        group.setOwner("stephanie");
+        group.getMembers().add("raf");
+        
+        adminConnection.update((Entry)group);
+        
+        Group newGroup = (Group) adminConnection.retrieve("myFirstGroup");
+        
+        assertEquals("stephanie", newGroup.getOwner());
+        assertNotNull(newGroup.getMembers());
+        assertEquals("raf", group.getMembers().get(3));
+    }
+ 
+    @Test
+    public void deleteUser() throws NamingException  {
+	LDAPDirectory userConnection =  new LDAPDirectory(Play.configuration.getProperty("ldap.host"),"cn="+"flore.tr"+","+Play.configuration.getProperty("ldap.dn"), "test");
+        
+        Entry entry = userConnection.retrieve("flore.tr");
+        adminConnection.delete(entry);
+        User userDeleted = (User)userConnection.retrieve("flore.tr");
+		userConnection.closeConnection();
+        assertNotNull(entry);
         assertNull(userDeleted);
     }
-
+    
     @Test
-    public void createGroup() {
-        LdapUser flo = LdapUser.connect("flora.dupont", "test");
-        ArrayList<String> myMembers = new ArrayList();
-        myMembers.add(flo.getLogin());
-
-        int aGroup = LdapGroup.createGroup("MySecondGroup", myMembers, flo);
-        assertEquals(0, aGroup);
-    }
-
-    @Test
-    public void addSpecificMemberInGroup() {
-        LdapUser flo = LdapUser.connect("flora.dupont", "test");
-        ArrayList<String> myMembers = new ArrayList();
-
-        new LdapUser("steve.bobbs@utt.fr", "password", "Steve", "Bobbs", "steve.bobbs").addUser();
-        LdapUser steve = LdapUser.connect("steve.bobbs", "password");
-
-        new LdapUser("michel.vaillant@utt.fr", "password", "Michel", "Vaillant", "michel.vaillant").addUser();
-        LdapUser michel = LdapUser.connect("michel.vaillant", "password");
-
-        new LdapUser("ken.baker@utt.fr", "password", "Ken", "Baker", "ken.baker").addUser();
-        LdapUser ken = LdapUser.connect("ken.baker", "password");
+    public void deleteGroup() throws NamingException {
 		
-		myMembers.add(flo.getLogin());
-
-        LdapGroup.createGroup("MySecondGroup", myMembers, flo);
-
-        LdapGroup myGroup = LdapGroup.retrieve("mySecondGroup");
-
-        myGroup.addSpecificMember(steve.getLogin());
-        myGroup.addSpecificMember(michel.getLogin());
-		myGroup.addSpecificMember(ken.getLogin());
-		
-        myGroup.displayGroupMembers();
-    }
-
-    @Test
-    public void removeSpecificMemberInGroup() {
-        LdapUser flo = LdapUser.connect("flora.dupont", "test");
-        ArrayList<String> myMembers = new ArrayList();
-        myMembers.add(flo.getLogin());
-		
-		LdapGroup.createGroup("MySecondGroup", myMembers, flo);
+        Group group = (Group)adminConnection.retrieve("myFirstGroup");
+       Entry entry=(Entry)group;
+        adminConnection.delete(entry);
+        Group groupDeleted = (Group)adminConnection.retrieve("myFirstGroup");
         
-		new LdapUser("steve.bobbs@utt.fr", "password", "Steve", "Bobbs", "steve.bobbs").addUser();
-        LdapUser steve = LdapUser.connect("steve.bobbs", "password");
-
-        new LdapUser("michel.vaillant@utt.fr", "password", "Michel", "Vaillant", "michel.vaillant").addUser();
-        LdapUser michel = LdapUser.connect("michel.vaillant", "password");
-
-        new LdapUser("ken.baker@utt.fr", "password", "Ken", "Baker", "ken.baker").addUser();
-        LdapUser ken = LdapUser.connect("ken.baker", "password");
-		
-        LdapGroup myGroup = LdapGroup.retrieve("mySecondGroup");
-
-        myGroup.addSpecificMember(steve.getLogin());
-        myGroup.addSpecificMember(michel.getLogin());
-        myGroup.addSpecificMember(ken.getLogin());
-        
-		myGroup.removeSpecificMember(steve.getLogin());
-		myGroup.displayGroupMembers();
-
+        assertNotNull(group);
+        assertNull(groupDeleted);
     }
-
-    @Test
-    public void deleteGroup() {
-        LdapGroup myGroup = LdapGroup.retrieve("myFirstGroup");
-        myGroup.deleteGroup();
-        LdapGroup myGroup2 = LdapGroup.retrieve("myFirstGroup");
-        assertNull(myGroup2);
-    }
-
+    
     @After
     //to do after EACH test
-    public void setDown() {
-        //delete Flora from Ldap
-        LdapUser flo = LdapUser.connect("flora.dupont", "test");
-        if (flo == null) {
-            flo = LdapUser.connect("flora.dupont", "new_password");
-        }
-        flo.deleteUser();
+    public void setDown() throws NamingException{
+	
+		//delete user create 
 
-        //delete the user created during the test if any
-        LdapUser user = LdapUser.connect("firstname.lastname", "password");
-        if (user != null) {
-            user.deleteUser();
+        
+          User user2= (User) adminConnection.retrieve("flore.tr");
+	    if (user2 != null) {
+            adminConnection.delete(user2);
         }
-
-        LdapUser ken = LdapUser.connect("ken.baker", "password");
-        if (ken != null) {
-            ken.deleteUser();
+             User user3 = (User) adminConnection.retrieve("userLast");
+	    if (user3 != null) {
+            adminConnection.delete(user3);
         }
-
-        LdapUser steve = LdapUser.connect("steve.bobbs", "password");
-        if (steve != null) {
-            steve.deleteUser();
+             User user4 = (User) adminConnection.retrieve("firstname.userLast");
+	    if (user4 != null) {
+            adminConnection.delete(user4);
         }
-
-        LdapUser michel = LdapUser.connect("michel.vaillant", "password");
-        if (michel != null) {
-            michel.deleteUser();
+            
+        Group grp=(Group)adminConnection.retrieve("mySecondGroup");
+	    if (grp != null) {
+            adminConnection.delete(grp);
         }
-
-        LdapGroup myGroup = LdapGroup.retrieve("myFirstGroup");
-        if (myGroup != null) {
-            myGroup.deleteGroup();
+        
+        Group grp2=(Group)adminConnection.retrieve("myFirstGroup");
+	    if (grp2 != null) {
+            adminConnection.delete(grp2);
         }
-
-        LdapGroup myGroup2 = LdapGroup.retrieve("mySecondGroup");
-        if (myGroup2 != null) {
-            myGroup2.deleteGroup();
-        }
-
+        
+        adminConnection.closeConnection();
+ 
+        
 
     }
+
+
+
+    
 }

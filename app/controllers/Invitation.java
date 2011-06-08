@@ -74,8 +74,10 @@ public class Invitation extends BaseController {
 		}                    
 		render("Invitation/index.html");
 	}
+
+		
 	public static void inviteNewMember(@Required String nom,@Required String prenom, @Required String mail, @Required String langue) {
-		 
+		 System.out.println("HAAAAAAAAAAAAAAAAAAA");
 		try {
             String login = normalize(prenom)+'.'+normalize(nom);
             String url = "";
@@ -85,14 +87,26 @@ public class Invitation extends BaseController {
             String mailGodfather="";
             String firstNameGodfather="";
             String lastNameGodfather="";
+			
             if(session.get("username").equals("admin")){
-            	firstNameGodfather="l'administrateur";
+            	//firstNameGodfather="l'administrateur";
+				firstNameGodfather="administrateur";
             	mailGodfather="Hypertopic Team <noreply@hypertopic.org>";
-            }
+            } else{
+            /* Ancienne méthode
             HashMap<String, String> infos=Ldap.getConnectedUserInfos(session.get("username"));
             mailGodfather=infos.get("mail");
             firstNameGodfather=infos.get("firstName");
             lastNameGodfather=infos.get("lastName");
+            */
+            LDAPDirectory adminConnection = new LDAPDirectory(Play.configuration.getProperty("ldap.host"),Play.configuration.getProperty("ldap.admin.dn"), Play.configuration.getProperty("ldap.admin.password"));
+            User usr = (User) adminConnection.retrieve(session.get("username"));
+            mailGodfather=usr.getEmail();
+            firstNameGodfather=usr.getFirstname();
+            lastNameGodfather=usr.getLastname();
+            }
+            
+            
     		/*Ldap adminConnection = new Ldap();
     		adminConnection.SetEnv(Play.configuration.getProperty("ldap.host"),Play.configuration.getProperty("ldap.admin.dn"), Play.configuration.getProperty("ldap.admin.password"));
     		Attributes r=adminConnection.getUserInfo(adminConnection.getLdapEnv(),session.get("username"));
@@ -160,7 +174,6 @@ public class Invitation extends BaseController {
 		render("Invitation/index.html"); }
 		
 	}
-	
 	public static void sendInvitation(
 		String firstNameSender,
 		String lastNameSender,

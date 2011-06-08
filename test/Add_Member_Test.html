@@ -1,0 +1,15 @@
+#{selenium 'add a member'}
+	open('/invitation')
+	clickAndWait('group_tab')
+	clickAndWait('see_member')
+	clickAndWait('add_a_member')
+	type('name', 'messon')	
+	clickAndWait('search')	
+	assertTextPresent('user_list', 'messon xavier')
+	assertTextPresent('user_list', 'messon paul')
+	click('member_messon_xavier')	
+    click(//input[@name='add_member'])
+	waitForPageToLoad(2000)	
+#{/selenium}
+	
+
