@@ -8,8 +8,6 @@
     <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
     <script src="@{'/public/javascripts/jquery-1.4.min.js'}" type="text/javascript" charset="utf-8"></script>
     <script src="@{'/public/javascripts/script.js'}" type="text/javascript" charset="utf-8"></script>
-    
-        
 </head>
     <body>
         <div id="art-page-background-simple-gradient">
@@ -48,9 +46,12 @@
 						<li>
                 			<a href="@{Invitation.index()}" class=" active"><span class="l"></span><span class="r"></span><span class="t">&{"menu_invitation"}</span></a>
                 		</li>
+						<li>
+                			<a href="@{CommunityController.index()}" class=" active"><span class="l"></span><span class="r"></span><span class="t">&{"menu_community"}</span></a>
+                		</li>
                 	</ul>
                 </div>
-				<div id="">
+				<div id="" class="layout">
 				#{doLayout /}
 				</div>
                 <div class="art-contentLayout">
@@ -71,7 +72,4 @@
 		</div>
     </div>
 </body>
-</html>
-
-    </body>
 </html>

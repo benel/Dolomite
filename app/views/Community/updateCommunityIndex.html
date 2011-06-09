@@ -1,0 +1,62 @@
+#{extends 'main.html' /}
+<div class="content_body_div">
+<h1>&{"title_update_of_community"}</h1><hr/>
+	<!--#{form @CommunityController.updateCommunity()}-->
+	<form action="@{CommunityController.updateCommunity(community_retrieved?.id)}" method="POST" onreset="document.location.href='index'">
+	<!--
+	#{ifErrors}
+        <table class="error" width="70%">
+			<td bgcolor="red" width="70%">
+			<FONT color="white" size="4">
+			<em>All fields are required!</em></FONT></td>
+	</table>
+	<p/>
+    #{/ifErrors}
+	-->
+	#{ifErrors}
+    <p class="error">
+        All fields are required!
+    </p>
+	#{/ifErrors}
+	
+	#{if flash.success}
+    <p class="success">
+		${flash.success}
+    </p>
+	#{/if}
+    
+	#{if flash.error}
+    <p class="error">
+		${flash.error}
+    </p>
+	#{/if}
+    
+	#{if community_retrieved}
+	<table>
+	<tr><td>&{"community_name"} :</td><td><input type='text' name='nom_communaute' value="${community_retrieved.name}" size='67'/></td></tr>
+	<tr><td>&{"community_prefix"} : </td><td><input type='text' name='prefixe_communaute' value="${community_retrieved.communityPrefix}" size='67'/></td></tr>
+	<tr><td>&{"application_community_link"} : </td><td><input type='text' name='application_link' value="${community_retrieved.applicationURL}" size='67'/></td></tr>
+	<tr><td>&{"descriptive_message"} : </td><td><textarea name="message_description" cols="50" rows="4">${community_retrieved.descriptionText}</textarea></td></tr>
+	<tr><td>&{"welcoming_message"} : </td><td><textarea name="message_bienvenue" cols="50" rows="4">${community_retrieved.welcomingMessage}</textarea></td></tr>
+	</table>
+	<br /><br />
+	<div style="margin-left:200px; margin-bottom:10px">
+		<input type='submit' name='validate' value='&{"update_community_validate"}' />
+		<input type='reset' name='reset' value='&{"update_community_reset"}'/>
+	</div>
+	#{/if}
+	
+	<!--#{/form}-->
+	</form>
+	
+	<script type="text/javascript" charset="utf-8">
+    $(function() {         
+                
+        // If there is an error, focus to form
+        if($('form .error').size()) {
+            $('form').expose({api: true, loadSpeed: 0}).load(); 
+            $('form input').get(0).focus();
+        }
+    });
+	</script>
+</div>
