@@ -56,7 +56,7 @@ menu_inscription=Inscription
 
 title_error=Erreur
 msg_signature_no_match=Signature erronée
-invitation_wrong_mail=Votre intivation a été bloquée!    Veuillez vérifier l'addresse Mail!
+invitation_mailadresse_no_match=Adresse mail erroné
 
 #500.html
 application_error_title=Erreur de l'application
