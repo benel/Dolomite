@@ -13,8 +13,6 @@ public class Mails extends Mailer {
 		setReplyTo(mailGodfather);
                 firstname=firstname.substring(0, 1).toUpperCase() + firstname.substring(1).toLowerCase();
                 lastname=lastname.substring(0, 1).toUpperCase() + lastname.substring(1).toLowerCase();
-                firstNameGodfather=firstNameGodfather.substring(0, 1).toUpperCase() + firstNameGodfather.substring(1).toLowerCase();
-		lastNameGodfather=lastNameGodfather.substring(0, 1).toUpperCase() + lastNameGodfather.substring(1).toLowerCase();
                 send(firstname, lastname, url, community, firstNameGodfather, lastNameGodfather);
 	}
 
@@ -25,8 +23,6 @@ public class Mails extends Mailer {
 		setReplyTo(mailGodfather);
 		firstname=firstname.substring(0, 1).toUpperCase() + firstname.substring(1).toLowerCase();
                 lastname=lastname.substring(0, 1).toUpperCase() + lastname.substring(1).toLowerCase();
-                firstNameGodfather=firstNameGodfather.substring(0, 1).toUpperCase() + firstNameGodfather.substring(1).toLowerCase();
-		lastNameGodfather=lastNameGodfather.substring(0, 1).toUpperCase() + lastNameGodfather.substring(1).toLowerCase();
                 send(firstname, lastname, url, community, firstNameGodfather, lastNameGodfather);
 	}
 }
