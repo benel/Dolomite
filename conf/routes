@@ -8,7 +8,8 @@ GET     /                                                  Application.index
 GET     /inscription                                       Application.inscription
 GET     /invitation                                        Invitation.index
 GET     /invitation/invitenewmember                        Invitation.inviteNewMember
-
+GET		/communitycontroller/createNewCommunity			   CommunityController.createNewCommunity
+POST	/communitycontroller/updatecommunity			   CommunityController.updateCommunity
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public

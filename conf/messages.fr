@@ -10,6 +10,33 @@ password=Mot de passe
 password_confirmation=Confirmation de mot de passe
 language=Langue
 
+#list of communities
+
+link_of_application=Lien de l'application:
+update_a_community=Editer
+delete_a_community=Supprimer
+
+#create community fields
+
+menu_create_community=Créer une Communauté
+community_name=Nom de la communauté
+community_prefix=Identifiant de la communauté
+application_community_link=Lien de l'application
+descriptive_message=Description de la communauté
+welcoming_message=Message de Bienvenue aux membres
+create_community_validate=Créer une Communauté
+create_community_reset=Annuler
+create_community_success=Votre communauté a été créée avec succès!
+list_of_community_empty=Aucune Communauté n'a été créée pour le moment. Cliquez sur "Créer une communauté", puis remplissez le formulaire. Une fois votre communauté créée, vous pourrez l'afficher ou modifier ses valeurs.
+display_communities_list=Afficher les Communautés
+community_searched_empty=Désolé. Aucune Communauté n'a été trouvée.
+
+# updating a community
+
+title_update_of_community=Modifiez une Communauté
+update_community_validate=Enregistrer les modifications
+update_community_reset=Annuler
+
 #inputs
 
 input_send_claim=Envoyer une réclamation
@@ -43,6 +70,12 @@ invitation_fail_user_already_exist=L'utilisateur %1s existe déjà. Votre invita
 home_title=Bienvenue sur Dolomite
 home_content=Cette application permet d'administrer un annuaire LDAP de façon collaborative. Tout membre disposant d'un compte utilisateur peut inviter d'autres personnes à rejoindre la communauté.
 
+#community
+
+title_description_of_community=Descriptif des Communautés
+title_creation_of_community=Créez votre Communauté
+title_search_community=Rechercher
+
 #_footer
 
 copyright=Copyright - Tous droits reservés
@@ -51,6 +84,7 @@ copyright=Copyright - Tous droits reservés
 
 menu_invitation=Invitation
 menu_inscription=Inscription
+menu_community=Communautés
 
 #error.html
 
