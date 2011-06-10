@@ -26,7 +26,8 @@ public class Community extends Model {
 		this.welcomingMessage = welcomingMessage;
 		this.applicationURL = applicationURL;
 		String lowerCasePrefix = communityPrefix.toLowerCase();
-		this.dolomiteURL = "http://" + lowerCasePrefix + ".community.hypertopic.org";
+		this.dolomiteURL = "http://"+lowerCasePrefix+Play.configuration.getProperty("domain");
+
 	}
 	
 	public String getName(){return name;}
@@ -63,7 +64,7 @@ public class Community extends Model {
 	
 	public void setDolomiteURL(String communityPrefix) {
 		String lowerCasePrefix = communityPrefix.toLowerCase();
-		this.dolomiteURL = "http://" + lowerCasePrefix + ".community.hypertopic.org";		
+		this.dolomiteURL = "http://"+lowerCasePrefix+Play.configuration.getProperty("domain");		
 	}
 	
 

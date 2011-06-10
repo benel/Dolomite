@@ -28,7 +28,7 @@ create_community_validate=Créer une Communauté
 create_community_reset=Annuler
 create_community_success=Votre communauté a été créée avec succès!
 list_of_community_empty=Aucune Communauté n'a été créée pour le moment. Cliquez sur "Créer une communauté", puis remplissez le formulaire. Une fois votre communauté créée, vous pourrez l'afficher ou modifier ses valeurs.
-display_communities_list=Afficher les Communautés
+display_communities_list=Afficher la Communauté
 community_searched_empty=Désolé. Aucune Communauté n'a été trouvée.
 
 # updating a community

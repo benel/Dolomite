@@ -15,7 +15,7 @@ language=Language
 input_send_claim=Send a claim
 input_reset=Cancel
 input_invite=Invite
-input_submit=Accept
+input_submit=Create
 
 #inscription
 
@@ -47,16 +47,49 @@ home_content=Anybody with an account can invite somebody else.
 
 copyright=Copyright - All rights reserved
 
+#list of communities
+
+link_of_application=Application link:
+update_a_community=Edit
+delete_a_community=Delete
+
+#create community fields
+
+menu_create_community=Create community
+community_name=Community name
+community_prefix= Community prefix
+application_community_link=Application link
+descriptive_message=Descriptive message
+welcoming_message=welcoming message
+create_community_validate=Create a Community
+create_community_reset=Reset
+create_community_success=You have successfully created your community
+list_of_community_empty=No Community is created at this moment yet. Please click on "Create a community" button to create a new one.
+display_communities_list=display your Community
+community_searched_empty=No results found.
+
+# updating a community
+
+title_update_of_community=Modify Community
+update_community_validate=Validate
+update_community_reset=Reset
+
+#community
+title_description_of_community=Description of Community
+title_creation_of_community=Creation of Community
+title_search_community=Search a Community
+
 #_menu
 
 menu_invitation=Invitation
+menu_community=Community
 menu_inscription=Registration
 
 #error.html
 
 title_error=Error
 msg_signature_no_match=Signature doesn't match
-invitation_mailadresse_no_match＝The mail adresse typed doesn't match!
+
 #500.html
 application_error_title=Application error
 
