@@ -56,7 +56,7 @@ menu_inscription=Registration
 
 title_error=Error
 msg_signature_no_match=Signature doesn't match
-
+invitation_mailadresse_no_match＝The mail adresse typed doesn't match!
 #500.html
 application_error_title=Application error
 
