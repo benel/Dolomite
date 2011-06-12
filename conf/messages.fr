@@ -27,13 +27,14 @@ welcoming_message=Message de Bienvenue aux membres
 create_community_validate=Créer une Communauté
 create_community_reset=Annuler
 create_community_success=Votre communauté a été créée avec succès!
-list_of_community_empty=Aucune Communauté n'a été créée pour le moment. Cliquez sur "Créer une communauté", puis remplissez le formulaire. Une fois votre communauté créée, vous pourrez l'afficher ou modifier ses valeurs.
+list_of_community_empty=Aucune Communauté n'a été créée pour le moment. Cliquez sur "Créer une communauté", puis remplissez le formulaire. Une fois votre communauté créée, vous pourrez l'afficher, modifier ses valeurs ou la supprimer.
 display_communities_list=Afficher la Communauté
 community_searched_empty=Désolé. Aucune Communauté n'a été trouvée.
 
 # updating a community
 
 title_update_of_community=Modifiez une Communauté
+update_community_success=La Communauté a été bien modifiée!
 update_community_validate=Enregistrer les modifications
 update_community_reset=Annuler
 

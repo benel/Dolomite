@@ -71,6 +71,7 @@ community_searched_empty=No results found.
 # updating a community
 
 title_update_of_community=Modify Community
+update_community_success=You have successfully update the community
 update_community_validate=Validate
 update_community_reset=Reset
 

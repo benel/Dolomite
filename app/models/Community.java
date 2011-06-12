@@ -27,46 +27,6 @@ public class Community extends Model {
 		this.applicationURL = applicationURL;
 		String lowerCasePrefix = communityPrefix.toLowerCase();
 		this.dolomiteURL = "http://"+lowerCasePrefix+Play.configuration.getProperty("domain");
-
 	}
-	
-	public String getName(){return name;}
-	
-	public void setName(String newName){
-		this.name = newName;
-	}
-
-	public String getCommunityPrefix(){return communityPrefix;}
-	
-	public void setCommunityPrefix(String newCommunityPrefix){
-		this.communityPrefix = newCommunityPrefix;
-	}
-	
-	public String getDescriptionText(){return descriptionText;}
-	
-	public void setDescriptionText(String newDescriptionText) {
-		this.descriptionText = newDescriptionText;
-	}
-	
-	public String getWelcomingMessage(){return welcomingMessage;}
-	
-	public void setWelcomingMessage(String newWelcomingMessage) {
-		this.welcomingMessage = newWelcomingMessage;
-	}
-	
-	public String getApplicationURL(){return applicationURL;}
-	
-	public void setApplicationURL(String newApplicationURL) {
-		this.applicationURL = newApplicationURL;
-	}
-	
-	public String getDolomiteURL(){return dolomiteURL;}
-	
-	public void setDolomiteURL(String communityPrefix) {
-		String lowerCasePrefix = communityPrefix.toLowerCase();
-		this.dolomiteURL = "http://"+lowerCasePrefix+Play.configuration.getProperty("domain");		
-	}
-	
-
 }	
 

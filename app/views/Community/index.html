@@ -1,9 +1,11 @@
 #{extends 'main.html' /}
 
 <script language="javascript">
+
 function displayCommunity(form1) {
 	var community_anchor = document.form1.community_name.value.toUpperCase();
 	document.location.href="#"+community_anchor;
+	return false;
 }
 
 function montre(id) {
@@ -29,7 +31,7 @@ function cache(id) {
 		<div id="content" class="content_body_div" style="height:350px; overflow:auto;">
 			<div style="">
 				<center>
-				<form name="form1">
+				<form name="form1" onSubmit="return displayCommunity(form1)">
 				<input type="text" name="community_name" value="" size=15>
 				<input type="button" name="bouton" value="GO" onclick="displayCommunity(form1)">
 				</form>
@@ -68,7 +70,7 @@ function cache(id) {
 	<td width=600>
 		<div id="content" class="content_body_div" style="height:350px; overflow:auto;">
 				#{if communities_list.size() > 0}
-					<div class="communities_table" border-radius: 10px >    
+					<div class="communities_table" style="border-radius: 10px;" >    
 						#{list items:communities_list, as:'community'}
 							<div class="communityDescription" style="background-color:white; padding:10px; border-radius: 8px 8px 8px 8px; -moz-border-radius: 8px 8px 8px 8px;" onmouseover="montre('${community.id}')" onmouseout="cache('${community.id}')">
 								<h3 id="${community.communityPrefix}" class="post-title">
@@ -106,7 +108,7 @@ function cache(id) {
 				#{/if}
 			
 				#{else}
-					<div class="empty" style="font-size:13px; color:red; -moz-border-radius: 6px 6px 6px 6px; background-color:white;">
+					<div class="empty" style="font-size:12px; color:red; -moz-border-radius: 6px 6px 6px 6px; background-color:white;">
 						<p style="padding:6px;">&{"list_of_community_empty"}</p>				
 					</div>
 				#{/else}
