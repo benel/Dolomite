@@ -33,8 +33,8 @@ community_searched_empty=Désolé. Aucune Communauté n'a été trouvée.
 
 # updating a community
 
-title_update_of_community=Modifiez une Communauté
-update_community_success=La Communauté a été bien modifiée!
+title_update_of_community=Modifiez la Communauté
+update_community_success=La Communauté a bien été modifiée !
 update_community_validate=Enregistrer les modifications
 update_community_reset=Annuler
 
@@ -62,7 +62,7 @@ error_empty_pass_msg=Votre mot de passe ne peut pas être vide
 #invitation
 
 title_invit_member_group=Inviter un membre
-error_all_field_required=Tous les champs sont nécessaires
+error_all_field_required=Tous les champs sont nécessaires !
 invitation_success=Votre invitation a été envoyée !
 invitation_fail_user_already_exist=L'utilisateur %1s existe déjà. Votre invitation à %2s n'a pas été envoyée
 

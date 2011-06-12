@@ -1,6 +1,7 @@
 #{extends 'main.html' /}
 
-<h1>&{"title_invit_member_group"}</h1>
+<div class="content_body_div">
+<h1>&{"title_invit_member_group"}</h1><hr/><br/>
 #{form @Invitation.inviteNewMember()}
 	<!--
 	#{ifErrors}
@@ -14,7 +15,7 @@
 	-->
 	#{ifErrors}
     <p class="error">
-        All fields are required!
+        &{"error_all_field_required"}
     </p>
 	#{/ifErrors}
 	
@@ -55,6 +56,6 @@
         }
     });
 </script>
-
+</div>
 
 %{System.out.println("flash in html: "+flash)}%
