@@ -97,7 +97,7 @@ function cache(id) {
 											<button onclick="document.location.href='@{displayCommunityUpdate(community.id)}'" size=15>&{"update_a_community"}</button>
 										</td>
 										<td align="center">
-											<button onclick="document.location.href='@{deleteCommunity(community.id)}'" size=15><span style="color:red;">&{"delete_a_community"}</span></button>
+											<button onclick="javascript:alert('The community has been deleted !'); document.location.href='@{deleteCommunity(community.id)}';" size=15><span style="color:red;">&{"delete_a_community"}</span></button>											
 										</td>
 									</tr>
 								</table>
