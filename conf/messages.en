@@ -26,7 +26,6 @@ claim=If you have any problem with your first name, your name or your email, ple
 start_now_msg=Welcome %1s! You can now either start using  <a id="application_link" href="%2s" target="_blank">%3s</a>
 start_now_msg_without_domain=Welcome %1s! You can now <a href="%4s">invite</a> other people to join the community.
 error_short_pass_msg=Your password should contain at least 6 characters
-error_easy_pass_msg=Your password shouldn't be equal to your firstname, lastname or login
 error_pass_no_match_msg=The passwords typed do not match
 error_alfanum_pass_msg=Your password should be at least 6 characters long and mix letters and numbers
 error_empty_pass_msg=Your password shouldn't be empty

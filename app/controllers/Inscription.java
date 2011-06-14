@@ -78,39 +78,11 @@ public class Inscription extends BaseController {
 	public static boolean checksign(String signature, String firstname, String lastname, String email) {
 			Boolean result = false;
 
-		  try {
+		try {
 			String data = firstname + lastname + email;
 			byte[] dataByte = data.getBytes();
 			result = Inscription.verifySig(dataByte, signature.getBytes(), Inscription.deserializePublic(System.getProperty("user.dir") + "/conf/key.pub"));
 			   System.out.println("check sign : " + result);
-
-			/*
-			Boolean isOk = false;
-			String data = firstname + lastname + email;
-			System.out.println("data URL : " + data);
-			System.out.println("signature URL : " + signature);
-			System.out.println("signature URL getBytes : " + signature.getBytes());
-			String newSignature;
-			try {
-			//Signature signer = Signature.getInstance("SHA1withDSA");
-			//signer.initVerify(Inscription.deserialize("D:\\Documents\\Developpement\\play-1.0.1\\dolomite\\public\\public.Obj"));
-			//signer.update(data.getBytes());
-			newSignature = (Inscription.signData(data.getBytes(), Inscription.deserializePrivate("D:\\Documents\\Developpement\\play-1.0.1\\dolomite\\public\\private.Obj"))).toString();
-			System.out.println("newSignature : " + newSignature);
-			System.out.println("newSignature getBytes : " + newSignature.getBytes());
-			//isOk = newSignature.verify(signature.getBytes());
-			} catch (Exception ex) {
-			Logger.getLogger(Inscription.class.getName()).log(Level.SEVERE, null, ex);
-			}
-			//catch (NoSuchAlgorithmException ex) {
-			//	java.util.logging.Logger.getLogger(Inscription.class.getName()).log(Level.SEVERE, null, ex);
-			//} catch (SignatureException ex) {
-			//	java.util.logging.Logger.getLogger(Inscription.class.getName()).log(Level.SEVERE, null, ex);
-			//} catch (InvalidKeyException ex) {
-			//	java.util.logging.Logger.getLogger(Inscription.class.getName()).log(Level.SEVERE, null, ex);
-			//}
-			return isOk;
-			 */
 		} catch (Exception ex) {
 			Logger.getLogger(Inscription.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -224,16 +196,14 @@ public class Inscription extends BaseController {
 	}
 
 	public static String checkPass(String password1, String password2, String firstname, String lastname, String login) {
-		if ((password1.matches("[a-zA-Z]")) && (password1.matches("[0-9]"))) {
-				if (password2.equals(password1)) {
-					if ((!password1.equals(firstname)) && (!password1.equals(lastname)) && (!password1.equals(login))) {
-						if (password1.length() >= 6) {
-								return null;
-						} else { return(Messages.get("error_short_pass_msg")); }
-					} else { return(Messages.get("error_easy_pass_msg")); }
-				} else { return(Messages.get("error_pass_no_match_msg")); }
-			} else { return(Messages.get("error_alfanum_pass_msg")); }
-    }
+		if (password1.length() < 6) 
+			return Messages.get("error_short_pass_msg");
+		if (!password2.equals(password1)) {
+			return Messages.get("error_pass_no_match_msg");
+		if (!password1.matches("[a-zA-Z]") || !password1.matches("[0-9]")) {
+			return Messages.get("error_alfanum_pass_msg");
+		return null;
+	}
 
 }
 
