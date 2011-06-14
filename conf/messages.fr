@@ -54,7 +54,7 @@ start_now_msg=Bienvenue %1s! Pour vous connecter veuillez cliquer sur le bouton 
 start_now_msg_without_domain=Bienvenue %1s! Vous pouvez maintenant <a href="%4s">inviter</a> d'autres personnes à rejoindre la communauté
 error_short_pass_msg=Votre mot de passe doit contenir au moins 6 caractères
 error_pass_no_match_msg=Les mots de passe insérés ne sont pas les mêmes
-error_alfanum_pass_msg=Votre mot de passe doit être d'au moins 6 caractères et doit mélanger des lettres et des chiffres
+error_alfanum_pass_msg=Votre mot de passe doit mélanger des lettres et des chiffres
 error_empty_pass_msg=Votre mot de passe ne peut pas être vide
 
 #invitation

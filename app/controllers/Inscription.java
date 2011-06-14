@@ -80,7 +80,7 @@ public class Inscription extends BaseController {
 				if (validation.hasErrors()) {
 					render("Application/reset.html");
 				} else {
-					checkResult = checkPass(password1,password2,firstname,lastname,login);
+					checkResult = checkPass(password1,password2);
 					System.out.println("v: "+validation);
 					if ( checkResult == null){ //valid passwords
 						// retrieve the user and change the password
