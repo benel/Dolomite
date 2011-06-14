@@ -1,0 +1,61 @@
+#{extends 'main.html' /}
+<div class="content_body_div">
+<h1>&{"title_creation_of_community"}</h1><hr/>
+	<!--#{form @CommunityController.createNewCommunity()}-->
+	<form action="@{CommunityController.createNewCommunity()}" method="GET" onreset="document.location.href='index'">
+	<!--
+	#{ifErrors}
+        <table class="error" width="70%">
+			<td bgcolor="red" width="70%">
+			<FONT color="white" size="4">
+			<em>All fields are required!</em></FONT></td>
+	</table>
+	<p/>
+    #{/ifErrors}
+	-->
+	#{ifErrors}
+    <p class="error">
+        All fields are required!
+    </p>
+	#{/ifErrors}
+	
+	#{if flash.success}
+    <p class="success">
+		${flash.success}
+    </p>
+	#{/if}
+    
+	#{if flash.error}
+    <p class="error">
+		${flash.error}
+    </p>
+	#{/if}
+    
+	<table>
+	<tr><td>&{"community_name"} :</td><td><input type='text' name='nom_communaute' value="${params.nom_communaute ? params.nom_communaute.escape() : ""}" size='67'/></td></tr>
+	<tr><td>&{"community_prefix"} : </td><td><input type='text' name='prefixe_communaute' value="${params.prefixe_communaute ? params.prefixe_communaute.escape() : ""}" size='67'/></td></tr>
+	<tr><td>&{"application_community_link"} : </td><td><input type='text' name='application_link' value="${params.application_link ? params.application_link.escape() : ""}" size='67'/></td></tr>
+	<tr><td>&{"descriptive_message"} : </td><td><textarea name="message_description" cols="50" rows="4">${params.message_description ? params.message_description.escape() : ""}</textarea></td></tr>
+	<tr><td>&{"welcoming_message"} : </td><td><textarea name="message_bienvenue" cols="50" rows="4">${params.message_bienvenue ? params.message_bienvenue.escape() : ""}</textarea></td></tr>
+	</table>
+	<br /><br />
+	<div style="margin-left:200px; margin-bottom:10px">
+		<input type='submit' name='validate' value='&{"input_submit"}' />
+		<input type='reset' name='reset' value='&{"create_community_reset"}' />
+		<!--<button onclick="document.location.href='index'"><span style="color:#2689CC; font-weight:bold;">&{"display_communities_list"}</span></button>-->
+		<input type='button' name='displayCommunities' value='&{"display_communities_list"}' onclick="document.location.href='index'" style="color:#2689CC; font-weight:bold;"/>
+	</div>
+	<!--#{/form}-->
+	</form>
+	
+	<script type="text/javascript" charset="utf-8">
+    $(function() {         
+                
+        // If there is an error, focus to form
+        if($('form .error').size()) {
+            $('form').expose({api: true, loadSpeed: 0}).load(); 
+            $('form input').get(0).focus();
+        }
+    });
+	</script>
+</div>

@@ -1,0 +1,11 @@
+#{selenium 'add a member'}
+	clickAndWait('group_tab')
+	clickAndWait('see_member')
+	assertTextPresent('group_member_list', 'messon xavier')	
+	click('delete_messon_xavier')	
+	waitForElementPresent('delete_confirmation')	
+    click('delete_confirm_button')
+	waitForPageToLoad(2000)
+	assertTextNotPresent('group_member_list', 'messon xavier')	
+#{/selenium}
+   

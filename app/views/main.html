@@ -8,8 +8,6 @@
     <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
     <script src="@{'/public/javascripts/jquery-1.4.min.js'}" type="text/javascript" charset="utf-8"></script>
     <script src="@{'/public/javascripts/script.js'}" type="text/javascript" charset="utf-8"></script>
-    
-        
 </head>
     <body>
         <div id="art-page-background-simple-gradient">
@@ -33,9 +31,8 @@
                     <div class="art-Header-png"></div>
                     <div class="art-Header-jpeg"></div>
                     <div class="art-Logo">
-                        <h1 id="name-text" class="art-Logo-name">#{if domainName} <a href="${domainHref?domainHref:'#'}" target="_blank">${domainName}</a> @ #{/if} <a href="#">DOLOMITE </a>
-                        </a></h1>
-                        <div id="slogan-text" class="art-Logo-text">ECom</div>
+                        <h1 id="name-text" class="art-Logo-name">#{if domainName} <a href="${domainHref?domainHref:'#'}" target="_blank">${domainName}</a>#{/if}</h1>
+                        <div id="slogan-text" class="art-Logo-text"></div>
                     </div>
                 </div>
                 <div class="art-nav">
@@ -46,11 +43,14 @@
                 			<a href="@{Application.index()}" class=" active"><span class="l"></span><span class="r"></span><span class="t">&{"title_home"}</span></a>
                 		</li>
 						<li>
-                			<a href="@{Application.invitation()}" class=" active"><span class="l"></span><span class="r"></span><span class="t">&{"menu_invitation"}</span></a>
+                			<a href="@{Invitation.index()}" class=" active"><span class="l"></span><span class="r"></span><span class="t">&{"menu_invitation"}</span></a>
+                		</li>
+						<li>
+                			<a href="@{CommunityController.index()}" class=" active"><span class="l"></span><span class="r"></span><span class="t">&{"menu_community"}</span></a>
                 		</li>
                 	</ul>
                 </div>
-				<div id="">
+				<div id="" class="layout">
 				#{doLayout /}
 				</div>
                 <div class="art-contentLayout">
@@ -58,7 +58,7 @@
 					<div class="art-Footer">
 						<div class="art-Footer-inner">
 							<div class="art-Footer-text">
-								<p>&{"copyright"} &copy; <a href="http://dolomite.sourceforge.net/" target="_blank">2010 Dolomite</a></p>
+								<p> &{"copyright"} &copy; <a href="http://dolomite.sourceforge.net/" target="_blank"><img class="powered" src="@{'/public/images/dolomite.png'}" /></a></p>
 							</div>
 						</div>
 						<div class="art-Footer-background"></div>
@@ -71,7 +71,4 @@
 		</div>
     </div>
 </body>
-</html>
-
-    </body>
 </html>

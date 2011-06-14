@@ -10,6 +10,7 @@ package models;
  */
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
@@ -38,6 +39,9 @@ public class Ldap {
      */
     Hashtable<String, String> ldapEnv = new Hashtable<String, String>();
     String ldap_account;
+    public static int USER_NOTEXIST =1;
+    public static int ADDRESSES_MATCHE =2;
+    public static int ADDRESSES_NOTMATCHE = 3;
 
     public static void listerAttributs(Attributes atts) {
         try {
@@ -143,6 +147,84 @@ public class Ldap {
 
         return null;
     }
+
+    public static HashMap<String, String> getConnectedUserInfos(String username){
+    	HashMap<String, String> infos=new HashMap<String, String>();
+    	if(username.equals("admin")){
+        	return null;
+        }
+		Ldap adminConnection = new Ldap();
+		adminConnection.SetEnv(Play.configuration.getProperty("ldap.host"),Play.configuration.getProperty("ldap.admin.dn"), Play.configuration.getProperty("ldap.admin.password"));
+		Attributes r=adminConnection.getUserInfo(adminConnection.getLdapEnv(),username);
+    	try{
+    		NamingEnumeration  e=r.getAll();
+    		while(e.hasMore()){
+    			javax.naming.directory.Attribute a=(javax.naming.directory.Attribute)e.next();
+    			String attributeName=a.getID();
+    			String attributeValue="";
+    			Enumeration values = a.getAll();
+    			while(values.hasMoreElements()){
+    				attributeValue = values.nextElement().toString();
+    			}
+				if(attributeName.equals("mail"))
+				{
+					infos.put("mail", attributeValue);
+				}
+				else if(attributeName.equals("givenName"))
+				{
+					infos.put("firstName", attributeValue);
+				}
+				else if(attributeName.equals("sn"))
+				{
+					infos.put("lastName", attributeValue);
+				}
+    		}
+    	}catch(javax.naming.NamingException e) {
+    		System.out.println(e.getMessage());
+    		return null;
+    	}
+    	return infos;
+    }
+
+ public static int verifyMaliciousPassword(String login, String mail){
+    String mailAdresse = "";
+    Ldap adminConnection = new Ldap();
+    adminConnection.SetEnv(Play.configuration.getProperty("ldap.host"),Play.configuration.getProperty("ldap.admin.dn"), Play.configuration.getProperty("ldap.admin.password"));
+    Attributes f=adminConnection.getUserInfo(adminConnection.getLdapEnv(),login);
+    	try{
+    		NamingEnumeration e=f.getAll();
+    		while(e.hasMore()){
+    			javax.naming.directory.Attribute a=(javax.naming.directory.Attribute)e.next();
+    			String attributeName=a.getID();
+    			String attributeValue="";
+    			Enumeration values = a.getAll();
+    			while(values.hasMoreElements()){
+    				attributeValue = values.nextElement().toString();
+    			}
+				if(attributeName.equals("mail"))
+				{
+					mailAdresse = attributeValue;
+				}
+    		}
+    	}catch(javax.naming.NamingException e) {
+    		System.out.println(e.getMessage());
+    		return 0;
+    	}finally{
+
+        if(mailAdresse.equals("")){
+            return Ldap.USER_NOTEXIST;
+        }
+        else if(mailAdresse.equals(mail))
+        {
+            return Ldap.ADDRESSES_MATCHE;
+        }
+        else
+        {
+            return Ldap.ADDRESSES_NOTMATCHE;
+        }
+        }
+
+ }
 
     public void modifyPassword(Hashtable ldapEnv, String password) {
         try {

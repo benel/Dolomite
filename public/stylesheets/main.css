@@ -237,7 +237,7 @@ div.art-Header-jpeg
 	left: 0;
 	width: 784px;
 	height: 125px;
-	background-image: url('../images/Header.jpg');
+	/*background-image: url('../images/Header.jpg');*/
 	background-repeat: no-repeat;
 	background-position: center center;
 }
@@ -248,15 +248,15 @@ div.art-Header-jpeg
 {
 	display : block;
 	position: absolute;
-	left: 0px;
-	top: 28px;
+	left: 30px;
+	top: 50px;
 	width: 349px;
 }
 
 h1.art-Logo-name
 {
 	display: block;
-	text-align: right;
+	text-align: left;
 }
 
 h1.art-Logo-name, h1.art-Logo-name a, h1.art-Logo-name a:link, h1.art-Logo-name a:visited, h1.art-Logo-name a:hover
@@ -268,7 +268,7 @@ font-weight: bold;
 text-decoration: none;
 	padding:0;
 	margin:0;
-	color: #0D1A73 !important;
+	color: white !important;
 }
 
 .art-Logo-text
@@ -382,10 +382,6 @@ font-weight: normal;
 	margin: -30px 0 0 -10px;
 }
 
-
-
-
-
 /* menu structure */
 
 .art-menu
@@ -469,10 +465,10 @@ font-weight: normal;
 
 .art-menu a .t 
 {
-font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
-font-size: 11px;
-font-style: normal;
-font-weight: normal;
+	font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
+	font-size: 11px;
+	font-style: normal;
+	font-weight: normal;
 	color: #161E22;
 	padding: 0 19px;
 	margin: 0 4px;
@@ -561,10 +557,10 @@ font-weight: normal;
 	text-decoration: none;
 	line-height: 20px;
 	color: #000000;
-font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
-font-size: 11px;
-font-style: normal;
-font-weight: normal;
+	font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
+	font-size: 11px;
+	font-style: normal;
+	font-weight: normal;
 }
 
 .art-menu ul ul a
@@ -737,10 +733,10 @@ font-weight: normal;
 {
 	height: 30px;
 	color: #000000;
-font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
-font-size: 11px;
-font-style: normal;
-font-weight: bold;
+	font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
+	font-size: 11px;
+	font-style: normal;
+	font-weight: bold;
 	white-space : nowrap;
 	padding: 0 6px;
 	line-height: 30px;	
@@ -767,10 +763,6 @@ font-weight: bold;
 	right:0;
 	clip: rect(auto, auto, auto, 778px);
 }
-
-
-
-
 
 .art-header-tag-icon
 {
@@ -803,8 +795,6 @@ font-weight: bold;
 	padding: 8px;
 }
 
-
-
 .art-BlockContent-body
 {
 	color:#28373E;
@@ -817,22 +807,22 @@ font-weight: normal;
 .art-BlockContent-body a:link
 {
 	color: #2F5F6A;
-font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
-text-decoration: underline;
+	font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
+	text-decoration: underline;
 }
 
 .art-BlockContent-body a:visited, .art-BlockContent-body a.visited
 {
 	color: #688D9C;
-font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
-text-decoration: underline;
+	font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
+	text-decoration: underline;
 }
 
 .art-BlockContent-body a:hover, .art-BlockContent-body a.hover
 {
 	color: #AF701D;
-font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
-text-decoration: none;
+	font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
+	text-decoration: none;
 }
 
 .art-BlockContent-body ul
@@ -877,8 +867,6 @@ text-decoration: none;
 	z-index: 1;
 	padding: 10px;
 }
-
-
 
 .art-Post
 {
@@ -961,21 +949,21 @@ pre
 	text-align:left;
 	text-indent:0;
 	line-height:inherit;
-font-family: "Palatino Linotype", Georgia, "Times New Roman", Times, Serif;
-font-size: 20px;
-font-style: normal;
-font-weight: bold;
-text-align: left;
+	font-family: "Palatino Linotype", Georgia, "Times New Roman", Times, Serif;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: bold;
+	text-align: left;
 	color: #1E3C43;
 }
 
 .art-PostHeader a, .art-PostHeader a:link, .art-PostHeader a:visited, .art-PostHeader a:hover
 {
-font-family: "Palatino Linotype", Georgia, "Times New Roman", Times, Serif;
-font-size: 20px;
-font-style: normal;
-font-weight: bold;
-text-align: left;
+	font-family: "Palatino Linotype", Georgia, "Times New Roman", Times, Serif;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: bold;
+	text-align: left;
 	margin:0;
 	color: #1E3C43;
 }
@@ -985,26 +973,26 @@ text-align: left;
 /* begin PostHeader */
 .art-PostHeader a:link
 {
-font-family: "Palatino Linotype", Georgia, "Times New Roman", Times, Serif;
-text-decoration: none;
-text-align: left;
+	font-family: "Palatino Linotype", Georgia, "Times New Roman", Times, Serif;
+	text-decoration: none;
+	text-align: left;
   color: #254C55;
 }
 
 .art-PostHeader a:visited, .art-PostHeader a.visited
 {
-font-family: "Palatino Linotype", Georgia, "Times New Roman", Times, Serif;
-text-decoration: none;
-text-align: left;
+	font-family: "Palatino Linotype", Georgia, "Times New Roman", Times, Serif;
+	text-decoration: none;
+	text-align: left;
   color: #30424A;
 }
 
 .art-PostHeader a:hover, .art-PostHeader a.hovered
 {
-font-family: "Palatino Linotype", Georgia, "Times New Roman", Times, Serif;
-text-decoration: none;
-text-align: left;
-  color: #2F5F6A;
+	font-family: "Palatino Linotype", Georgia, "Times New Roman", Times, Serif;
+	text-decoration: none;
+	text-align: left;
+	color: #2F5F6A;
 }
 /* end PostHeader */
 
@@ -1012,11 +1000,11 @@ text-align: left;
 /* Content Text Font & Color (Default) */
 body
 {
-font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
-font-size: 11px;
-font-style: normal;
-font-weight: normal;
-  color: #000000;
+	font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
+	font-size: 11px;
+	font-style: normal;
+	font-weight: normal;
+	color: #000000;
 }
 
 
@@ -1027,12 +1015,12 @@ font-weight: normal;
 
 .art-PostContent, .art-PostContent p
 {
-font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
-font-size: 11px;
-font-style: normal;
-font-weight: normal;
-text-align: justify;
-  color: #000000;
+	font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
+	font-size: 11px;
+	font-style: normal;
+	font-weight: normal;
+	text-align: justify;
+	color: #000000;
 }
 
 .art-PostContent
@@ -1393,9 +1381,6 @@ font-weight: normal;
     cursor: default;
 }
 
-
-
-
 .art-Footer .art-Footer-text p
 {
 	margin: 0;
@@ -1405,33 +1390,39 @@ font-weight: normal;
 {
 	display:inline-block;
 	color:#364B53;
-font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
-font-size: 10px;
+	font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
+	font-size: 10px;
 }
 
 .art-Footer .art-Footer-text a:link
 {
 	text-decoration: none;
 	color: #2D5C67;
-font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
-text-decoration: underline;
+	font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
+	text-decoration: underline;
 }
 
 .art-Footer .art-Footer-text a:visited
 {
 	text-decoration: none;
 	color: #4F6C78;
-font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
-text-decoration: underline;
+	font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
+	text-decoration: underline;
 }
 
 .art-Footer .art-Footer-text a:hover
 {
 	text-decoration: none;
 	color: #7F5115;
-font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
-text-decoration: none;
+	font-family: Verdana, Geneva, Arial, Helvetica, Sans-Serif;
+	text-decoration: none;
 }
+
+.powered{
+	position:relative;
+	top:5px;
+}
+
 /* end Footer */
 
 /* begin PageFooter */
@@ -1512,12 +1503,21 @@ form .info {
 	/*background: -moz-linear-gradient(center top , #50B7D1, #286DA3) repeat scroll 0 0 transparent; */   
 	background-color:  #78A419;
 	border: 1px solid #78A419;
-    	display: inline-block;
-    	font-size: 28px;
-    	padding: 15px 30px;
-
-	
+	display: inline-block;
+	font-size: 28px;
+	padding: 15px 30px;
 }
+
 #start_now{
 	margin-bottom: 9em;
+}
+
+.content_body_div{
+	padding:2px;
+	margin:5px;
+}
+
+#communities_table { 
+  border-radius: 10px; 
+  background-color : red;
 }
