@@ -16,6 +16,24 @@ function cache(id) {
    document.getElementById(id).style.visibility="hidden";   
 }
 
+function removeCommunity(id){
+
+	var txt = 'Are you sure you want to remove this community ?<input type="hidden" id="communityid" name="communityid" value="'+ id +'" />';
+	
+	$.prompt(txt,{ 
+		buttons:{Delete:true, Cancel:false},
+		callback: function(v,m,f){
+			
+			if(v){
+				var uid = f.communityid;
+				document.location.href='deleteCommunity?id='+uid;
+			}
+			else{}
+			
+		}
+	});
+	}
+
 </script>
 
 <table style="margin-top:10px; border-collapse:collapse; margin:5px;" >
@@ -98,7 +116,8 @@ function cache(id) {
 											<button onclick="document.location.href='@{displayCommunityUpdate(community.id)}'" size=15>&{"update_a_community"}</button>
 										</td>
 										<td align="center">
-											<button onclick="javascript:alert('The community has been deleted !'); document.location.href='@{deleteCommunity(community.id)}';" size=15><span style="color:red;">&{"delete_a_community"}</span></button>											
+											<!--<button onclick="javascript:alert('The community has been deleted !'); document.location.href='@{deleteCommunity(community.id)}';" size=15><span style="color:red;">&{"delete_a_community"}</span></button>-->
+											<button onclick="removeCommunity(${community.id});" size=15><span style="color:red;">&{"delete_a_community"}</span></button>
 										</td>
 									</tr>
 								</table>
