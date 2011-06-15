@@ -15,7 +15,7 @@
 	-->
 	#{ifErrors}
     <p class="error">
-        All fields are required!
+        &{"error_all_field_required"}
     </p>
 	#{/ifErrors}
 	
@@ -40,10 +40,13 @@
 	<tr><td>&{"welcoming_message"} : </td><td><textarea name="message_bienvenue" cols="50" rows="4">${community_retrieved.welcomingMessage}</textarea></td></tr>
 	</table>
 	<br /><br />
-	<div style="margin-left:200px; margin-bottom:10px">
+	<center>
+	<div style="margin-bottom:10px">
 		<input type='submit' name='validate' value='&{"update_community_validate"}' />
 		<input type='reset' name='reset' value='&{"update_community_reset"}'/>
+		<input type='button' name='displayCommunities' value='&{"display_communities_list"}' onclick="document.location.href='index#${community_retrieved.communityPrefix.toUpperCase();}'" style="color:#2689CC; font-weight:bold;"/>
 	</div>
+	</center>
 	#{/if}
 	
 	<!--#{/form}-->

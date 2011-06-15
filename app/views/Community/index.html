@@ -1,13 +1,20 @@
 #{extends 'main.html' /}
 
 <script language="javascript">
+
 function displayCommunity(form1) {
-
-var community_anchor = document.form1.community_name.value.toUpperCase();;
-
-document.location.href="#"+community_anchor;
-
+	var community_anchor = document.form1.community_name.value.toUpperCase();
+	document.location.href="#"+community_anchor;
+	return false;
 }
+
+function montre(id) {
+   document.getElementById(id).style.visibility="visible";
+}
+function cache(id) {
+   document.getElementById(id).style.visibility="hidden";   
+}
+
 </script>
 
 <table style="margin-top:10px; border-collapse:collapse; margin:5px;" >
@@ -24,9 +31,8 @@ document.location.href="#"+community_anchor;
 		<div id="content" class="content_body_div" style="height:350px; overflow:auto;">
 			<div style="">
 				<center>
-				
-				<form name="form1">
-				<input type="text" name="community_name" value="" size=15 onKeypress="displayCommunity(form1)">
+				<form name="form1" onSubmit="return displayCommunity(form1)">
+				<input type="text" name="community_name" value="" size=15>
 				<input type="button" name="bouton" value="GO" onclick="displayCommunity(form1)">
 				</form>
 				</center>
@@ -36,8 +42,8 @@ document.location.href="#"+community_anchor;
 					#{if communities_list.size() > 0}
 						<div class="communities_table">    
 							#{list items:communities_list, as:'community'}
-								<div id="${community.id}" class="post">
-									<h4 class="post-title">
+								<div class="community">
+									<h4 class="communityPrefix">
 										<a href="#${community.communityPrefix}" style="color:white;font-size:16px;">${community.communityPrefix}</a>
 									</h4>
 								</div>
@@ -57,16 +63,16 @@ document.location.href="#"+community_anchor;
 		<div>
 			<center>
 				<!--<input type="button" onclick="document.location.href='createCommunityIndex'" value='&{"create_community_validate"}'/>-->
-				<button onclick="document.location.href='createCommunityIndex'">&{"create_community_validate"}</button>
+				<button onclick="document.location.href='createCommunityIndex'" style="text-align:center;"><img src="@{'/public/images/add_icon.png'}"/>   &{"create_community_validate"}</button>
 			</center>
 		</div>
 	</td>
 	<td width=600>
 		<div id="content" class="content_body_div" style="height:350px; overflow:auto;">
 				#{if communities_list.size() > 0}
-					<div class="communities_table" border-radius: 10px >    
+					<div class="communities_table" style="border-radius: 10px;" >    
 						#{list items:communities_list, as:'community'}
-							<div id="${community.id}" class="post" style="background-color:white; padding:10px; border-radius: 8px 8px 8px 8px; -moz-border-radius: 8px 8px 8px 8px;">
+							<div class="communityDescription" style="background-color:white; padding:10px; border-radius: 8px 8px 8px 8px; -moz-border-radius: 8px 8px 8px 8px;" onmouseover="montre('${community.id}')" onmouseout="cache('${community.id}')">
 								<h3 id="${community.communityPrefix}" class="post-title">
 									<a href="${community.dolomiteURL}"><img src="@{'/public/images/link_icon.png'}"/>  ${community.communityPrefix}</a>
 								</h3>
@@ -84,16 +90,14 @@ document.location.href="#"+community_anchor;
 								</div><br/>
 								
 								<center>
-								<table style="margin-left:65%" cellpadding="2" cellspacing="6">
+								<table id="${community.id}" style="margin-left:65%; visibility:hidden;" cellpadding="2" cellspacing="6">
 									<tr>
 										<td align="center">
-											<a href="@{displayCommunityUpdate(community.id)}"><img src="/public/images/update.png" />   &{"update_a_community"}</a>
 											<!--<a href="javascript:'@{displayCommunityUpdate(community.id)})"><img src="/public/images/update.png" /> </a>-->
-											<!--<button onclick="document.location.href='@{displayCommunityUpdate(community.id)}'" size=15>&{"update_a_community"}</button>-->
+											<button onclick="document.location.href='@{displayCommunityUpdate(community.id)}'" size=15>&{"update_a_community"}</button>
 										</td>
 										<td align="center">
-											<a href="@{deleteCommunity(community.id)}"><img src="@{'/public/images/delete_icon.png'}" />   &{"delete_a_community"}</a>
-											<!--<button onclick="document.location.href='@{deleteCommunity(community.id)}'" size=15><span style="color:red;">&{"delete_a_community"}</span></button>-->
+											<button onclick="javascript:alert('The community has been deleted !'); document.location.href='@{deleteCommunity(community.id)}';" size=15><span style="color:red;">&{"delete_a_community"}</span></button>											
 										</td>
 									</tr>
 								</table>
@@ -104,7 +108,7 @@ document.location.href="#"+community_anchor;
 				#{/if}
 			
 				#{else}
-					<div class="empty" style="font-size:13px; color:red; -moz-border-radius: 6px 6px 6px 6px; background-color:white;">
+					<div class="empty" style="font-size:12px; color:red; -moz-border-radius: 6px 6px 6px 6px; background-color:white;">
 						<p style="padding:6px;">&{"list_of_community_empty"}</p>				
 					</div>
 				#{/else}

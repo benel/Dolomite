@@ -79,42 +79,51 @@ public class CommunityController extends Controller {
 	
 	public static void updateCommunity(
 	  Long id,
-	  String nom_communaute,
-	  String prefixe_communaute,
-	  String application_link,
-	  String message_description,
-	  String message_bienvenue){
+	  @Required String nom_communaute,
+	  @Required String prefixe_communaute,
+	  @Required String application_link,
+	  @Required String message_description,
+	  @Required String message_bienvenue){
 	
-		Community community_updated = Community.findById(id);
+		Community community_retrieved = Community.findById(id);
 		
-		// Updating the community attributes with the new ones
-		if (nom_communaute != null) {
-			community_updated.name = nom_communaute;
-		}
-		
-		if (prefixe_communaute != null) {
-			community_updated.communityPrefix = prefixe_communaute.toUpperCase();
+		if (validation.hasErrors()){
+                render("Community/updateCommunityIndex.html",community_retrieved);
+        } 
+		else {
 			
-			// Updating the dolomiteURL of the community
-			community_updated.setDolomiteURL(prefixe_communaute);
+			// Updating the community attributes with the new ones
+			if (nom_communaute != null) {
+				community_retrieved.name = nom_communaute;
+			}
 			
+			if (prefixe_communaute != null) {
+				community_retrieved.communityPrefix = prefixe_communaute.toUpperCase();
+				
+				// Updating the dolomiteURL of the community
+				community_retrieved.dolomiteURL = "";
+				community_retrieved.dolomiteURL = "http://"+prefixe_communaute.toLowerCase()+Play.configuration.getProperty("domain");
+			}
+			
+			if (message_description != null) {
+				community_retrieved.descriptionText = message_description;
+			}
+			
+			if (message_bienvenue != null) {
+				community_retrieved.welcomingMessage = message_bienvenue;
+			}
+			
+			if (application_link != null) {
+				community_retrieved.applicationURL = application_link;
+			}
+			
+			community_retrieved.save();
+			
+			flash.success(Messages.get("update_community_success"));
+			
+			render("Community/updateCommunityIndex.html",community_retrieved);
 		}
-		
-		if (message_description != null) {
-			community_updated.descriptionText = message_description;
-		}
-		
-		if (message_bienvenue != null) {
-			community_updated.welcomingMessage = message_bienvenue;
-		}
-		
-		if (application_link != null) {
-			community_updated.applicationURL = application_link;
-		}
-		
-		community_updated.save();
-		
-		index();		
+		//index();		
 	}
 	
 	public static void deleteCommunity(Long id) {
@@ -123,17 +132,5 @@ public class CommunityController extends Controller {
 		community_deleted.delete();
 		
 		index();
-	}
-	
-	public static void searchCommunity( @Required String community_name_search) {
-	
-		String community_prefix_upper_case = community_name_search.toUpperCase();
-		
-		Community community_searched = Community.find("byCommunityPrefix", community_prefix_upper_case).first();		
-			
-		render("Community/resultsSearch.html", community_searched);		
-
-	}
-
-	
+	}	
 }

@@ -15,7 +15,7 @@
 	-->
 	#{ifErrors}
     <p class="error">
-        All fields are required!
+        &{"error_all_field_required"}
     </p>
 	#{/ifErrors}
 	
@@ -43,7 +43,7 @@
 		<input type='submit' name='validate' value='&{"input_submit"}' />
 		<input type='reset' name='reset' value='&{"create_community_reset"}' />
 		<!--<button onclick="document.location.href='index'"><span style="color:#2689CC; font-weight:bold;">&{"display_communities_list"}</span></button>-->
-		<input type='button' name='displayCommunities' value='&{"display_communities_list"}' onclick="document.location.href='index'" style="color:#2689CC; font-weight:bold;"/>
+		<input type='button' name='displayCommunities' value='&{"display_communities_list"}' onclick="document.location.href='index#${params.prefixe_communaute?.toUpperCase();}'" style="color:#2689CC; font-weight:bold;"/>
 	</div>
 	<!--#{/form}-->
 	</form>
