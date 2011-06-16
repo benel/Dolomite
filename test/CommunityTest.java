@@ -71,8 +71,12 @@ public class CommunityTest extends UnitTest {
 		// Test 
 		assertNotNull(communaute_retrieved);
 		
-		communaute_retrieved.setCommunityPrefix("DBZ");
-		System.out.println(communaute_retrieved.getCommunityPrefix());
+		System.out.println();
+		communaute_retrieved.communityPrefix="DBZ";
+		System.out.println("valuer du prefixe de la communaute: "+ communaute_retrieved.communityPrefix);
+		
+		System.out.println();
+		System.out.println("----------------------------------------------------------------------");
 
 	}
 	

@@ -31,12 +31,13 @@ list_of_community_empty=Aucune Communauté n'a été créée pour le moment. Cli
 display_communities_list=Afficher la Communauté
 community_searched_empty=Désolé. Aucune Communauté n'a été trouvée.
 
-# updating a community
+# update a community
 
 title_update_of_community=Modifiez la Communauté
 update_community_success=La Communauté a bien été modifiée !
 update_community_validate=Enregistrer les modifications
 update_community_reset=Annuler
+
 
 #inputs
 
