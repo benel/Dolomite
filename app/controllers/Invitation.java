@@ -100,6 +100,8 @@ public class Invitation extends BaseController {
             mailGodfather=infos.get("mail");
             firstNameGodfather=infos.get("firstName");
             lastNameGodfather=infos.get("lastName");
+            firstNameGodfather=firstNameGodfather.substring(0, 1).toUpperCase() + firstNameGodfather.substring(1).toLowerCase();
+            lastNameGodfather=lastNameGodfather.substring(0, 1).toUpperCase() + lastNameGodfather.substring(1).toLowerCase();
                     }
             flag = Invitation.verifyMaliciousPassword(login, mail);
             if(flag == Invitation.ADDRESSES_MATCHE || flag ==Invitation.USER_NOTEXIST){
@@ -123,6 +125,8 @@ public class Invitation extends BaseController {
                 if(renderArgs.get("domainName")!=null){
                     community=renderArgs.get("domainName").toString();
                 }
+
+                System.out.println("I can arrive heeeeeeeeeeeeeeeeeeeeeeeeer");
                 if (langue.equals("fr")) {
                 	Mails.inviteFr("Hypertopic Team <noreply@hypertopic.org>", mail, prenom, nom, url, community, firstNameGodfather, lastNameGodfather, mailGodfather);
                 } 
