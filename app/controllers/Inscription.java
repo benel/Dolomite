@@ -1,22 +1,13 @@
 package controllers;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.Signature;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import models.Sign;
+import java.io.*;
+import java.util.logging.*;
 import models.LdapUser;
 import play.mvc.*;
 import play.libs.Crypto;
 import play.data.validation.*;
 import play.*;
 import play.i18n.Messages;
-
 
 public class Inscription extends BaseController {
 

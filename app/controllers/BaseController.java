@@ -1,9 +1,6 @@
 package controllers;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.lang.*;
-import models.Sign;
+import java.util.logging.*;
 import play.mvc.*;
 import play.data.validation.Required;
 import play.libs.Crypto;
