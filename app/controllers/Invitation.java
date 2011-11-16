@@ -110,7 +110,7 @@ public class Invitation extends BaseController {
             try {
                 url = "http://" + request.domain;
                 if (request.port!=80) url += ":" + request.port;
-                url += "/inscription?firstname=" + URLEncoder.encode(prenom, "UTF-8") + "&lastname=" + URLEncoder.encode(nom, "UTF-8") + "&email=" + URLEncoder.encode(mail, "UTF-8");
+                url += "/registration?firstname=" + URLEncoder.encode(prenom, "UTF-8") + "&lastname=" + URLEncoder.encode(nom, "UTF-8") + "&email=" + URLEncoder.encode(mail, "UTF-8");
                 signature = Crypto.sign(prenom + nom + mail);
                 url += "&signature=" + signature;
                 System.out.println("url in inviteNewMember: "+url);

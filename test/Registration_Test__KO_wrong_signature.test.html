@@ -1,4 +1,4 @@
 #{selenium 'Registration Test KO : wrong signature'}
-	open('inscription?firstname=Tryphon&lastname=Tournesol&email=nobody%40hypertopic.org&signature=a0714ac9e1ccfec4070be0cbaac9db42130a88bd')
+	open('registration?firstname=Tryphon&lastname=Tournesol&email=nobody%40hypertopic.org&signature=a0714ac9e1ccfec4070be0cbaac9db42130a88bd')
 	assertTextPresent(&{'msg_signature_no_match'})
 #{/selenium}
