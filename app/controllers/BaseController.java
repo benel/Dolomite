@@ -37,7 +37,11 @@ public class BaseController extends Controller {
     
     }
     
-    public static String normalize(String original){
+    public static String normalize(String firstname, String surname) {
+      return normalize(firstname)+'.'+normalize(surname);
+    }
+
+    protected static String normalize(String original){
         // to lower case
         String str = original.toLowerCase();  
         

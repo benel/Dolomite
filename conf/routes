@@ -4,8 +4,8 @@
 
 # Home page
 GET     /                                                  Application.index
-
-GET     /inscription                                       Application.inscription
+# TODO Change "inscription" into "registration" 
+GET     /inscription                                       Registration.index
 GET     /invitation                                        Invitation.index
 GET     /invitation/invitenewmember                        Invitation.inviteNewMember
 GET		/communitycontroller/createNewCommunity			   CommunityController.createNewCommunity

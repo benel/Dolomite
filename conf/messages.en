@@ -19,16 +19,16 @@ input_submit=Create
 
 #inscription
 
-title_inscription=Registration
+registration_title=Define a password
+registration_success=Your are now able to log as "%1s".
 title_home=Home
 msg_problem_with_identification=All fields have not been carried out correctly
 claim=If you have any problem with your first name, your name or your email, please send a message to your sponsor. You can find your sponsor's email in your invitation's mail.
-start_now_msg=Welcome %1s! You can now either start using  <a id="application_link" href="%2s" target="_blank">%3s</a>
-start_now_msg_without_domain=Welcome %1s! You can now <a href="%4s">invite</a> other people to join the community.
-error_short_pass_msg=Your password should contain at least 6 characters
-error_pass_no_match_msg=The passwords typed do not match
-error_alfanum_pass_msg=Your password should mix letters and numbers
-error_empty_pass_msg=Your password shouldn't be empty
+start_now_msg=Enter
+error_short_pass_msg=Your password should contain at least 6 characters!
+error_pass_no_match_msg=The passwords typed do not match!
+error_alpha_pass_msg=Your password should contain at least one alphabetic character!
+error_num_pass_msg=Your password should contain at least one numeric character!
 
 #invitation
 
@@ -88,7 +88,7 @@ menu_inscription=Registration
 #error.html
 
 title_error=Error
-msg_signature_no_match=Signature doesn't match
+msg_signature_no_match=Erroneous URL! Your e-mail reader may have corrupted the invitation e-mail.
 
 #500.html
 application_error_title=Application error

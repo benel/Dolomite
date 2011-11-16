@@ -1,0 +1,64 @@
+#{extends 'main.html' /}
+
+<h1>&{"registration_title"}</h1>
+		
+	#{form @Registration.index()}
+	
+	#{ifErrors}
+	<p class="error">
+		${errors}
+	</p>
+	#{/ifErrors}
+	
+	#{if flash.error}
+	<p class="error">
+		${flash.error}
+	</p>
+	#{/if}
+	
+	#{if flash.success}
+	<p class="success">
+		${flash.success}
+	</p>
+  #{/if}
+	#{else}
+		<table border="0">	
+			<tbody>				
+				<tr>
+					<td><label>&{"firstname"} :</label></td>
+					<td><input type="text" name="firstname" value="${params.firstname}" readonly="true" /></td>
+				</tr>
+        <tr>
+					<td><label>&{"lastname"} :</label></td>
+					<td><input type="text" name="lastname" value="${params.lastname}" readonly="true" /></td>
+				</tr>
+				<tr>
+					<td><label>&{"email"} :</label></td>
+					<td><input type="text" name='email' value="${params.email}" readonly="true" /></td>
+				</tr>
+				<tr>
+					<td><label>&{"password"} :</label></td>
+					<td><input type="password" name="password1" value="" /></td>
+				</tr>
+				<tr>
+					<td><label>&{"password_confirmation"} :</label></td>
+				  
+					<td><input type="password" name="password2" value="" /></td>
+				</tr>
+			</tbody>
+		</table>   
+		<br />
+		<div style="margin-left:100px">
+			<input type="hidden" name="signature" value='${params.signature.escape()}'/>
+			<input type="submit" value=&{"input_submit"} name="validate" /><input type="reset" value=&{"input_reset"} name="reset" />
+		</div>
+  #{/else}
+  #{if flash.success}
+    #{if domainHref!=null}
+    <p id="start_now">
+      <a id="application_link" href="${domainHref}" target="_blank">&{"start_now_msg"}</a>
+    </p>
+    #{/if}
+  #{/if}
+
+	#{/form}

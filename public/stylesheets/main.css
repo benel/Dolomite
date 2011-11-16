@@ -1494,14 +1494,13 @@ form .info {
 }
 #application_link{
 	position: absolute;
-	top: 300px;
 	right: 327px;
 	font-size: 337%;
 	border-radius: 4px 4px 4px 4px;
 	-moz-border-radius: 4px 4px 4px 4px;
 	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 	/*background: -moz-linear-gradient(center top , #50B7D1, #286DA3) repeat scroll 0 0 transparent; */   
-	background-color:  #78A419;
+/*	background-color:  #78A419;*/
 	border: 1px solid #78A419;
 	display: inline-block;
 	font-size: 28px;
