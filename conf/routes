@@ -6,7 +6,6 @@
 GET     /                                                  Application.index
 GET     /registration                                      Registration.index
 GET     /invitation                                        Invitation.index
-GET     /invitation/invitenewmember                        Invitation.inviteNewMember
 GET		/communitycontroller/createNewCommunity			   CommunityController.createNewCommunity
 POST	/communitycontroller/updatecommunity			   CommunityController.updateCommunity
 

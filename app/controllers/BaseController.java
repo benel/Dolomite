@@ -12,21 +12,17 @@ import java.text.Normalizer;
 import java.util.regex.Pattern;
 
 public class BaseController extends Controller {
-
+ 
     @Before
-    static void getDomain(){
+    public static void getDomain(){
         String domain = request.domain;
         String domainName = Play.configuration.getProperty(domain + ".name");
         String domainHref = Play.configuration.getProperty(domain + ".href");
-        System.out.println("domain name: " + domainName);
-        System.out.println("domain Href: " + domainHref);
-        
         renderArgs.put("domainName", domainName);
         renderArgs.put("domainHref", domainHref);
-        
     }
     
-    
+    //TODO LDAP refactoring
     public static boolean userExists(String login) {
 
         //verify that the user doesn't exist yet

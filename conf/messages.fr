@@ -4,11 +4,9 @@ site_title=Bienvenue sur Dolomite
 
 lastname=Nom de famille
 firstname=Prénom
-login=Identifiant
 email=Adresse électronique
 password=Mot de passe
 password_confirmation=Confirmation de mot de passe
-language=Langue
 
 #list of communities
 
@@ -46,11 +44,10 @@ input_reset=Annuler
 input_invite=Inviter
 input_submit=Valider
 
-#inscription
+#registration
 
 registration_title=Choisissez un mot de passe
 registration_success=Vous pouvez désormais vous connecter en tant que "%1s".
-title_inscription=Inscrire un membre	
 title_home=Accueil
 msg_problem_with_identification=Les champs n'ont pas été saisis correctement
 claim=Si vous rencontrez le moindre probleme avec votre prénom, votre nom ou votre email, envoyez un message a votre sponsor. Vous pourrez trouver l'email de votre sponsor dans votre courier d'invitation 
@@ -65,7 +62,10 @@ error_num_pass_msg=Votre mot de passe doit contenir au moins un caractère numé
 title_invit_member_group=Inviter un membre
 error_all_field_required=Tous les champs sont nécessaires !
 invitation_success=Votre invitation a été envoyée !
-invitation_fail_user_already_exist=L'utilisateur %1s existe déjà. Votre invitation à %2s n'a pas été envoyée
+invitation_subject=[%1s] Invitation
+invitation_prologue=%1s vous invite à rejoindre %2s
+invitation_password=Pour commencer, vous devrez <a href="%1s">choisir un mot de passe</a> (cliquez sur le lien).
+invitation_keep=Il est conseillé de garder ce courriel. Il vous permettra en effet de réinitialiser votre mot de passe en cas d'oubli.
 
 #main.html
 
@@ -85,14 +85,13 @@ copyright=Copyright - Tous droits reservés
 #_menu
 
 menu_invitation=Invitation
-menu_inscription=Inscription
 menu_community=Communautés
 
 #error.html
 
 title_error=Erreur
 msg_signature_no_match=URL erronée ! Vérifiez que le courriel d'invitation n'a pas été corrompu par votre logiciel de messagerie.
-invitation_mailadresse_no_match=Adresse mail erroné
+invitation_mailadresse_no_match=Vous ne pouvez pas changer l'adresse électronique d'un autre membre !
 
 #500.html
 application_error_title=Erreur de l'application

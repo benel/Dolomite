@@ -4,11 +4,9 @@ site_title=Welcome to Dolomite
 
 lastname=Last name
 firstname=First name
-login=Login
 email=Email
 password=Password
 password_confirmation=Confirm your password
-language=Language
 
 #inputs
 
@@ -17,7 +15,7 @@ input_reset=Cancel
 input_invite=Invite
 input_submit=Create
 
-#inscription
+#registration
 
 registration_title=Define a password
 registration_success=Your are now able to log as "%1s".
@@ -35,7 +33,10 @@ error_num_pass_msg=Your password should contain at least one numeric character!
 title_invit_member_group=Invite a member
 error_all_field_required=All fields are required
 invitation_success=Your invitation has been sent successfully!
-invitation_fail_user_already_exist=The user %1s already exists. Your invitation to %2s hasn't been sent
+invitation_subject=[%1s] Invitation
+invitation_prologue=%1s invited you to join %2s
+invitation_password=To begin with, you have to <a href="%1s">define a password</a> (click on the link).
+invitation_keep=It is usually considered a good idea to keep this e-mail. It can be used later to reset your password in case you forget it.
 
 #main.html
 
@@ -83,12 +84,12 @@ title_search_community=Search a Community
 
 menu_invitation=Invitation
 menu_community=Community
-menu_inscription=Registration
 
 #error.html
 
 title_error=Error
 msg_signature_no_match=Erroneous URL! Your e-mail reader may have corrupted the invitation e-mail.
+invitation_mailadresse_no_match=You cannot change the e-mail of another member!
 
 #500.html
 application_error_title=Application error
