@@ -61,6 +61,14 @@ set application mode to "production":
 
     application.mode=prod
 
+Use an in-file database (instead of in-memory):
+
+    db = fs
+
+Activate data definition:
+
+    jpa.ddl=update
+
 Define a real SMTP server (instead of the mock):
 
     mail.smtp.host = smtp.acme.com 
